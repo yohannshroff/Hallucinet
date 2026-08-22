@@ -1,0 +1,48 @@
+entity_id,name,entity_type,aliases,period_tag,description
+E001,Bahadur Shah II,Person,Bahadur Shah Zafar;Zafar,1857_revolt,Last Mughal emperor declared symbolic leader of the revolt in Delhi
+E002,Rani Lakshmibai,Person,Rani of Jhansi;Lakshmi Bai;Manikarnika Tambe,1857_revolt,Ruler of Jhansi who led armed resistance against the British
+E003,Mangal Pandey,Person,,1857_revolt,Sepoy of the 34th Bengal Native Infantry whose Barrackpore mutiny is seen as an early spark
+E004,Nana Sahib,Person,Nana Saheb;Dhondu Pant,1857_revolt,Maratha ruler who led the rebellion at Kanpur
+E005,Tantia Tope,Person,Tantia Topi,1857_revolt,Military commander allied with Nana Sahib and the Rani of Jhansi
+E006,Bakht Khan,Person,,1857_revolt,Commander-in-chief of rebel forces in Delhi
+E007,Begum Hazrat Mahal,Person,Hazrat Mahal,1857_revolt,Regent of Awadh who led resistance at Lucknow
+E008,Lord Canning,Person,Charles Canning;1st Earl Canning,1857_revolt,Governor-General and first Viceroy of India during the revolt
+E009,Henry Lawrence,Person,,1857_revolt,British officer who organized the defense of the Lucknow Residency
+E010,Hugh Rose,Person,Baron Strathnairn,1857_revolt,British commander who led the siege of Jhansi and the Battle of Gwalior
+E011,John Nicholson,Person,,1857_revolt,British officer who led the final assault to recapture Delhi
+E012,Colin Campbell,Person,Baron Clyde,1857_revolt,British commander who led the final relief of Lucknow
+E013,Henry Havelock,Person,,1857_revolt,British officer who led the first relief of Lucknow
+E014,James Outram,Person,,1857_revolt,British officer involved in the defense and relief of Lucknow
+E015,William Hodson,Person,,1857_revolt,British officer who captured Bahadur Shah II and killed his sons
+E020,Meerut,Location,,1857_revolt,Cantonment town where the sepoy mutiny of May 1857 began
+E021,Delhi,Location,,1857_revolt,Mughal capital seized by rebels and later recaptured by the British
+E022,Kanpur,Location,Cawnpore,1857_revolt,Site of a prolonged siege and subsequent massacre of British prisoners
+E023,Jhansi,Location,,1857_revolt,Princely state ruled by Rani Lakshmibai and site of the 1858 siege
+E024,Lucknow,Location,,1857_revolt,Site of a prolonged siege of the British Residency and two relief efforts
+E025,Barrackpore,Location,,1857_revolt,Cantonment where Mangal Pandey's mutiny took place in March 1857
+E026,Gwalior,Location,,1857_revolt,Site of the final major battle of the revolt in June 1858
+E027,Bareilly,Location,,1857_revolt,Rohilkhand rebel stronghold
+E028,Agra,Location,,1857_revolt,British fort that served as a refuge during the revolt
+E029,Arrah,Location,,1857_revolt,Site of a small British garrison's siege by rebel forces
+E030,Awadh,Location,Oudh,1857_revolt,Kingdom annexed by the East India Company shortly before the revolt
+E040,Greased Cartridge Incident,Event,Enfield Cartridge Controversy,1857_revolt,Controversy over animal-fat-greased cartridges for the new Enfield rifle
+E041,Meerut Mutiny,Event,,1857_revolt,Sepoy mutiny at Meerut in May 1857 that began the wider revolt
+E042,Fall of Delhi,Event,Siege of Delhi;Capture of Delhi,1857_revolt,British siege and recapture of Delhi in September 1857
+E043,Siege of Lucknow,Event,,1857_revolt,Prolonged siege of the British Residency at Lucknow
+E044,First Relief of Lucknow,Event,,1857_revolt,Havelock and Outram's relief column reaching the besieged Lucknow Residency
+E045,Second Relief of Lucknow,Event,Final Relief of Lucknow,1857_revolt,Colin Campbell's relief and evacuation of Lucknow
+E046,Siege of Jhansi,Event,Capture of Jhansi,1857_revolt,Hugh Rose's siege and capture of the fort of Jhansi in 1858
+E047,Siege of Cawnpore,Event,Siege of Kanpur,1857_revolt,Nana Sahib's siege of the British garrison at Kanpur
+E048,Massacre of Cawnpore,Event,Bibighar Massacre,1857_revolt,Killing of British prisoners at Kanpur following the siege
+E049,Siege of Arrah,Event,,1857_revolt,Siege of a small British garrison by rebel forces including Kunwar Singh
+E050,Fall of Gwalior,Event,Battle of Gwalior,1857_revolt,Final major battle of the revolt where Rani Lakshmibai was killed
+E051,Capture of Bahadur Shah II,Event,,1857_revolt,William Hodson's capture of the last Mughal emperor after the fall of Delhi
+E052,Government of India Act 1858,Event,Crown takeover;end of Company rule,1857_revolt,Act transferring rule of India from the East India Company to the British Crown
+E060,British East India Company,Organization,East India Company;EIC,1857_revolt,Trading company that ruled much of India before the revolt
+E061,Bengal Army,Organization,,1857_revolt,East India Company army wing whose sepoys formed the core of the rebellion
+E062,Princely States,Organization,Indian princely states,1857_revolt,Semi-autonomous Indian states some of which allied with or against the rebels
+E070,Doctrine of Lapse,Cause,,1857_revolt,East India Company annexation policy that fueled resentment among Indian rulers
+E071,Enfield Cartridge Issue,Cause,Pattern 1853 Enfield rifle controversy,1857_revolt,Technical and religious controversy over the new rifle's cartridges
+E072,Land Revenue Grievances,Cause,,1857_revolt,Harsh land revenue policies that fueled rural discontent
+E073,Disbanding of Sepoy Regiments,Cause,,1857_revolt,Punitive disbanding of regiments that refused orders which deepened unrest
+E074,Annexation of Awadh,Cause,,1857_revolt,1856 annexation of Awadh by the East India Company on grounds of misgovernance which fueled resentment ahead of the revolt

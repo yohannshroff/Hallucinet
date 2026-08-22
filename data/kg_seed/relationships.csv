@@ -1,0 +1,51 @@
+subject,relation,object,source,period_tag,notes
+Bahadur Shah II,declared_emperor_by,rebel sepoys,https://en.wikipedia.org/wiki/Bahadur_Shah_Zafar,1857_revolt,Declared emperor in Delhi in May 1857
+Bahadur Shah II,located_in,Delhi,https://en.wikipedia.org/wiki/Bahadur_Shah_Zafar,1857_revolt,
+Bakht Khan,commanded,rebel forces in Delhi,https://en.wikipedia.org/wiki/Bakht_Khan,1857_revolt,
+Rani Lakshmibai,ruled,Jhansi,https://en.wikipedia.org/wiki/Rani_of_Jhansi,1857_revolt,
+Rani Lakshmibai,fought_against,Hugh Rose,https://en.wikipedia.org/wiki/Rani_of_Jhansi,1857_revolt,Siege of Jhansi 1858
+Rani Lakshmibai,allied_with,Tantia Tope,https://en.wikipedia.org/wiki/Rani_of_Jhansi,1857_revolt,
+Rani Lakshmibai,died_during,Fall of Gwalior,https://en.wikipedia.org/wiki/Rani_of_Jhansi,1857_revolt,Killed in battle June 1858
+Rani Lakshmibai,fought_against,British East India Company,https://en.wikipedia.org/wiki/Rani_of_Jhansi,1857_revolt,
+Nana Sahib,led,Siege of Cawnpore,https://en.wikipedia.org/wiki/Nana_Sahib,1857_revolt,
+Nana Sahib,allied_with,Tantia Tope,https://en.wikipedia.org/wiki/Nana_Sahib,1857_revolt,
+Nana Sahib,fought_against,British East India Company,https://en.wikipedia.org/wiki/Nana_Sahib,1857_revolt,Pension claim denied under the Doctrine of Lapse
+Tantia Tope,fought_against,Colin Campbell,https://en.wikipedia.org/wiki/Tantia_Tope,1857_revolt,
+British East India Company,executed,Tantia Tope,https://en.wikipedia.org/wiki/Tantia_Tope,1857_revolt,Executed April 1859
+Begum Hazrat Mahal,ruled,Awadh,https://en.wikipedia.org/wiki/Hazrat_Mahal,1857_revolt,Acted as regent for her son
+Begum Hazrat Mahal,led,Siege of Lucknow,https://en.wikipedia.org/wiki/Hazrat_Mahal,1857_revolt,
+Henry Lawrence,died_during,Siege of Lucknow,https://en.wikipedia.org/wiki/Henry_Lawrence,1857_revolt,
+Henry Havelock,led,First Relief of Lucknow,https://en.wikipedia.org/wiki/Henry_Havelock,1857_revolt,
+James Outram,led,First Relief of Lucknow,https://en.wikipedia.org/wiki/James_Outram,1857_revolt,Deferred formal command to Havelock
+Colin Campbell,led,Second Relief of Lucknow,"https://en.wikipedia.org/wiki/Colin_Campbell,_1st_Baron_Clyde",1857_revolt,
+John Nicholson,led,Fall of Delhi,https://en.wikipedia.org/wiki/John_Nicholson_(East_India_Company_officer),1857_revolt,Led the final assault
+John Nicholson,died_during,Fall of Delhi,https://en.wikipedia.org/wiki/John_Nicholson_(East_India_Company_officer),1857_revolt,Died of wounds
+William Hodson,captured,Bahadur Shah II,https://en.wikipedia.org/wiki/William_Hodson,1857_revolt,
+William Hodson,killed,sons of Bahadur Shah II,https://en.wikipedia.org/wiki/William_Hodson,1857_revolt,Executed the Mughal princes after Delhi fell
+Lord Canning,appointed_by,British East India Company,"https://en.wikipedia.org/wiki/Charles_Canning,_1st_Earl_Canning",1857_revolt,Governor-General later first Viceroy
+Hugh Rose,besieged,Jhansi,"https://en.wikipedia.org/wiki/Hugh_Rose,_1st_Baron_Strathnairn",1857_revolt,
+Hugh Rose,led,Fall of Gwalior,"https://en.wikipedia.org/wiki/Hugh_Rose,_1st_Baron_Strathnairn",1857_revolt,
+Hugh Rose,fought_against,Tantia Tope,"https://en.wikipedia.org/wiki/Hugh_Rose,_1st_Baron_Strathnairn",1857_revolt,
+Mangal Pandey,member_of,Bengal Army,https://en.wikipedia.org/wiki/Mangal_Pandey,1857_revolt,
+Mangal Pandey,located_in,Barrackpore,https://en.wikipedia.org/wiki/Mangal_Pandey,1857_revolt,Attacked officers in March 1857
+Bakht Khan,member_of,Bengal Army,https://en.wikipedia.org/wiki/Bakht_Khan,1857_revolt,
+Bengal Army,part_of,British East India Company,https://en.wikipedia.org/wiki/Bengal_Army,1857_revolt,
+Meerut Mutiny,located_in,Meerut,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,
+Fall of Delhi,located_in,Delhi,https://en.wikipedia.org/wiki/Siege_of_Delhi_(1857),1857_revolt,
+Siege of Lucknow,located_in,Lucknow,https://en.wikipedia.org/wiki/Siege_of_Lucknow,1857_revolt,
+Siege of Jhansi,located_in,Jhansi,https://en.wikipedia.org/wiki/Siege_of_Jhansi,1857_revolt,
+Siege of Cawnpore,located_in,Kanpur,https://en.wikipedia.org/wiki/Siege_of_Cawnpore,1857_revolt,
+Massacre of Cawnpore,located_in,Kanpur,https://en.wikipedia.org/wiki/Siege_of_Cawnpore,1857_revolt,Killing of British prisoners at the Bibighar
+Fall of Gwalior,located_in,Gwalior,https://en.wikipedia.org/wiki/Central_Indian_campaign_of_1858,1857_revolt,
+Siege of Arrah,located_in,Arrah,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,
+Greased Cartridge Incident,caused_by,Enfield Cartridge Issue,https://en.wikipedia.org/wiki/Pattern_1853_Enfield,1857_revolt,
+Meerut Mutiny,caused_by,Greased Cartridge Incident,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,
+Fall of Delhi,caused_by,Meerut Mutiny,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,Mutineers marched to Delhi after Meerut
+Land Revenue Grievances,caused_by,British East India Company,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,
+Disbanding of Sepoy Regiments,caused_by,British East India Company,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,
+Annexation of Awadh,caused_by,British East India Company,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,On grounds of misgovernance in 1856
+Siege of Jhansi,caused_by,Doctrine of Lapse,https://en.wikipedia.org/wiki/Doctrine_of_lapse,1857_revolt,Annexation of Jhansi under the doctrine prompted the Rani's rebellion
+Government of India Act 1858,caused_by,Fall of Gwalior,https://en.wikipedia.org/wiki/Government_of_India_Act_1858,1857_revolt,Followed the revolt's suppression of which this was the final major battle
+British East India Company,succeeded_by,Government of India Act 1858,https://en.wikipedia.org/wiki/Government_of_India_Act_1858,1857_revolt,Company rule replaced by direct Crown rule
+Princely States,allied_with,British East India Company,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,Some princely states supported the Company during the revolt
+Princely States,fought_against,British East India Company,https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857,1857_revolt,Others supported the rebels against the Company

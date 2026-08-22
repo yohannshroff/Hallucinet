@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+data/processed/embeddings/*.npy
+data/processed/faiss_index/*.faiss
+.DS_Store

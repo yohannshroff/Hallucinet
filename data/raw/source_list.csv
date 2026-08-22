@@ -1,0 +1,37 @@
+doc_id,title,entity_or_event,notes
+Bahadur_Shah_Zafar,Bahadur Shah Zafar,Person,Last Mughal emperor
+Rani_of_Jhansi,Rani of Jhansi,Person,Ruler of Jhansi
+Mangal_Pandey,Mangal Pandey,Person,Sepoy at Barrackpore
+Nana_Sahib,Nana Sahib,Person,Maratha ruler at Kanpur
+Tantia_Tope,Tantia Tope,Person,Military commander
+Bakht_Khan,Bakht Khan,Person,Rebel commander in Delhi
+Hazrat_Mahal,Hazrat Mahal,Person,Begum who led Lucknow resistance
+Charles_Canning,"Charles Canning, 1st Earl Canning",Person,Governor-General/Viceroy
+Henry_Lawrence,Henry Lawrence,Person,British officer at Lucknow
+Hugh_Rose,"Hugh Rose, 1st Baron Strathnairn",Person,British commander at Jhansi and Gwalior
+John_Nicholson,John Nicholson (East India Company officer),Person,British officer at Delhi
+Colin_Campbell,"Colin Campbell, 1st Baron Clyde",Person,Relieved Lucknow
+Henry_Havelock,Henry Havelock,Person,First relief of Lucknow
+James_Outram,"James Outram, 1st Baronet",Person,British officer at Lucknow
+William_Hodson,William Stephen Raikes Hodson,Person,Captured Bahadur Shah II
+Meerut,Meerut,Location,Where the mutiny began
+Delhi,Delhi,Location,Mughal capital retaken by rebels
+Kanpur,Kanpur,Location,Site of siege and massacre
+Jhansi,Jhansi,Location,Princely state ruled by the Rani
+Lucknow,Lucknow,Location,Site of prolonged siege
+Barrackpore,Barrackpore,Location,Site of Mangal Pandey's mutiny
+Gwalior,Gwalior,Location,Site of the final major battle
+Bareilly,Bareilly,Location,Rohilkhand rebel stronghold
+Agra,Agra,Location,British fort and refuge
+Arrah,Siege of Arrah,Location,Small British garrison besieged
+Indian_Rebellion_1857,Indian Rebellion of 1857,Event,Overview causes and greased cartridge issue
+Siege_of_Delhi,Siege of Delhi (1857),Event,British recapture of Delhi
+Siege_of_Lucknow,Siege of Lucknow,Event,Prolonged siege and relief
+Capture_of_Jhansi,Siege of Jhansi,Event,Hugh Rose's siege of Jhansi
+Siege_of_Cawnpore,Siege of Cawnpore,Event,Siege and massacre at Kanpur
+Battle_of_Gwalior,Central Indian campaign of 1858,Event,Final major engagement including the fall of Gwalior
+East_India_Company,East India Company,Organization,Ruling company before Crown rule
+Bengal_Army,Bengal Army,Organization,Company army whose sepoys revolted
+Doctrine_of_Lapse,Doctrine of lapse,Cause,Annexation policy
+Pattern_1853_Enfield,Pattern 1853 Enfield,Cause,Rifle and cartridge controversy
+Government_of_India_Act_1858,Government of India Act 1858,Event,Transfer of power to the Crown

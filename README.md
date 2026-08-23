@@ -9,11 +9,12 @@ Q&A. v1 scope: the Revolt of 1857 (~May 1857 – 1859).
 
 ## Status
 
-Weeks 1–2 of an 8-week build: knowledge-graph seed data, source document
-collection, and a working vector retrieval pipeline (chunking → embeddings
-→ FAISS). Weeks 3–8 (graph ingestion, hybrid retrieval, LLM integration,
-trust scoring, evaluation, full app) are stubbed out — see the `README.md`
-in each of `kg/`, `retrieval/`, `api/`, `ui/`, `eval/`.
+Weeks 1–3 of an 8-week build: knowledge-graph seed data, source document
+collection, a working vector retrieval pipeline (chunking → embeddings →
+FAISS), and that KG seed loaded into Neo4j with entity resolution. Weeks
+4–8 (hybrid retrieval, LLM integration, trust scoring, evaluation, full
+app) are stubbed out — see the `README.md` in each of `retrieval/`, `api/`,
+`ui/`, `eval/`.
 
 ## Setup
 
@@ -22,13 +23,15 @@ bash scripts/setup_env.sh
 source .venv/bin/activate
 ```
 
-This installs everything Week 1–2 code needs (`requests`, `pandas`,
-`sentence-transformers`, `faiss-cpu`, etc.). Neo4j and Ollama are **not**
-installed by this script — see [docs/manual_setup_neo4j.md](docs/manual_setup_neo4j.md)
-and [docs/manual_setup_ollama.md](docs/manual_setup_ollama.md) for those
-(needed starting Week 3 and Week 5 respectively).
+This installs everything Week 1–3 code needs (`requests`, `pandas`,
+`sentence-transformers`, `faiss-cpu`, `neo4j`, `fuzzywuzzy`, etc.). Neo4j
+itself and Ollama are **not** installed by this script — see
+[docs/manual_setup_neo4j.md](docs/manual_setup_neo4j.md) and
+[docs/manual_setup_ollama.md](docs/manual_setup_ollama.md) (Ollama isn't
+needed until Week 5). Copy `.env.example` to `.env` and fill in your Neo4j
+credentials before running anything in `kg/`.
 
-## Pipeline (Weeks 1–2)
+## Pipeline (Weeks 1–3)
 
 ```bash
 # Week 1: fetch source documents and validate the hand-built KG seed
@@ -40,6 +43,10 @@ python scripts/clean_and_chunk.py
 python scripts/build_embeddings.py
 python scripts/build_faiss_index.py
 python scripts/query_index.py "Who led the resistance at Jhansi?" --k 5
+
+# Week 3: load the KG seed into Neo4j and validate it
+python kg/load_graph.py
+python kg/validate_graph.py --all
 ```
 
 Run the test suite with:
@@ -48,15 +55,17 @@ Run the test suite with:
 pytest tests/
 ```
 
+(The `kg/` integration tests skip automatically if Neo4j isn't running.)
+
 ## Repo layout
 
 ```
 data/           source docs, KG seed CSVs, processed chunks/embeddings/index
 scripts/        Week 1-2 pipeline scripts (see docs/week1_notes.md, week2_notes.md)
+kg/             Week 3: Neo4j ingestion + entity resolution (see docs/week3_notes.md)
 docs/           schema reference, manual setup guides, weekly notes
-tests/          pytest suite for the Week 1-2 pipeline
-kg/             [stub] Week 3-4: Neo4j ingestion + entity resolution
-retrieval/      [stub] Week 3-4: hybrid vector+graph retrieval
+tests/          pytest suite for the Week 1-3 pipeline
+retrieval/      [stub] Week 4: hybrid vector+graph retrieval
 api/            [stub] Week 5: FastAPI backend
 ui/             [stub] Week 6: Streamlit frontend
 eval/           [stub] Week 7-8: hallucination evaluation harness

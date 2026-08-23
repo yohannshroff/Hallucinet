@@ -6,11 +6,13 @@ sentence-transformers>=3.3   # all-MiniLM-L6-v2 embeddings
 faiss-cpu>=1.9           # vector index + search
 pytest>=8.3              # test suite
 
+# --- installed & used in Week 3 ---
+neo4j>=5.26              # KG ingestion/queries against the local Neo4j instance
+fuzzywuzzy>=0.18         # alias fuzzy-matching entities during KG build
+python-Levenshtein       # speeds up fuzzywuzzy
+
 # --- needed LATER, do not install yet (documented for future weeks) ---
-# neo4j>=5.26            # week 3-4: KG ingestion/queries
-# spacy>=3.8              # week 3: NER over chunk text
-# fuzzywuzzy>=0.18        # week 3: alias fuzzy-matching entities during KG build
-# python-Levenshtein      # speeds up fuzzywuzzy
+# spacy>=3.8              # week 4: NER over chunk text at query time
 # beautifulsoup4>=4.12    # only if a future non-Wikipedia source needs HTML scraping
 # fastapi>=0.115          # week 5: API layer
 # uvicorn>=0.34            # week 5: serve FastAPI

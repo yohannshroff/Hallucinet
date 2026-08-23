@@ -17,7 +17,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from common import ENTITIES_CSV, RELATIONSHIPS_CSV, get_logger
+from common import ENTITIES_CSV, RELATIONSHIPS_CSV, build_alias_index, get_logger
 
 log = get_logger("validate_kg_csv")
 
@@ -25,20 +25,6 @@ log = get_logger("validate_kg_csv")
 def load_entities(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path, keep_default_na=False)
     return df
-
-
-def build_alias_index(entities_df: pd.DataFrame) -> dict:
-    """Map every lowercased name and alias to its entity_id."""
-    index = {}
-    for _, row in entities_df.iterrows():
-        index[row["name"].strip().lower()] = row["entity_id"]
-        aliases = row.get("aliases", "")
-        if aliases:
-            for alias in aliases.split(";"):
-                alias = alias.strip()
-                if alias:
-                    index[alias.lower()] = row["entity_id"]
-    return index
 
 
 def validate(entities_df: pd.DataFrame, relationships_df: pd.DataFrame) -> list:

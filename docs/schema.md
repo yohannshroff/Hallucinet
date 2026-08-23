@@ -33,9 +33,23 @@ ever mean adding new `period_tag` *values*, never new columns.
 `succeeded_by`, `appointed_by`, `commanded`, `declared_emperor_by`,
 `died_during`, `member_of`, `disbanded_by`.
 
-Adding a new relation type is fine — just add it to this list so the
-Week 3 KG-loading code and any validation scripts stay in sync with what's
-actually used in the data.
+Adding a new relation type is fine — just add it to this list (and to
+`RELATION_VOCAB` in `scripts/common.py`) so `kg/load_graph.py` and the
+validation scripts stay in sync with what's actually used in the data.
+
+## Neo4j graph shape (Week 3)
+
+`kg/load_graph.py` loads this spreadsheet into Neo4j:
+
+- Every `entities.csv` row becomes an `:Entity` node, plus a second label
+  matching its `entity_type` (`:Person`, `:Location`, `:Event`,
+  `:Organization`, `:Cause`) for cheap type-filtered Cypher queries.
+- A relationship whose `object` resolves to a known entity becomes a normal
+  `(:Entity)-[:RELATION]->(:Entity)` edge.
+- A relationship whose `object` is a free-text phrase (no matching entity)
+  becomes `(:Entity)-[:RELATION]->(:Concept {name: "..."})` instead of
+  being dropped. A `Concept` can be promoted to a full `Entity` later by
+  adding it to `entities.csv` and re-running the loader.
 
 ## Validation
 

@@ -31,6 +31,8 @@ from vector_search import search as vector_search  # noqa: E402
 
 log = get_logger("hybrid_retrieve")
 
+RETRIEVAL_MODES = ("vector", "graph", "hybrid")
+
 
 def retrieve(
     query: str,
@@ -38,16 +40,26 @@ def retrieve(
     k: int = 5,
     graph_limit: int = DEFAULT_HOPS_LIMIT,
     index_dir: Path = FAISS_INDEX_DIR,
+    mode: str = "hybrid",
 ) -> dict:
     """Run entity extraction, graph search, and vector search; return a
-    merged context bundle. Returns None for graph_facts/seed_entities if
+    merged context bundle. Returns [] for graph_facts/seed_entities if
     Neo4j isn't reachable, so callers can still get vector-only results.
+
+    `mode` selects which retrieval source(s) actually populate the bundle
+    -- "vector" or "graph" alone, or "hybrid" (both) -- used by Week 7's
+    ablation to compare them. Entity extraction still runs for all modes
+    (cheap, and needed for the seed_entities field either way); only the
+    graph/vector search calls themselves are skipped.
     """
+    if mode not in RETRIEVAL_MODES:
+        raise ValueError(f"mode must be one of {RETRIEVAL_MODES}, got {mode!r}")
+
     alias_index = build_alias_index(entities_df)
     seed_entity_ids = extract_entities(query, alias_index)
 
     graph_facts = []
-    if seed_entity_ids:
+    if mode in ("graph", "hybrid") and seed_entity_ids:
         driver = get_neo4j_driver()
         try:
             driver.verify_connectivity()
@@ -58,7 +70,7 @@ def retrieve(
         finally:
             driver.close()
 
-    vector_chunks = vector_search(query, index_dir=index_dir, k=k)
+    vector_chunks = vector_search(query, index_dir=index_dir, k=k) if mode in ("vector", "hybrid") else []
 
     seed_names = [
         entities_df.loc[entities_df["entity_id"] == eid, "name"].iloc[0] for eid in seed_entity_ids
@@ -110,10 +122,11 @@ def main():
     parser.add_argument("--graph_limit", type=int, default=DEFAULT_HOPS_LIMIT, help="Max facts per seed entity")
     parser.add_argument("--entities", type=Path, default=ENTITIES_CSV)
     parser.add_argument("--index_dir", type=Path, default=FAISS_INDEX_DIR)
+    parser.add_argument("--mode", choices=RETRIEVAL_MODES, default="hybrid")
     args = parser.parse_args()
 
     entities_df = pd.read_csv(args.entities, keep_default_na=False)
-    bundle = retrieve(args.query, entities_df, k=args.k, graph_limit=args.graph_limit, index_dir=args.index_dir)
+    bundle = retrieve(args.query, entities_df, k=args.k, graph_limit=args.graph_limit, index_dir=args.index_dir, mode=args.mode)
 
     log.info(f"seed entities: {bundle['seed_entities']}")
     log.info(f"{len(bundle['graph_facts'])} graph fact(s), {len(bundle['vector_chunks'])} vector chunk(s)")

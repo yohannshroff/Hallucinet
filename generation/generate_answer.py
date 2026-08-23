@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "retrieval"))
 from common import ENTITIES_CSV, FAISS_INDEX_DIR, OLLAMA_MODEL, get_logger  # noqa: E402
 
-from hybrid_retrieve import DEFAULT_HOPS_LIMIT, format_context_only, retrieve  # noqa: E402
+from hybrid_retrieve import DEFAULT_HOPS_LIMIT, RETRIEVAL_MODES, format_context_only, retrieve  # noqa: E402
 from ollama_client import chat, is_reachable  # noqa: E402
 from prompt_template import build_messages  # noqa: E402
 
@@ -30,15 +30,17 @@ def answer_question(
     graph_limit: int = DEFAULT_HOPS_LIMIT,
     index_dir: Path = FAISS_INDEX_DIR,
     model: str = OLLAMA_MODEL,
+    mode: str = "hybrid",
 ) -> dict:
     """Run retrieval, build the grounded prompt, and generate an answer.
 
     Returns {"question", "answer", "context", "bundle"} -- `bundle` is the
     raw retrieval output (Week 4's retrieve()), kept around so Week 6's
     trust scoring can re-check the answer's claims against the same
-    evidence it was generated from.
+    evidence it was generated from. `mode` ("vector"/"graph"/"hybrid") is
+    forwarded to retrieve() -- see Week 7's ablation.
     """
-    bundle = retrieve(question, entities_df, k=k, graph_limit=graph_limit, index_dir=index_dir)
+    bundle = retrieve(question, entities_df, k=k, graph_limit=graph_limit, index_dir=index_dir, mode=mode)
     context = format_context_only(bundle)
 
     messages = build_messages(question, context)
@@ -55,6 +57,7 @@ def main():
     parser.add_argument("--entities", type=Path, default=ENTITIES_CSV)
     parser.add_argument("--index_dir", type=Path, default=FAISS_INDEX_DIR)
     parser.add_argument("--model", default=OLLAMA_MODEL)
+    parser.add_argument("--mode", choices=RETRIEVAL_MODES, default="hybrid")
     args = parser.parse_args()
 
     if not is_reachable():
@@ -69,6 +72,7 @@ def main():
         graph_limit=args.graph_limit,
         index_dir=args.index_dir,
         model=args.model,
+        mode=args.mode,
     )
 
     log.info(f"seed entities: {result['bundle']['seed_entities']}")

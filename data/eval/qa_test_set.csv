@@ -1,0 +1,31 @@
+id,question,expected_entities,category,notes
+T01,Who ruled Jhansi before the revolt?,Rani Lakshmibai,person,Direct 1-hop graph fact
+T02,Who did Rani Lakshmibai fight against during the Siege of Jhansi?,Hugh Rose,person,Direct 1-hop graph fact
+T03,Who was Rani Lakshmibai allied with during the revolt?,Tantia Tope,person,Direct 1-hop graph fact
+T04,Who led the Siege of Cawnpore?,Nana Sahib,person,Direct 1-hop graph fact
+T05,Who acted as regent of Awadh and led resistance at Lucknow?,Begum Hazrat Mahal,person,Direct 1-hop graph fact
+T06,Who led the first relief of Lucknow?,Henry Havelock;James Outram,person,Two co-leaders -- either counts as correct
+T07,Who led the second and final relief of Lucknow?,Colin Campbell,person,Direct 1-hop graph fact
+T08,Who captured Bahadur Shah II after the fall of Delhi?,William Hodson,person,Direct 1-hop graph fact
+T09,Who was declared emperor by the rebel sepoys in Delhi?,Bahadur Shah II,person,Direct 1-hop graph fact
+T10,Who commanded rebel forces in Delhi?,Bakht Khan,person,Direct 1-hop graph fact
+T11,Who executed Tantia Tope?,British East India Company,person,Direct 1-hop graph fact
+T12,Who besieged Jhansi in 1858?,Hugh Rose,person,Direct 1-hop graph fact
+T13,Who commanded the British forces that recaptured Delhi?,John Nicholson,person,"2-hop graph fact (Delhi -> Fall of Delhi -> John Nicholson) -- known hard case for graph-only mode, see docs/week4_notes.md"
+T14,Where did the Meerut Mutiny take place?,Meerut,location,Direct 1-hop graph fact
+T15,Where did the Siege of Lucknow take place?,Lucknow,location,Direct 1-hop graph fact
+T16,Where did the Massacre of Cawnpore take place?,Kanpur,location,Direct 1-hop graph fact
+T17,Where did the Fall of Gwalior take place?,Gwalior,location,Direct 1-hop graph fact
+T18,Where did the Siege of Arrah take place?,Arrah,location,Direct 1-hop graph fact
+T19,Where was Rani Lakshmibai killed?,Gwalior,location,Tests died_during -> located_in chaining
+T20,What caused the Meerut Mutiny?,Greased Cartridge Incident,cause,Direct 1-hop graph fact
+T21,What caused the Greased Cartridge Incident?,Enfield Cartridge Issue,cause,2-hop causal chain
+T22,What policy led to the annexation of Jhansi and Rani Lakshmibai's rebellion?,Doctrine of Lapse,cause,Direct 1-hop graph fact
+T23,What caused the land revenue grievances among the population?,British East India Company,cause,Direct 1-hop graph fact
+T24,What caused the disbanding of sepoy regiments that refused orders?,British East India Company,cause,Direct 1-hop graph fact
+T25,What was the East India Company's stated justification for annexing Awadh?,misgovernance;maladministration,cause,"Requires vector text detail not captured as a graph fact. Originally scored 'misgovernance' only -- widened after the ablation run showed the sourced Wikipedia text actually says 'maladministration', a synonym the substring matcher missed (see docs/week7_notes.md)"
+T26,What event caused the Fall of Delhi?,Meerut Mutiny,event,2-hop causal chain
+T27,What organization was Mangal Pandey a member of?,Bengal Army,event,Direct 1-hop graph fact
+T28,What organization was the Bengal Army part of?,British East India Company,event,Direct 1-hop graph fact
+T29,Which act transferred rule of India from the East India Company to the Crown?,Government of India Act 1858,aftermath,Direct 1-hop graph fact
+T30,What war cry emerged in the aftermath of the Cawnpore massacre?,Remember Cawnpore,event,"Vector-only fact -- not in the KG at all, tests whether graph-only mode correctly fails here"

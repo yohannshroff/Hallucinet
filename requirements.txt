@@ -11,8 +11,11 @@ neo4j>=5.26              # KG ingestion/queries against the local Neo4j instance
 fuzzywuzzy>=0.18         # alias fuzzy-matching entities during KG build
 python-Levenshtein       # speeds up fuzzywuzzy
 
+# --- installed & used in Week 4 ---
+spacy>=3.8               # NER + noun chunks for query-time entity extraction
+# run once after installing: python -m spacy download en_core_web_sm
+
 # --- needed LATER, do not install yet (documented for future weeks) ---
-# spacy>=3.8              # week 4: NER over chunk text at query time
 # beautifulsoup4>=4.12    # only if a future non-Wikipedia source needs HTML scraping
 # fastapi>=0.115          # week 5: API layer
 # uvicorn>=0.34            # week 5: serve FastAPI

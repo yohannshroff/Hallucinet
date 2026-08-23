@@ -37,6 +37,10 @@ NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.environ.get("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD", "changeme")
 
+# Ollama connection config (Week 5+), read from .env -- see docs/manual_setup_ollama.md
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "gemma3:4b")
+
 # Controlled vocabularies, kept in sync with docs/schema.md.
 ENTITY_TYPES = {"Person", "Location", "Event", "Organization", "Cause"}
 RELATION_VOCAB = {

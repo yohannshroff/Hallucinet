@@ -72,10 +72,11 @@ def retrieve(
     }
 
 
-def format_context_for_llm(bundle: dict) -> str:
-    """Render the retrieved bundle as a single context block, ready to hand
-    to an LLM prompt in Week 5 -- every line traces back to a source."""
-    lines = [f"Query: {bundle['query']}", ""]
+def format_context_only(bundle: dict) -> str:
+    """Render just the retrieved context (graph facts + passages), with no
+    query line -- used as the context block inside an LLM prompt (Week 5),
+    where the question is already provided separately."""
+    lines = []
 
     if bundle["graph_facts"]:
         lines.append("Graph facts:")
@@ -94,6 +95,12 @@ def format_context_for_llm(bundle: dict) -> str:
         lines.append("(no context retrieved)")
 
     return "\n".join(lines)
+
+
+def format_context_for_llm(bundle: dict) -> str:
+    """Like format_context_only, but with a leading query line -- used for
+    the CLI's own human-readable display."""
+    return f"Query: {bundle['query']}\n\n" + format_context_only(bundle)
 
 
 def main():

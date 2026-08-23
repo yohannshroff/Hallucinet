@@ -1,36 +1,49 @@
 # Manual setup: Ollama (needed starting Week 5)
 
-Not installed by any script in this repo — run these yourself when you
-reach Week 5 (LLM integration).
+Not installed by any Week 1-4 script — set this up when you reach Week 5
+(LLM integration). This project's dev instance was set up as below.
 
-## Install
+## Install (Homebrew, macOS)
 
 ```bash
 brew install ollama
+brew services start ollama
 ```
 
-(Or download from https://ollama.com/download for other platforms.)
+- API: `http://localhost:11434`
+- Stop with `brew services stop ollama`; check status with
+  `brew services info ollama`.
+
+(Other platforms: download from https://ollama.com/download and run
+`ollama serve`.)
 
 ## Pull a model
 
 ```bash
-ollama pull llama3
-# or, for a lighter/faster option:
-ollama pull gemma3
+ollama pull gemma3:4b
+# or, the other option the master plan named:
+ollama pull llama3.2
 ```
 
-## Run
-
-```bash
-ollama serve
-```
-
-This starts the local API at `http://localhost:11434` by default, matching
-`OLLAMA_HOST` in `.env.example`. Set `OLLAMA_MODEL` to whichever model you
-pulled.
+`gemma3:4b` is what this repo's `.env.example` defaults to — small enough
+to run acceptably on CPU, which matters for live-demo risk (see the master
+plan's risk register). A larger model answers better but is slower.
 
 ## Sanity check
 
 ```bash
-ollama run llama3 "Say hello in one sentence."
+ollama run gemma3:4b "Say hello in one sentence."
+```
+
+## After it's running
+
+Copy `.env.example` to `.env` (if you haven't already) and set
+`OLLAMA_HOST`/`OLLAMA_MODEL` to match. `scripts/common.py` loads these via
+`python-dotenv`, and `generation/` reads the connection config from there.
+
+Then:
+
+```bash
+python generation/generate_answer.py "Who led the resistance at Jhansi?"
+python generation/run_sample_questions.py
 ```

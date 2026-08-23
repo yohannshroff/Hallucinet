@@ -6,7 +6,7 @@ atomic-fact decomposition (breaking compound sentences into separate
 subject-predicate-object claims) would catch more, but adds a lot of
 complexity/failure surface for a 2-month project -- sentence-level
 splitting is the simple, defensible choice, matching the master plan's
-"keep it simple" guidance. See docs/week6_notes.md.
+"keep it simple" guidance. See docs/part6_notes.md.
 
 Citation markers the model tends to emit (e.g. "[1]", "[1, 2]",
 "[https://en.wikipedia.org/wiki/X]") are stripped before scoring since

@@ -1,4 +1,4 @@
-# ui/ (Week 8)
+# ui/ (Part 8)
 
 Streamlit frontend: question box, retrieval-mode selector, grounded
 answer, trust score, and cited sources — calls the FastAPI backend in
@@ -12,4 +12,4 @@ uvicorn api.main:app --port 8000
 streamlit run ui/app.py
 ```
 
-See [docs/week8_notes.md](../docs/week8_notes.md).
+See [docs/part8_notes.md](../docs/part8_notes.md).

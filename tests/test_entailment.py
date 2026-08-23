@@ -1,7 +1,7 @@
 """Tests for eval/entailment.py's NLI classification, using clear-cut
 sentence pairs so verdicts are unambiguous. Downloads the (small)
 cross-encoder/nli-MiniLM2-L6-H768 model on first run, same pattern as the
-Week 2 embedding tests."""
+Part 2 embedding tests."""
 
 import sys
 from pathlib import Path

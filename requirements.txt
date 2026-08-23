@@ -1,4 +1,4 @@
-# --- installed & used in Week 1-2 ---
+# --- installed & used in Part 1-2 ---
 requests>=2.32          # fetch Wikipedia article text via the API
 pandas>=2.2              # read/write/validate the entities & relationships CSVs
 python-dotenv>=1.0       # load .env for any future API keys / config
@@ -6,22 +6,22 @@ sentence-transformers>=3.3   # all-MiniLM-L6-v2 embeddings
 faiss-cpu>=1.9           # vector index + search
 pytest>=8.3              # test suite
 
-# --- installed & used in Week 3 ---
+# --- installed & used in Part 3 ---
 neo4j>=5.26              # KG ingestion/queries against the local Neo4j instance
 fuzzywuzzy>=0.18         # alias fuzzy-matching entities during KG build
 python-Levenshtein       # speeds up fuzzywuzzy
 
-# --- installed & used in Week 4 ---
+# --- installed & used in Part 4 ---
 spacy>=3.8               # NER + noun chunks for query-time entity extraction
 # run once after installing: python -m spacy download en_core_web_sm
 
-# --- installed & used in Week 7 ---
+# --- installed & used in Part 7 ---
 matplotlib>=3.9          # accuracy-by-mode comparison chart
 
-# --- installed & used in Week 8 ---
+# --- installed & used in Part 8 ---
 fastapi>=0.115           # API layer wrapping the retriever + generation + trust score
 uvicorn>=0.34             # serves the FastAPI app
 streamlit>=1.41           # frontend
 
-# --- needed LATER, do not install yet (documented for future weeks) ---
+# --- needed LATER, do not install yet (documented for future parts) ---
 # beautifulsoup4>=4.12    # only if a future non-Wikipedia source needs HTML scraping

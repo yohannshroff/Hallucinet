@@ -64,7 +64,7 @@ def fact_to_sentence(fact: dict) -> str:
 
 
 def evidence_texts_from_bundle(bundle: dict) -> list:
-    """Flatten a Week 4 retrieval bundle into a list of single-sentence
+    """Flatten a Part 4 retrieval bundle into a list of single-sentence
     evidence strings: one per graph fact, plus each vector chunk's text
     broken into individual sentences.
 
@@ -73,7 +73,7 @@ def evidence_texts_from_bundle(bundle: dict) -> list:
     premise/hypothesis pairs, and empirically scores true, well-supported
     claims far too low when the premise is a whole ~180-word multi-topic
     chunk instead of the one sentence that actually supports the claim
-    (see docs/week6_notes.md for the before/after numbers).
+    (see docs/part6_notes.md for the before/after numbers).
     """
     texts = [fact_to_sentence(fact) for fact in bundle.get("graph_facts", [])]
     for chunk in bundle.get("vector_chunks", []):
@@ -96,7 +96,7 @@ def compute_trust_score(answer_text: str, bundle: dict) -> dict:
     # The model's own "I don't know" refusal is meta-commentary about the
     # system, not a factual claim about history -- scoring it against
     # evidence would wrongly report 0% trust for exactly the behavior the
-    # prompt template is designed to produce (see docs/week6_notes.md).
+    # prompt template is designed to produce (see docs/part6_notes.md).
     claims = [c for c in claims if c.strip().rstrip(".") != REFUSAL_PHRASE.rstrip(".")]
 
     results = [classify_claim(claim, evidence_texts) for claim in claims]

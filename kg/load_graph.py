@@ -1,10 +1,10 @@
 """Load the hand-built KG seed spreadsheet (entities.csv + relationships.csv)
 into Neo4j.
 
-Design decisions (see docs/schema.md and docs/week3_notes.md):
+Design decisions (see docs/schema.md and docs/part3_notes.md):
 - Every entity becomes a :Entity node, plus a second label matching its
   entity_type (:Person / :Location / :Event / :Organization / :Cause) so
-  Week 4 Cypher queries can filter by type cheaply.
+  Part 4 Cypher queries can filter by type cheaply.
 - A relationship's `object` usually resolves to another entity, but per the
   schema some objects are legitimate free-text phrases (e.g. "rebel
   sepoys"). Rather than dropping those facts, they become :Concept nodes

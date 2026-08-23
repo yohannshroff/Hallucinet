@@ -1,4 +1,4 @@
-"""Shared response-building logic: runs the full Week 4-6 pipeline
+"""Shared response-building logic: runs the full Part 4-6 pipeline
 (retrieval -> generation -> trust score) and shapes the result into the
 dict both api/main.py's /ask endpoint and the demo-cache builder need.
 Kept out of main.py so it has no FastAPI dependency and can be imported

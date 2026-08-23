@@ -1,9 +1,9 @@
-"""Render the Week 7 "core proof slide": accuracy by retrieval mode
+"""Render the Part 7 "core proof slide": accuracy by retrieval mode
 (vector-only / graph-only / hybrid), from eval/ablation.py's results CSV.
 
 Usage:
     python eval/chart.py
-    python eval/chart.py --results docs/week7_ablation_results.csv --out docs/week7_accuracy_by_mode.png
+    python eval/chart.py --results docs/part7_ablation_results.csv --out docs/part7_accuracy_by_mode.png
 """
 
 import argparse
@@ -17,8 +17,8 @@ from common import REPO_ROOT, get_logger  # noqa: E402
 
 log = get_logger("chart")
 
-DEFAULT_RESULTS = REPO_ROOT / "docs" / "week7_ablation_results.csv"
-DEFAULT_OUT = REPO_ROOT / "docs" / "week7_accuracy_by_mode.png"
+DEFAULT_RESULTS = REPO_ROOT / "docs" / "part7_ablation_results.csv"
+DEFAULT_OUT = REPO_ROOT / "docs" / "part7_accuracy_by_mode.png"
 
 MODE_ORDER = ["vector", "graph", "hybrid"]
 MODE_LABELS = {"vector": "Vector-only", "graph": "Graph-only", "hybrid": "Hybrid"}

@@ -1,6 +1,6 @@
-# Manual setup: Ollama (needed starting Week 5)
+# Manual setup: Ollama (needed starting Part 5)
 
-Not installed by any Week 1-4 script — set this up when you reach Week 5
+Not installed by any Part 1-4 script — set this up when you reach Part 5
 (LLM integration). This project's dev instance was set up as below.
 
 ## Install (Homebrew, macOS)

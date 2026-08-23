@@ -1,4 +1,4 @@
-# Week 7 notes
+# Part 7 notes
 
 Goals: finalize a 30-40 question Q&A test set, run the vector-only vs
 graph-only vs hybrid ablation, score it, and produce the comparison chart.
@@ -6,15 +6,15 @@ graph-only vs hybrid ablation, score it, and produce the comparison chart.
 - Test set: [data/eval/qa_test_set.csv](../data/eval/qa_test_set.csv), 30
   questions across person/location/cause/event/aftermath categories, each
   with `expected_entities` (the answer's key entity/entities) drawn
-  directly from the Week 1 KG seed so ground truth is known.
+  directly from the Part 1 KG seed so ground truth is known.
 - Ablation: `eval/ablation.py` ran all 30 questions x 3 modes (90 answers
   total) through `generate_answer` with `mode` threaded down to
   `retrieve()` (added a `mode` param -- "vector"/"graph"/"hybrid" -- to
   `retrieval/hybrid_retrieve.py` for this).
 - Scoring: **automated, not hand-scored** -- see "Scoring methodology"
   below for why and how. Results:
-  [docs/week7_ablation_results.csv](week7_ablation_results.csv), chart:
-  [docs/week7_accuracy_by_mode.png](week7_accuracy_by_mode.png).
+  [docs/part7_ablation_results.csv](part7_ablation_results.csv), chart:
+  [docs/part7_accuracy_by_mode.png](part7_accuracy_by_mode.png).
 
 ## Headline numbers (90 answers, 30 questions x 3 modes)
 
@@ -38,7 +38,7 @@ signals already built earlier in this project:
 
 1. **Entity match**: does the answer contain a case-insensitive substring
    match for any of the question's `expected_entities`?
-2. **Trust score** (Week 6's NLI entailment check): is the answer actually
+2. **Trust score** (Part 6's NLI entailment check): is the answer actually
    grounded in the evidence it was given?
 
 `correct` = both; `partial` = right entity, weak grounding; `wrong` =
@@ -94,7 +94,7 @@ calls for a human-scored check before reporting final numbers.
 
 **T13 — "Who commanded the British forces that recaptured Delhi?"**
 (expected: John Nicholson, a 2-hop graph fact — Delhi → Fall of Delhi →
-John Nicholson, flagged as a hard case back in Week 4/5.)
+John Nicholson, flagged as a hard case back in Part 4/5.)
 - graph-only: **correctly refused** — "does not contain enough
   information." 1-hop search genuinely can't reach Nicholson; the model
   didn't invent an answer either. This is the safe failure mode.
@@ -130,7 +130,7 @@ the fetched Wikipedia prose, not in the KG at all.)
   named in their own text) worth fixing before this KG is extended
   further — flagged as an open item below.
 
-## Bugs/gaps found and fixed this week
+## Bugs/gaps found and fixed in this part
 
 - **T25's expected answer** (documented above) — test-set authoring bug,
   fixed.
@@ -143,7 +143,7 @@ the fetched Wikipedia prose, not in the KG at all.)
 
 ## Open items
 
-- Fix the Concept-node disconnection from T10 before Week 8 locks in the
+- Fix the Concept-node disconnection from T10 before Part 8 locks in the
   demo -- either link Concept nodes to any Location entities mentioned in
   their text, or accept the gap and document it as a known limitation in
   the final report.

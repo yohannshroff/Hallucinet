@@ -1,10 +1,10 @@
-"""Week 7 ablation: run every question in data/eval/qa_test_set.csv through
+"""Part 7 ablation: run every question in data/eval/qa_test_set.csv through
 vector-only, graph-only, and hybrid retrieval, generate an answer for each,
 and classify each answer as correct / partial / wrong / hallucinated.
 
 Scoring methodology (documented here since it's a deliberate departure from
 the master plan's literal "score by hand" suggestion -- see
-docs/week7_notes.md for the full rationale):
+docs/part7_notes.md for the full rationale):
 
 The master plan's own risk register flags LLM-grading-its-own-answer as
 circular. Scoring 90 answers (30 questions x 3 modes) by a human for real
@@ -19,7 +19,7 @@ in this project:
    judgment call by any LLM.
 2. Trust score (eval/trust_score.py): the fraction of the answer's claims
    entailed by the evidence it was actually given, via the independent NLI
-   model from Week 6.
+   model from Part 6.
 
 Classification (deterministic, no LLM involved):
     correct       -- expected entity found AND trust_score >= 0.5
@@ -43,7 +43,7 @@ before reporting these numbers in the final write-up.
 
 Usage:
     python eval/ablation.py
-    python eval/ablation.py --questions data/eval/qa_test_set.csv --out docs/week7_ablation_results.csv
+    python eval/ablation.py --questions data/eval/qa_test_set.csv --out docs/part7_ablation_results.csv
 """
 
 import argparse
@@ -66,7 +66,7 @@ from trust_score import compute_trust_score  # noqa: E402
 log = get_logger("ablation")
 
 QA_TEST_SET_CSV = REPO_ROOT / "data" / "eval" / "qa_test_set.csv"
-DEFAULT_OUT = REPO_ROOT / "docs" / "week7_ablation_results.csv"
+DEFAULT_OUT = REPO_ROOT / "docs" / "part7_ablation_results.csv"
 TRUST_SCORE_THRESHOLD = 0.5
 
 

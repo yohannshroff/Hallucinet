@@ -16,39 +16,39 @@ redesign.
 
 ## System
 
-1. **Vector retrieval** (Week 2): Wikipedia articles → cleaned, chunked
+1. **Vector retrieval** (Part 2): Wikipedia articles → cleaned, chunked
    (180 words, 40 overlap) → `all-MiniLM-L6-v2` embeddings → FAISS flat
    index.
-2. **Knowledge graph** (Weeks 1, 3): entities/relationships hand-curated
+2. **Knowledge graph** (Parts 1, 3): entities/relationships hand-curated
    into a spreadsheet with per-fact source citations, loaded into Neo4j
    (`:Entity` nodes typed by `:Person`/`:Location`/`:Event`/
    `:Organization`/`:Cause`; unresolved relationship objects become
    `:Concept` nodes rather than being dropped).
-3. **Hybrid retrieval** (Week 4): query-time entity extraction (direct
+3. **Hybrid retrieval** (Part 4): query-time entity extraction (direct
    alias substring scan + spaCy noun-chunk/NER spans resolved via exact
    + fuzzy matching — chosen after verifying generic spaCy NER alone
    misses domain-specific entities) → 1-hop Cypher graph search + FAISS
    vector search, run independently and concatenated (graph facts first,
    then vector passages).
-4. **Grounded generation** (Week 5): local Ollama (`gemma3:4b`) with a
+4. **Grounded generation** (Part 5): local Ollama (`gemma3:4b`) with a
    system prompt that forbids outside knowledge and requires an explicit
    "I don't have enough information" response when the context doesn't
    support an answer.
-5. **Trust scoring** (Week 6): claim splitting (spaCy sentences) → NLI
+5. **Trust scoring** (Part 6): claim splitting (spaCy sentences) → NLI
    entailment (`cross-encoder/nli-MiniLM2-L6-H768`, an independent model —
    not the generating LLM grading itself) against the retrieved evidence,
    sentence-decomposed for accurate scoring. Trust score = % of claims
    entailed.
-6. **Evaluation** (Week 7): 30-question hand-authored test set, ablated
+6. **Evaluation** (Part 7): 30-question hand-authored test set, ablated
    across vector-only / graph-only / hybrid retrieval, classified
    correct/partial/wrong/hallucinated/refused via an automated proxy
    (entity match + trust score).
-7. **App** (Week 8): FastAPI backend (`POST /ask`), Streamlit frontend
+7. **App** (Part 8): FastAPI backend (`POST /ask`), Streamlit frontend
    with a pre-cached demo-question fallback.
 
 ## Results
 
-![Accuracy by retrieval mode](week7_accuracy_by_mode.png)
+![Accuracy by retrieval mode](part7_accuracy_by_mode.png)
 
 | mode | correct | partial | wrong | hallucinated | refused |
 |---|---|---|---|---|---|
@@ -57,7 +57,7 @@ redesign.
 | vector-only | 6/30 | 7 | 9 | 7 | 1 |
 
 **This table needs its caveats to be read honestly** (full detail in
-[docs/week7_notes.md](week7_notes.md)):
+[docs/part7_notes.md](part7_notes.md)):
 
 - The test set was authored directly from the same KG that graph-only
   retrieves from, which structurally advantages graph-only — this is
@@ -65,7 +65,7 @@ redesign.
 - The automated entity-match scorer favors answers that echo canonical KG
   entity names, which graph-derived answers naturally do and vector-only
   prose often doesn't even when factually correct (two concrete examples
-  in `week7_notes.md`: T25's "maladministration" vs the test set's
+  in `part7_notes.md`: T25's "maladministration" vs the test set's
   "misgovernance"; T21's accurate but non-canonical phrasing).
 - Net effect: vector-only's apparent error rate is inflated by scoring
   brittleness, not just by real invented facts. The true gap between
@@ -94,13 +94,13 @@ those caveats:**
 Building and testing against real output caught real bugs, not just
 theoretical ones:
 
-- Week 6: the refusal phrase itself was being scored as an unsupported
+- Part 6: the refusal phrase itself was being scored as an unsupported
   claim (0% trust for the *correct* behavior); evidence chunks fed to the
   NLI model whole instead of sentence-split cut real claims' scores by an
   order of magnitude. Fixing both took the 10-question average trust
   score from 21% to 61% — the 21% number was mostly a bug in our own
   evaluation code, not a true hallucination rate.
-- Week 7: found and fixed a synonym mismatch in the test set itself
+- Part 7: found and fixed a synonym mismatch in the test set itself
   (T25), and a missing entity alias ("Tatya Tope") that would have caused
   real query-time entity extraction failures, not just an eval scoring
   quirk.
@@ -118,5 +118,5 @@ theoretical ones:
 ## Repository
 
 [github.com/yohannshroff/Hallucinet](https://github.com/yohannshroff/Hallucinet)
-— see `README.md` for setup and the full pipeline, and `docs/week*_notes.md`
-for what was built, run, and found each week.
+— see `README.md` for setup and the full pipeline, and `docs/part*_notes.md`
+for what was built, run, and found in each part.

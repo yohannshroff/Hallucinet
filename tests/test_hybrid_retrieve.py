@@ -67,7 +67,7 @@ def test_retrieve_end_to_end_smoke():
 
 @pytest.mark.skipif(not FAISS_INDEX_FILE.exists(), reason="FAISS index not built -- run scripts/build_faiss_index.py first")
 def test_retrieve_modes_isolate_sources():
-    """Week 7's ablation depends on vector/graph modes actually excluding
+    """Part 7's ablation depends on vector/graph modes actually excluding
     the other source -- verify that directly rather than trusting it."""
     pytest.importorskip("neo4j")
     pytest.importorskip("spacy")

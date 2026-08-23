@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Create a venv and install Week 1-2 dependencies. Neo4j/Ollama are NOT
+# Create a venv and install Part 1-2 dependencies. Neo4j/Ollama are NOT
 # touched by this script -- see docs/manual_setup_neo4j.md and
 # docs/manual_setup_ollama.md for those.
 set -e

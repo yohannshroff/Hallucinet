@@ -1,4 +1,4 @@
-# Week 8 notes
+# Part 8 notes
 
 Goals: wire FastAPI + Streamlit end-to-end, cache demo questions as a
 fallback, finalize the report.
@@ -16,7 +16,7 @@ fallback, finalize the report.
   browser: typed "Who ruled Jhansi before the revolt?", got "Rani
   Lakshmibai ruled Jhansi" at 100% trust with two cited sources rendered
   correctly end-to-end through the actual UI (not just the API).
-- `api/build_demo_cache.py`: pre-ran the 10 Week 5 sample questions
+- `api/build_demo_cache.py`: pre-ran the 10 Part 5 sample questions
   through the full pipeline, cached to `data/eval/demo_cache.json` --
   the master plan's risk-register mitigation for "local LLM too slow for
   live demo."
@@ -29,7 +29,7 @@ fallback, finalize the report.
 3. Streamlit UI driven through an actual browser (not just curl): typed a
    question, clicked Ask, confirmed the answer/trust score/sources render
    correctly
-4. Full `pytest tests/` suite green (see final count in the Week 8 commit)
+4. Full `pytest tests/` suite green (see final count in the Part 8 commit)
 
 ## What this project deliberately did not build
 
@@ -42,10 +42,10 @@ production service.
 
 ## Open items for the actual report/viva prep
 
-- Run the 2-rater manual agreement check (flagged in `docs/week7_notes.md`)
-  on a sample of the ablation results before quoting the Week 7 numbers as
+- Run the 2-rater manual agreement check (flagged in `docs/part7_notes.md`)
+  on a sample of the ablation results before quoting the Part 7 numbers as
   final.
-- Consider fixing the T10 Concept-node graph gap (`docs/week7_notes.md`)
+- Consider fixing the T10 Concept-node graph gap (`docs/part7_notes.md`)
   if there's time before presenting.
 - Rehearse with the demo cache as the fallback path in mind -- if live
   Ollama inference stalls during the viva, switch talking points to "the

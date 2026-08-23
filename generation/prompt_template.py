@@ -2,7 +2,7 @@
 ONLY the retrieved context (from retrieval/hybrid_retrieve.py) and to say
 so explicitly when the context doesn't support an answer, rather than
 falling back on the model's own training-time knowledge. This is the core
-anti-hallucination lever for Week 5 -- see docs/week5_notes.md.
+anti-hallucination lever for Part 5 -- see docs/part5_notes.md.
 """
 
 REFUSAL_PHRASE = "The provided context does not contain enough information to answer this question."

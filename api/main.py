@@ -1,5 +1,5 @@
 """FastAPI backend wrapping the hybrid retriever + grounded Ollama
-generation (Weeks 4-5) and trust scoring (Week 6) behind an HTTP endpoint,
+generation (Parts 4-5) and trust scoring (Part 6) behind an HTTP endpoint,
 for the Streamlit frontend (ui/) to call.
 
 Usage:

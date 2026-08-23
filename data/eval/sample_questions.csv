@@ -4,7 +4,7 @@ Q02,What caused the Meerut Mutiny?,cause,Tests the caused_by chain (cartridge is
 Q03,Who was declared emperor by the rebel sepoys in Delhi?,person,Should surface Bahadur Shah II
 Q04,What happened during the Siege of Cawnpore?,event,Tests vector retrieval depth on a single event
 Q05,Who commanded the British forces that recaptured Delhi?,person,Should surface John Nicholson
-Q06,What was the Doctrine of Lapse and how did it relate to the revolt?,cause,Tests the split-noun-chunk entity extraction case from Week 4
+Q06,What was the Doctrine of Lapse and how did it relate to the revolt?,cause,Tests the split-noun-chunk entity extraction case from Part 4
 Q07,Who led the first relief of Lucknow?,person,Should surface Henry Havelock and James Outram
 Q08,What happened to Bahadur Shah II after the fall of Delhi?,event,Tests multi-entity/event chaining
 Q09,Which act transferred rule of India from the East India Company to the Crown?,aftermath,Should surface Government of India Act 1858

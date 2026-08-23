@@ -1,4 +1,4 @@
-# retrieval/ (Week 4 stub)
+# retrieval/ (Part 4 stub)
 
 Hybrid retrieval lives here: query-time entity extraction (spaCy), Cypher
 graph search against the Neo4j graph built in `kg/`, vector search against

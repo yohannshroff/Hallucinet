@@ -1,5 +1,5 @@
 """Query the FAISS index built by build_faiss_index.py -- a manual smoke
-test for the Week 1-2 vector retrieval pipeline.
+test for the Part 1-2 vector retrieval pipeline.
 
 Usage:
     python scripts/query_index.py "Who led the resistance at Jhansi?" --k 5

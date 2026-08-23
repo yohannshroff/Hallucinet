@@ -1,4 +1,4 @@
-"""End-to-end grounded answer generation: hybrid retrieval (Week 4) -> the
+"""End-to-end grounded answer generation: hybrid retrieval (Part 4) -> the
 grounding-only prompt template -> local Ollama generation.
 
 Usage:
@@ -35,10 +35,10 @@ def answer_question(
     """Run retrieval, build the grounded prompt, and generate an answer.
 
     Returns {"question", "answer", "context", "bundle"} -- `bundle` is the
-    raw retrieval output (Week 4's retrieve()), kept around so Week 6's
+    raw retrieval output (Part 4's retrieve()), kept around so Part 6's
     trust scoring can re-check the answer's claims against the same
     evidence it was generated from. `mode` ("vector"/"graph"/"hybrid") is
-    forwarded to retrieve() -- see Week 7's ablation.
+    forwarded to retrieve() -- see Part 7's ablation.
     """
     bundle = retrieve(question, entities_df, k=k, graph_limit=graph_limit, index_dir=index_dir, mode=mode)
     context = format_context_only(bundle)

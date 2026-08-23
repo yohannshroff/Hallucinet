@@ -3,7 +3,7 @@
 Loads entities.csv and relationships.csv, builds a name+alias -> entity_id
 index, and flags any subject/object in relationships.csv that doesn't
 resolve to a known entity (catching typos before they become orphan nodes
-in the Week 3 graph build).
+in the Part 3 graph build).
 
 Usage:
     python scripts/validate_kg_csv.py

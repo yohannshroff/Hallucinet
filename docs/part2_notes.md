@@ -1,4 +1,4 @@
-# Week 2 notes
+# Part 2 notes
 
 Goals: clean + chunk the fetched documents, embed the chunks, build a FAISS
 index, and confirm vector search works end-to-end.
@@ -24,4 +24,4 @@ fetch_wikipedia_sources.py -> clean_and_chunk.py -> build_embeddings.py -> build
 ## Open items
 
 - If retrieval quality looks weak on the smoke-test query, revisit chunk
-  size/overlap before Week 4 (hybrid retrieval) rather than after.
+  size/overlap before Part 4 (hybrid retrieval) rather than after.

@@ -1,4 +1,4 @@
-# Week 6 notes
+# Part 6 notes
 
 Goals: claim splitting, NLI-based entailment scoring against retrieved
 evidence, and a trust score formula.
@@ -26,9 +26,9 @@ evidence, and a trust score formula.
 
 ## Two real bugs found and fixed while testing on real output
 
-Ran `eval/run_trust_scores.py` over the Week 5 sample questions twice —
+Ran `eval/run_trust_scores.py` over the Part 5 sample questions twice —
 before and after fixing these — see
-[docs/week6_trust_scores.md](week6_trust_scores.md) for the final
+[docs/part6_trust_scores.md](part6_trust_scores.md) for the final
 transcript.
 
 1. **The refusal phrase was being scored as an unsupported claim.** Q10's
@@ -81,4 +81,4 @@ around.
 - The 2-rater manual agreement check the master plan's risk register
   recommends for scoring credibility should be run against this script's
   verdicts before they go in the final report (see also
-  `docs/week7_notes.md`).
+  `docs/part7_notes.md`).

@@ -1,4 +1,4 @@
-# Week 4 notes
+# Part 4 notes
 
 Goals: extract entities from a user query, run graph + vector search, merge
 into a single context.
@@ -25,7 +25,7 @@ into a single context.
   independently (graph search degrades gracefully to empty if Neo4j is
   unreachable) and concatenates: graph facts first (precise, entity-tied),
   vector chunks second (broader supporting prose), each cited. No
-  cross-source scoring/fusion — deliberately simple; Week 7's vector-only
+  cross-source scoring/fusion — deliberately simple; Part 7's vector-only
   vs graph-only vs hybrid ablation is what tells us whether this is good
   enough.
 
@@ -43,7 +43,7 @@ into a single context.
 
 - The fuzzy fallback can occasionally resolve a loosely-related phrase to
   an entity (e.g. "Indian rulers" → Princely States) — not wrong exactly,
-  but worth watching as the query set grows in Week 7's evaluation.
-- 1-hop graph expansion only; if Week 7 evaluation shows multi-hop
-  reasoning questions need more, revisit before Week 5 locks in the prompt
+  but worth watching as the query set grows in Part 7's evaluation.
+- 1-hop graph expansion only; if Part 7 evaluation shows multi-hop
+  reasoning questions need more, revisit before Part 5 locks in the prompt
   template.

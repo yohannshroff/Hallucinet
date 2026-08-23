@@ -3,7 +3,7 @@
 Generic spaCy NER is unreliable on this niche domain out of the box (it
 mislabels "Barrackpore" as PERSON, misses "Mangal Pandey" as an entity
 entirely, and splits "Doctrine of Lapse" into two separate noun chunks --
-verified empirically, see docs/week4_notes.md). Since our KG only has ~50
+verified empirically, see docs/part4_notes.md). Since our KG only has ~50
 entities, we combine two complementary signals instead of relying on
 spaCy's NER labels alone:
 

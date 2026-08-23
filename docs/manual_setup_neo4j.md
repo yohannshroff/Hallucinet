@@ -1,6 +1,6 @@
-# Manual setup: Neo4j (needed starting Week 3)
+# Manual setup: Neo4j (needed starting Part 3)
 
-Not installed by any Week 1-2 script — set this up when you reach Week 3
+Not installed by any Part 1-2 script — set this up when you reach Part 3
 (KG ingestion). This project's dev instance was set up with Option A below.
 
 ## Option A: Homebrew (macOS, what this repo's dev instance uses)

@@ -1,5 +1,5 @@
 """Resolve a free-text mention (e.g. from a relationships.csv row, or later
-a user query in Week 4) to a known entity_id.
+a user query in Part 4) to a known entity_id.
 
 Two-stage resolution:
 1. Exact match against the name/alias index built from entities.csv

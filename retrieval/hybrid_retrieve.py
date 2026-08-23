@@ -7,7 +7,7 @@ not meant to be a sophisticated reranker):
   the entities the query is actually about.
 - Vector chunks come second: broader supporting context/prose, ranked by
   cosine similarity, capped at `k`.
-- No cross-source scoring/fusion -- Week 7's evaluation (vector-only vs
+- No cross-source scoring/fusion -- Part 7's evaluation (vector-only vs
   graph-only vs hybrid) is exactly what tells us whether this simple
   concatenation is good enough or needs a real fusion strategy.
 
@@ -47,7 +47,7 @@ def retrieve(
     Neo4j isn't reachable, so callers can still get vector-only results.
 
     `mode` selects which retrieval source(s) actually populate the bundle
-    -- "vector" or "graph" alone, or "hybrid" (both) -- used by Week 7's
+    -- "vector" or "graph" alone, or "hybrid" (both) -- used by Part 7's
     ablation to compare them. Entity extraction still runs for all modes
     (cheap, and needed for the seed_entities field either way); only the
     graph/vector search calls themselves are skipped.
@@ -86,7 +86,7 @@ def retrieve(
 
 def format_context_only(bundle: dict) -> str:
     """Render just the retrieved context (graph facts + passages), with no
-    query line -- used as the context block inside an LLM prompt (Week 5),
+    query line -- used as the context block inside an LLM prompt (Part 5),
     where the question is already provided separately."""
     lines = []
 

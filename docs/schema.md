@@ -11,7 +11,7 @@ ever mean adding new `period_tag` *values*, never new columns.
 | `entity_id` | short stable id, e.g. `E001` |
 | `name` | canonical display name |
 | `entity_type` | one of: `Person`, `Location`, `Event`, `Organization`, `Cause` |
-| `aliases` | semicolon-separated alternate names/spellings (used for fuzzy alias matching in Week 3, e.g. "Rani Lakshmibai" vs "Rani of Jhansi") |
+| `aliases` | semicolon-separated alternate names/spellings (used for fuzzy alias matching in Part 3, e.g. "Rani Lakshmibai" vs "Rani of Jhansi") |
 | `period_tag` | which historical period this belongs to, e.g. `1857_revolt`. Future scope expansion adds new tag values here, not new columns. |
 | `description` | one-sentence summary |
 
@@ -37,7 +37,7 @@ Adding a new relation type is fine — just add it to this list (and to
 `RELATION_VOCAB` in `scripts/common.py`) so `kg/load_graph.py` and the
 validation scripts stay in sync with what's actually used in the data.
 
-## Neo4j graph shape (Week 3)
+## Neo4j graph shape (Part 3)
 
 `kg/load_graph.py` loads this spreadsheet into Neo4j:
 
@@ -56,4 +56,4 @@ validation scripts stay in sync with what's actually used in the data.
 `scripts/validate_kg_csv.py` builds a name+alias → `entity_id` index from
 `entities.csv` and flags any `subject`/`object` in `relationships.csv` that
 doesn't resolve, so typos in the hand-built spreadsheet get caught early
-instead of silently producing orphan graph nodes in Week 3.
+instead of silently producing orphan graph nodes in Part 3.

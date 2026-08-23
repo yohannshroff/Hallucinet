@@ -8,7 +8,7 @@ Two checks:
    is actually present in the graph.
 
 Historical accuracy of each fact was checked against its cited Wikipedia
-source during Week 1 seeding (see docs/week1_notes.md) -- this script
+source during Part 1 seeding (see docs/part1_notes.md) -- this script
 checks that ingestion faithfully reproduced the spreadsheet in the graph,
 not the underlying history.
 

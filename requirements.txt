@@ -15,8 +15,13 @@ python-Levenshtein       # speeds up fuzzywuzzy
 spacy>=3.8               # NER + noun chunks for query-time entity extraction
 # run once after installing: python -m spacy download en_core_web_sm
 
+# --- installed & used in Week 7 ---
+matplotlib>=3.9          # accuracy-by-mode comparison chart
+
+# --- installed & used in Week 8 ---
+fastapi>=0.115           # API layer wrapping the retriever + generation + trust score
+uvicorn>=0.34             # serves the FastAPI app
+streamlit>=1.41           # frontend
+
 # --- needed LATER, do not install yet (documented for future weeks) ---
 # beautifulsoup4>=4.12    # only if a future non-Wikipedia source needs HTML scraping
-# fastapi>=0.115          # week 5: API layer
-# uvicorn>=0.34            # week 5: serve FastAPI
-# streamlit>=1.41          # week 6: UI

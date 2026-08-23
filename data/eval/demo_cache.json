@@ -1,0 +1,319 @@
+[
+  {
+    "question": "Who led the resistance at Jhansi?",
+    "answer": "Rani Lakshmibai led the resistance at Jhansi. [https://en.wikipedia.org/wiki/Rani_of_Jhansi] \nHugh Rose besieged Jhansi. [https://en.wikipedia.org/wiki/Hugh_Rose,_1st_Baron_Strathnairn] \n",
+    "trust_score": 0.5,
+    "n_claims": 2,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Jhansi"
+    ],
+    "sources": [
+      {
+        "title": "Siege of Jhansi located_in Jhansi",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Jhansi"
+      },
+      {
+        "title": "Hugh Rose besieged Jhansi",
+        "url": "https://en.wikipedia.org/wiki/Hugh_Rose,_1st_Baron_Strathnairn"
+      },
+      {
+        "title": "Rani Lakshmibai ruled Jhansi",
+        "url": "https://en.wikipedia.org/wiki/Rani_of_Jhansi"
+      },
+      {
+        "title": "Indian Rebellion of 1857",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      }
+    ]
+  },
+  {
+    "question": "What caused the Meerut Mutiny?",
+    "answer": "The Meerut Mutiny was caused by the Greased Cartridge Incident [https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857]. The provided context also states that the fall of Delhi was caused by the Meerut Mutiny [https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857].",
+    "trust_score": 0.5,
+    "n_claims": 2,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Meerut Mutiny",
+      "Meerut"
+    ],
+    "sources": [
+      {
+        "title": "Fall of Delhi caused_by Meerut Mutiny",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      },
+      {
+        "title": "Siege of Jhansi",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Jhansi"
+      },
+      {
+        "title": "Meerut",
+        "url": "https://en.wikipedia.org/wiki/Meerut"
+      },
+      {
+        "title": "Siege of Delhi (1857)",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Delhi_(1857)"
+      },
+      {
+        "title": "John Nicholson (East India Company officer)",
+        "url": "https://en.wikipedia.org/wiki/John_Nicholson_(East_India_Company_officer)"
+      }
+    ]
+  },
+  {
+    "question": "Who was declared emperor by the rebel sepoys in Delhi?",
+    "answer": "Bahadur Shah II was declared emperor by the rebel sepoys in Delhi [1, 2, 5]. The context states: “Seeking a symbol around which to rally, the first sepoys to rebel sought to reinstate the power of the Mughal Empire, which had ruled much of the Indian subcontinent in the previous centuries. Lacking overall direction, many who subsequently rebelled also flocked to Delhi. This made the siege decisive for two reasons. Firstly, large numbers of rebels were committed to the defence of a single fixed point, perhaps to the detriment of their prospects elsewhere, and their defeat at Delhi was thus a very major military setback. Secondly, the British recapture of Delhi and the refusal of the aged Mughal Emperor Bahadur Shah II to continue the struggle deprived the rebellion of the nominal Mughal Emperor…” [1, 4, 5].",
+    "trust_score": 0.6666666666666666,
+    "n_claims": 6,
+    "n_entailed": 4,
+    "seed_entities": [
+      "Delhi"
+    ],
+    "sources": [
+      {
+        "title": "Fall of Delhi located_in Delhi",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Delhi_(1857)"
+      },
+      {
+        "title": "Bahadur Shah II located_in Delhi",
+        "url": "https://en.wikipedia.org/wiki/Bahadur_Shah_Zafar"
+      },
+      {
+        "title": "Indian Rebellion of 1857",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      }
+    ]
+  },
+  {
+    "question": "What happened during the Siege of Cawnpore?",
+    "answer": "During the Siege of Cawnpore, around three hundred military men, around three hundred women and children and about one hundred and fifty merchants, business owners, drummers (salesman), engineers and others were present [1]. The British forces, led by General Wheeler, initially took refuge in an entrenchment south of the city [1]. However, the siege resulted in the massacre of approximately 73 women and 124 children [2]. Following the recapture of Cawnpore, the British engaged in retaliatory violence, including the hanging of ten men without trial and the flogging and beating of others [2]. The event led to the war cry \"Remember Cawnpore!\" [4]. The siege was a key episode in the Indian Rebellion of 1857 [4]. Sources: [1], [2], [4]",
+    "trust_score": 0.3333333333333333,
+    "n_claims": 6,
+    "n_entailed": 2,
+    "seed_entities": [
+      "Kanpur",
+      "Siege of Cawnpore"
+    ],
+    "sources": [
+      {
+        "title": "Massacre of Cawnpore located_in Kanpur",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Cawnpore"
+      },
+      {
+        "title": "Nana Sahib led Siege of Cawnpore",
+        "url": "https://en.wikipedia.org/wiki/Nana_Sahib"
+      }
+    ]
+  },
+  {
+    "question": "Who commanded the British forces that recaptured Delhi?",
+    "answer": "The provided context does not contain enough information to answer this question.",
+    "trust_score": null,
+    "n_claims": 0,
+    "n_entailed": 0,
+    "seed_entities": [
+      "British East India Company",
+      "Delhi"
+    ],
+    "sources": [
+      {
+        "title": "Princely States fought_against British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      },
+      {
+        "title": "British East India Company succeeded_by Government of India Act 1858",
+        "url": "https://en.wikipedia.org/wiki/Government_of_India_Act_1858"
+      },
+      {
+        "title": "Bengal Army part_of British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Bengal_Army"
+      },
+      {
+        "title": "Lord Canning appointed_by British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Charles_Canning,_1st_Earl_Canning"
+      },
+      {
+        "title": "British East India Company executed Tantia Tope",
+        "url": "https://en.wikipedia.org/wiki/Tantia_Tope"
+      },
+      {
+        "title": "Nana Sahib fought_against British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Nana_Sahib"
+      },
+      {
+        "title": "Rani Lakshmibai fought_against British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Rani_of_Jhansi"
+      },
+      {
+        "title": "Fall of Delhi located_in Delhi",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Delhi_(1857)"
+      },
+      {
+        "title": "Bahadur Shah II located_in Delhi",
+        "url": "https://en.wikipedia.org/wiki/Bahadur_Shah_Zafar"
+      },
+      {
+        "title": "Bakht Khan",
+        "url": "https://en.wikipedia.org/wiki/Bakht_Khan"
+      },
+      {
+        "title": "Siege of Lucknow",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Lucknow"
+      }
+    ]
+  },
+  {
+    "question": "What was the Doctrine of Lapse and how did it relate to the revolt?",
+    "answer": "The Doctrine of Lapse was a policy initiated by the East India Company, associated with James Broun-Ramsay, 1st Marquess of Dalhousie [1, 2]. It stipulated that any Indian princely state under the Company’s suzerainty would be annexed if the ruler was “manifestly incompetent or died without a male heir” [1, 2]. This policy supplanted the Indian sovereign’s right to choose a successor [1, 2].\n\nThe Doctrine of Lapse is directly linked to the revolt through several points: it fueled grievances among Indian rulers like Nana Sahib and Rani of Jhansi [3], who had their legal and hereditary claims rejected by the Company [3]. The rejection of adopted heirs, as exemplified by the Rani of Jhansi’s situation [3], contributed to the widespread discontent that ultimately erupted into the 1857 Revolt [3]. The annexation of states like Jhansi [1] was a key factor in the rebellion, and the British response, including acts of violence like those at Cawnpore [4], further inflamed tensions and became a rallying cry for the rebels [4].",
+    "trust_score": 0.14285714285714285,
+    "n_claims": 7,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Doctrine of Lapse"
+    ],
+    "sources": [
+      {
+        "title": "Siege of Jhansi caused_by Doctrine of Lapse",
+        "url": "https://en.wikipedia.org/wiki/Doctrine_of_lapse"
+      },
+      {
+        "title": "Indian Rebellion of 1857",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      },
+      {
+        "title": "Siege of Cawnpore",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Cawnpore"
+      }
+    ]
+  },
+  {
+    "question": "Who led the first relief of Lucknow?",
+    "answer": "Henry Havelock and James Outram led the First Relief of Lucknow [1, 2].",
+    "trust_score": 0.0,
+    "n_claims": 1,
+    "n_entailed": 0,
+    "seed_entities": [
+      "First Relief of Lucknow",
+      "Lucknow"
+    ],
+    "sources": [
+      {
+        "title": "James Outram led First Relief of Lucknow",
+        "url": "https://en.wikipedia.org/wiki/James_Outram"
+      },
+      {
+        "title": "Henry Havelock led First Relief of Lucknow",
+        "url": "https://en.wikipedia.org/wiki/Henry_Havelock"
+      },
+      {
+        "title": "Siege of Lucknow located_in Lucknow",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Lucknow"
+      },
+      {
+        "title": "Lucknow",
+        "url": "https://en.wikipedia.org/wiki/Lucknow"
+      }
+    ]
+  },
+  {
+    "question": "What happened to Bahadur Shah II after the fall of Delhi?",
+    "answer": "Bahadur Shah Zafar was tried on the charges of treason and exiled to Rangoon in Burma [2]. After rebel defeat in the war, he was mortally wounded by the British in the last days of the mutiny and died in the Terai plains of Nepal in 1859 [1]. He entered the region along with Begum Hazrat Mahal after Awadh came under British control [1].",
+    "trust_score": 1.0,
+    "n_claims": 3,
+    "n_entailed": 3,
+    "seed_entities": [
+      "Bahadur Shah II",
+      "Delhi",
+      "Fall of Delhi"
+    ],
+    "sources": [
+      {
+        "title": "William Hodson captured Bahadur Shah II",
+        "url": "https://en.wikipedia.org/wiki/William_Hodson"
+      },
+      {
+        "title": "Bahadur Shah II located_in Delhi",
+        "url": "https://en.wikipedia.org/wiki/Bahadur_Shah_Zafar"
+      },
+      {
+        "title": "Fall of Delhi located_in Delhi",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Delhi_(1857)"
+      },
+      {
+        "title": "Fall of Delhi caused_by Meerut Mutiny",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      },
+      {
+        "title": "John Nicholson died_during Fall of Delhi",
+        "url": "https://en.wikipedia.org/wiki/John_Nicholson_(East_India_Company_officer)"
+      },
+      {
+        "title": "Bakht Khan",
+        "url": "https://en.wikipedia.org/wiki/Bakht_Khan"
+      }
+    ]
+  },
+  {
+    "question": "Which act transferred rule of India from the East India Company to the Crown?",
+    "answer": "The Government of India Act 1858 [https://en.wikipedia.org/wiki/Government_of_India_Act_1858] transferred rule of India from the East India Company to the Crown. The context states: “The act ushered in a new period of Indian history, bringing about the end of Company rule in India. The era of the new British Raj would last until the Partition of India in August 1947…” and “The act is one of the most consequential pieces of legislation in the constitutional history of India: It formally ended the rule of the East India Company and transferred all powers, territories, and revenues of the Company to the British Crown…”",
+    "trust_score": 0.3333333333333333,
+    "n_claims": 3,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Government of India Act 1858",
+      "British East India Company"
+    ],
+    "sources": [
+      {
+        "title": "British East India Company succeeded_by Government of India Act 1858",
+        "url": "https://en.wikipedia.org/wiki/Government_of_India_Act_1858"
+      },
+      {
+        "title": "Princely States fought_against British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      },
+      {
+        "title": "Bengal Army part_of British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Bengal_Army"
+      },
+      {
+        "title": "Lord Canning appointed_by British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Charles_Canning,_1st_Earl_Canning"
+      },
+      {
+        "title": "British East India Company executed Tantia Tope",
+        "url": "https://en.wikipedia.org/wiki/Tantia_Tope"
+      },
+      {
+        "title": "Nana Sahib fought_against British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Nana_Sahib"
+      },
+      {
+        "title": "Rani Lakshmibai fought_against British East India Company",
+        "url": "https://en.wikipedia.org/wiki/Rani_of_Jhansi"
+      },
+      {
+        "title": "East India Company",
+        "url": "https://en.wikipedia.org/wiki/East_India_Company"
+      }
+    ]
+  },
+  {
+    "question": "What was Napoleon's role in the Indian Rebellion of 1857?",
+    "answer": "The provided context does not contain enough information to answer this question.",
+    "trust_score": null,
+    "n_claims": 0,
+    "n_entailed": 0,
+    "seed_entities": [],
+    "sources": [
+      {
+        "title": "Indian Rebellion of 1857",
+        "url": "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+      },
+      {
+        "title": "Siege of Cawnpore",
+        "url": "https://en.wikipedia.org/wiki/Siege_of_Cawnpore"
+      }
+    ]
+  }
+]

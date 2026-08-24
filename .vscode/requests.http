@@ -1,0 +1,38 @@
+### Requires the "REST Client" VS Code extension (humao.rest-client).
+### Start the FastAPI backend first (task "Serve: FastAPI backend" or F5 -> "Serve: FastAPI backend (uvicorn)"),
+### then click "Send Request" above any block below.
+
+@baseUrl = http://localhost:8000
+
+### Health check
+GET {{baseUrl}}/health
+
+### Ask a question (hybrid mode)
+POST {{baseUrl}}/ask
+Content-Type: application/json
+
+{
+  "question": "Who led the resistance at Jhansi?",
+  "mode": "hybrid",
+  "k": 5
+}
+
+### Ask a question (vector-only, for comparison)
+POST {{baseUrl}}/ask
+Content-Type: application/json
+
+{
+  "question": "Who led the resistance at Jhansi?",
+  "mode": "vector",
+  "k": 5
+}
+
+### Ask a question (graph-only, for comparison)
+POST {{baseUrl}}/ask
+Content-Type: application/json
+
+{
+  "question": "Who led the resistance at Jhansi?",
+  "mode": "graph",
+  "k": 5
+}

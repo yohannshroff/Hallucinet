@@ -1,0 +1,73 @@
+{
+  "version": "0.2.0",
+  "inputs": [
+    {
+      "id": "question",
+      "type": "promptString",
+      "description": "Question to ask HalluciNet",
+      "default": "Who led the resistance at Jhansi?"
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pytest: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["${file}", "-v"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: hybrid_retrieve.py (ask a question)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/retrieval/hybrid_retrieve.py",
+      "args": ["${input:question}"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: generate_answer.py (ask a question)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/generation/generate_answer.py",
+      "args": ["${input:question}"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: trust_score.py (ask a question)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/eval/trust_score.py",
+      "args": ["${input:question}"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Serve: FastAPI backend (uvicorn)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["api.main:app", "--reload", "--port", "8000"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Serve: Streamlit UI",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "args": ["run", "ui/app.py"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ]
+}

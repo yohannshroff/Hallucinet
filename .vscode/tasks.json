@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup: install Python deps",
+      "type": "shell",
+      "command": "bash scripts/setup_env.sh && .venv/bin/python -m spacy download en_core_web_sm",
+      "problemMatcher": []
+    },
+    {
+      "label": "Services: start Neo4j + Ollama",
+      "type": "shell",
+      "command": "brew services start neo4j && brew services start ollama",
+      "problemMatcher": []
+    },
+    {
+      "label": "Test: pytest (full suite)",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python -m pytest tests/ -v",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Serve: FastAPI backend",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python -m uvicorn api.main:app --reload --port 8000",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Serve: Streamlit UI",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python -m streamlit run ui/app.py",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Run: full app (FastAPI + Streamlit)",
+      "dependsOn": ["Serve: FastAPI backend", "Serve: Streamlit UI"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pipeline: Part 1 (fetch + validate KG)",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/fetch_wikipedia_sources.py && ${workspaceFolder}/.venv/bin/python scripts/validate_kg_csv.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pipeline: Part 2 (chunk + embed + index)",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/clean_and_chunk.py && ${workspaceFolder}/.venv/bin/python scripts/build_embeddings.py && ${workspaceFolder}/.venv/bin/python scripts/build_faiss_index.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pipeline: Part 3 (load Neo4j graph)",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python kg/load_graph.py && ${workspaceFolder}/.venv/bin/python kg/validate_graph.py --all",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pipeline: Part 7 (ablation + chart)",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python eval/ablation.py && ${workspaceFolder}/.venv/bin/python eval/chart.py",
+      "problemMatcher": []
+    }
+  ]
+}

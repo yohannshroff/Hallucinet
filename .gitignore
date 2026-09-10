@@ -5,4 +5,14 @@ __pycache__/
 .pytest_cache/
 data/processed/embeddings/*.npy
 data/processed/faiss_index/*.faiss
+
+# Source PDFs are copyrighted books -- don't push them, or any full-text
+# derived from them, to the public repo. Drop PDFs in data/raw/ locally and
+# run the pipeline scripts to regenerate everything below from scratch;
+# data/raw/sources_manifest.csv (metadata only, no book text) still gets
+# committed for provenance.
+data/raw/*.pdf
+data/raw/text/
+data/processed/chunks.jsonl
+data/processed/faiss_index/id_map.json
 .DS_Store

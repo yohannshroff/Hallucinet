@@ -15,7 +15,6 @@ load_dotenv(REPO_ROOT / ".env")
 DATA_DIR = REPO_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 RAW_TEXT_DIR = RAW_DIR / "text"
-SOURCE_LIST_CSV = RAW_DIR / "source_list.csv"
 SOURCES_MANIFEST_CSV = RAW_DIR / "sources_manifest.csv"
 
 KG_SEED_DIR = DATA_DIR / "kg_seed"

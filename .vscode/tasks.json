@@ -41,9 +41,9 @@
       "problemMatcher": []
     },
     {
-      "label": "Pipeline: Part 1 (fetch + validate KG)",
+      "label": "Pipeline: Part 1 (ingest PDFs + validate KG)",
       "type": "shell",
-      "command": "${workspaceFolder}/.venv/bin/python scripts/fetch_wikipedia_sources.py && ${workspaceFolder}/.venv/bin/python scripts/validate_kg_csv.py",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/ingest_pdf_sources.py && ${workspaceFolder}/.venv/bin/python scripts/validate_kg_csv.py",
       "problemMatcher": []
     },
     {

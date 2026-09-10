@@ -28,7 +28,7 @@ source .venv/bin/activate
 python -m spacy download en_core_web_sm
 ```
 
-This installs all Python dependencies (`requests`, `pandas`,
+This installs all Python dependencies (`pypdf`, `pandas`, `requests`,
 `sentence-transformers`, `faiss-cpu`, `neo4j`, `fuzzywuzzy`, `spacy`,
 `matplotlib`, `fastapi`, `uvicorn`, `streamlit`). Neo4j and Ollama are
 **not** installed by `setup_env.sh` — see
@@ -39,8 +39,9 @@ This installs all Python dependencies (`requests`, `pandas`,
 ## Pipeline
 
 ```bash
-# Part 1: fetch source documents and validate the hand-built KG seed
-python scripts/fetch_wikipedia_sources.py
+# Part 1: extract text from PDF source books (drop PDFs in data/raw/) and
+# validate the hand-built KG seed
+python scripts/ingest_pdf_sources.py
 python scripts/validate_kg_csv.py
 
 # Part 2: chunk -> embed -> index -> query

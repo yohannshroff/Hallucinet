@@ -28,7 +28,7 @@ evidence, and a trust score formula.
 
 Ran `eval/run_trust_scores.py` over the Part 5 sample questions twice —
 before and after fixing these — see
-[docs/part6_trust_scores.md](part6_trust_scores.md) for the final
+docs/part6_trust_scores.md (removed with the earlier corpus; regenerate with the script) for the final
 transcript.
 
 1. **The refusal phrase was being scored as an unsupported claim.** Q10's

@@ -1,4 +1,4 @@
-"""Validate the hand-built knowledge-graph seed spreadsheet.
+"""Validate the knowledge-graph CSVs (entities.csv, relationships.csv).
 
 Loads entities.csv and relationships.csv, builds a name+alias -> entity_id
 index, and flags any subject/object in relationships.csv that doesn't

@@ -1,6 +1,9 @@
 # kg/ (Part 3)
 
-Entity resolution and Neo4j ingestion.
+Building the knowledge graph from the book, and loading it into Neo4j. The
+build pipeline (`find_candidates.py` -> `type_entities.py` -> `extract_facts.py`
+-> `consolidate_triples.py`, with `book_text.py` as a helper) is described in
+[docs/kg_build.md](../docs/kg_build.md); the loader and resolution code:
 
 - `entity_resolution.py` — resolves a free-text mention to an `entity_id`:
   exact match against `data/kg_seed/entities.csv`'s name/alias index first,
@@ -12,8 +15,8 @@ Entity resolution and Neo4j ingestion.
   `object` resolves to an entity become normal entity-to-entity edges;
   relationships whose `object` is a free-text phrase (per `docs/schema.md`)
   become edges to a `:Concept` node instead, so no row from the curated
-  spreadsheet is dropped. Idempotent (`MERGE`-based) — safe to re-run after
-  editing the CSVs.
+  spreadsheet is dropped. Idempotent (`MERGE`-based); use `--reset` to wipe the
+  existing graph first when the CSVs were rebuilt (node ids change).
 - `validate_graph.py` — structural summary (node/relationship counts) plus
   a round-trip spot-check that sampled (or, with `--all`, every) row from
   `relationships.csv` actually made it into the graph correctly.

@@ -1,3 +1,7 @@
+> **Outdated.** The numbers in this report were produced on the earlier Wikipedia corpus and the
+> hand-curated graph. The corpus is now the PDF source book and the graph has been rebuilt from it
+> ([kg_build.md](kg_build.md)); the evaluation is being redone, and the old result files were removed.
+
 # HalluciNet — Final Report
 
 ## Hypothesis
@@ -48,7 +52,6 @@ redesign.
 
 ## Results
 
-![Accuracy by retrieval mode](part7_accuracy_by_mode.png)
 
 | mode | correct | partial | wrong | hallucinated | refused |
 |---|---|---|---|---|---|

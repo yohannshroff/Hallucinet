@@ -22,7 +22,7 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
-from common import RAW_DIR, RAW_TEXT_DIR, SOURCES_MANIFEST_CSV, get_logger
+from common import RAW_DIR, RAW_TEXT_DIR, REPO_ROOT, SOURCES_MANIFEST_CSV, get_logger
 
 log = get_logger("ingest_pdf_sources")
 
@@ -62,6 +62,14 @@ def book_title_from_filename(path: Path) -> str:
     return path.stem
 
 
+def portable_path(path: Path) -> str:
+    """Repo-relative path, so citations survive moving the project folder."""
+    try:
+        return path.resolve().relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path.resolve())
+
+
 def slugify(text: str) -> str:
     slug = re.sub(r"[^A-Za-z0-9]+", "_", text).strip("_")
     return slug[:40]
@@ -94,7 +102,7 @@ def ingest_pdf(path: Path, outdir: Path, pages_per_doc: int) -> list:
         first_page, last_page = start + 1, end  # 1-indexed, inclusive
         doc_id = f"{book_slug}_p{first_page:04d}-{last_page:04d}"
         title = f"{book_title} (pp. {first_page}-{last_page})"
-        resolved_url = f"{path.resolve()}#page={first_page}"
+        resolved_url = f"{portable_path(path)}#page={first_page}"
 
         (outdir / f"{doc_id}.txt").write_text(text, encoding="utf-8")
         rows.append(

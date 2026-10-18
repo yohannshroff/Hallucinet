@@ -32,8 +32,10 @@ def test_build_ask_response_shape():
     entities_df = pd.read_csv(ENTITIES_CSV, keep_default_na=False)
     result = build_ask_response("Who led the resistance at Jhansi?", entities_df, k=3)
 
-    assert set(result.keys()) == {
+    assert {
         "question", "answer", "trust_score", "n_claims", "n_entailed", "seed_entities", "sources",
-    }
+        "mode", "claims", "graph_facts", "passages", "timing_ms",
+    } <= set(result.keys())
+    assert result["n_claims"] == len(result["claims"])
     assert len(result["sources"]) > 0
     assert all({"title", "url"} == set(s.keys()) for s in result["sources"])

@@ -32,7 +32,38 @@ DEFAULT_HOPS_LIMIT = 20  # cap facts per seed entity so a hub node doesn't flood
 def get_driver():
     from neo4j import GraphDatabase
 
-    return GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+    # Short timeouts: if Neo4j is down we want to fall back to vector-only in
+    # seconds, not hang for the driver's default 60s on every request.
+    return GraphDatabase.driver(
+        NEO4J_URI,
+        auth=(NEO4J_USER, NEO4J_PASSWORD),
+        connection_timeout=3,
+        connection_acquisition_timeout=5,
+    )
+
+
+_shared_driver = None
+
+
+def get_shared_driver():
+    """One long-lived driver (and its connection pool) per process. Opening a
+    new driver + handshake for every question was pure overhead."""
+    global _shared_driver
+    if _shared_driver is None:
+        _shared_driver = get_driver()
+    return _shared_driver
+
+
+def reset_shared_driver() -> None:
+    """Drop the cached driver (e.g. after a connection error) so the next
+    call builds a fresh one."""
+    global _shared_driver
+    if _shared_driver is not None:
+        try:
+            _shared_driver.close()
+        except Exception:  # noqa: BLE001
+            pass
+        _shared_driver = None
 
 
 def one_hop_facts(session, entity_id: str, limit: int = DEFAULT_HOPS_LIMIT) -> list:
@@ -49,6 +80,9 @@ def one_hop_facts(session, entity_id: str, limit: int = DEFAULT_HOPS_LIMIT) -> l
                r.source AS source,
                r.notes AS notes,
                startNode(r) = e AS is_outgoing
+        // typed facts first, then the most strongly supported co-mentions: a hub entity
+        // (e.g. Delhi) must not have its few informative facts crowded out by the cap
+        ORDER BY (type(r) = 'associated_with'), coalesce(r.weight, 1) DESC
         LIMIT $limit
     """
     results = session.run(query, entity_id=entity_id, limit=limit)

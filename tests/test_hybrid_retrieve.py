@@ -61,7 +61,7 @@ def test_retrieve_end_to_end_smoke():
     entities_df = pd.read_csv(ENTITIES_CSV, keep_default_na=False)
     bundle = retrieve("Who led the resistance at Jhansi?", entities_df, k=3)
 
-    assert ("E023", "Jhansi") in bundle["seed_entities"]
+    assert "Jhansi" in [name for _, name in bundle["seed_entities"]]
     assert len(bundle["vector_chunks"]) > 0
 
 

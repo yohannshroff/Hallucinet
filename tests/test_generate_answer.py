@@ -39,7 +39,7 @@ def test_answer_question_returns_expected_structure(entities_df):
 
     assert set(result.keys()) == {"question", "answer", "context", "bundle"}
     assert isinstance(result["answer"], str) and len(result["answer"]) > 0
-    assert "Rani Lakshmibai" in result["context"]  # graph fact should be in the context fed to the model
+    assert "Jhansi" in result["context"]  # retrieved evidence (graph facts + book passages) is fed to the model
 
 
 def test_answer_grounded_in_context_for_in_scope_question(entities_df):

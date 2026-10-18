@@ -14,16 +14,25 @@
       "problemMatcher": []
     },
     {
+      "label": "Services: stop Ollama (free ~3 GB RAM)",
+      "type": "shell",
+      "command": "brew services stop ollama",
+      "problemMatcher": []
+    },
+    {
       "label": "Test: pytest (full suite)",
       "type": "shell",
       "command": "${workspaceFolder}/.venv/bin/python -m pytest tests/ -v",
-      "group": { "kind": "test", "isDefault": true },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
       "problemMatcher": []
     },
     {
       "label": "Serve: FastAPI backend",
       "type": "shell",
-      "command": "${workspaceFolder}/.venv/bin/python -m uvicorn api.main:app --reload --port 8000",
+      "command": "${workspaceFolder}/.venv/bin/python -m uvicorn api.main:app --port 8000",
       "isBackground": true,
       "problemMatcher": []
     },
@@ -36,14 +45,17 @@
     },
     {
       "label": "Run: full app (FastAPI + Streamlit)",
-      "dependsOn": ["Serve: FastAPI backend", "Serve: Streamlit UI"],
+      "dependsOn": [
+        "Serve: FastAPI backend",
+        "Serve: Streamlit UI"
+      ],
       "dependsOrder": "parallel",
       "problemMatcher": []
     },
     {
-      "label": "Pipeline: Part 1 (ingest PDFs + validate KG)",
+      "label": "Pipeline: Part 1 (ingest PDFs)",
       "type": "shell",
-      "command": "${workspaceFolder}/.venv/bin/python scripts/ingest_pdf_sources.py && ${workspaceFolder}/.venv/bin/python scripts/validate_kg_csv.py",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/ingest_pdf_sources.py",
       "problemMatcher": []
     },
     {
@@ -53,9 +65,9 @@
       "problemMatcher": []
     },
     {
-      "label": "Pipeline: Part 3 (load Neo4j graph)",
+      "label": "Pipeline: Part 3 (rebuild graph CSVs from cached extraction + load Neo4j)",
       "type": "shell",
-      "command": "${workspaceFolder}/.venv/bin/python kg/load_graph.py && ${workspaceFolder}/.venv/bin/python kg/validate_graph.py --all",
+      "command": "${workspaceFolder}/.venv/bin/python kg/consolidate_triples.py --min_cooc 2 && ${workspaceFolder}/.venv/bin/python scripts/validate_kg_csv.py && ${workspaceFolder}/.venv/bin/python kg/load_graph.py --reset",
       "problemMatcher": []
     },
     {

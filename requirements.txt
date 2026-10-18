@@ -24,7 +24,7 @@ matplotlib>=3.9          # accuracy-by-mode comparison chart
 # --- installed & used in Part 8 ---
 fastapi>=0.115           # API layer wrapping the retriever + generation + trust score
 uvicorn>=0.34             # serves the FastAPI app
-streamlit>=1.41           # frontend
+streamlit>=1.50           # frontend
 
 # --- needed LATER, do not install yet (documented for future parts) ---
 # beautifulsoup4>=4.12    # only if a future source needs HTML scraping

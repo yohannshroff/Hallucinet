@@ -2,7 +2,7 @@
 
 Streamlit frontend: question box, retrieval-mode selector, grounded
 answer, trust score, and cited sources — calls the FastAPI backend in
-`api/`, with a pre-cached fallback (`data/eval/demo_cache.json`) if the
+`api/`, with a pre-cached fallback (`data/eval/demo_cache.json`, built with `python api/build_demo_cache.py`) if the
 live API is unreachable or too slow during a demo.
 
 Run with (in a separate terminal from the API):

@@ -1,0 +1,13 @@
+[server]
+headless = true
+# Don't re-run the whole app when unrelated files in the (large) venv change.
+runOnSave = false
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
+
+[theme]
+primaryColor = "#1F5F8B"

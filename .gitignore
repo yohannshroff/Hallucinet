@@ -15,4 +15,8 @@ data/raw/*.pdf
 data/raw/text/
 data/processed/chunks.jsonl
 data/processed/faiss_index/id_map.json
+# KG build intermediates that quote book sentences. The LLM results
+# (entity_types.json, extracted.jsonl: names + relations + page only) are kept.
+data/kg_build/mentions.json
+data/kg_build/candidates.jsonl
 .DS_Store

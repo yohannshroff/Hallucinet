@@ -24,14 +24,20 @@ ever mean adding new `period_tag` *values*, never new columns.
 | `object` | entity `name`, or a short phrase when no single entity fits (e.g. "rebel sepoys") |
 | `source` | URL the fact was drawn from — should match a `resolved_url` in `data/raw/sources_manifest.csv` |
 | `period_tag` | same convention as entities.csv |
-| `notes` | free-text context (dates, caveats) |
+| `weight` | how many distinct source sentences support the fact (co-mentions for `associated_with`); graph search returns typed facts first, then the highest-weight associations |
+| `notes` | free-text context: book pages and how the fact was found |
 
 ### Relation controlled vocabulary
 
 `led`, `ruled`, `fought_against`, `allied_with`, `killed`, `executed`,
 `captured`, `besieged`, `located_in`, `part_of`, `caused_by`, `triggered`,
 `succeeded_by`, `appointed_by`, `commanded`, `declared_emperor_by`,
-`died_during`, `member_of`, `disbanded_by`.
+`died_during`, `member_of`, `disbanded_by`, `associated_with`.
+
+`associated_with` is the one non-semantic relation: two entities that are
+repeatedly mentioned in the same sentences of the source text (the note on
+the edge says how many sentences and which pages). All other relations are
+typed facts. See `docs/kg_build.md` for how the graph is built from the book.
 
 Adding a new relation type is fine — just add it to this list (and to
 `RELATION_VOCAB` in `scripts/common.py`) so `kg/load_graph.py` and the

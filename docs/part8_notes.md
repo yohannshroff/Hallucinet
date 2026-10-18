@@ -50,3 +50,23 @@ production service.
 - Rehearse with the demo cache as the fallback path in mind -- if live
   Ollama inference stalls during the viva, switch talking points to "the
   system falls back to pre-verified cached answers" rather than waiting.
+
+## Update: richer app + laptop efficiency pass
+
+- **API:** `/ask` now also returns per-claim verdicts, graph facts, book
+  passages (with snippets and match scores) and timings; new `/stats`
+  (live Neo4j counts + corpus size) and `/kg` (entity/relationship tables)
+  endpoints; `/health` also reports Neo4j and index status. Models and the
+  FAISS index load once at startup.
+- **UI:** tabs for Ask (example chips, trust banner, sources, claim-by-claim
+  check), Compare search modes (same question, three retrieval modes side by
+  side), Knowledge base (counts, charts, searchable tables) and How it works.
+- **Efficiency:** shared Neo4j connection, cached FAISS/alias indexes,
+  batched claim checking, CPU-pinned helper models with 2 threads, Ollama
+  `keep_alive`/length caps, and Neo4j heap/page-cache caps -- see the
+  "Running it on a small laptop" section of the README.
+- **Citations:** book passages are cited by title and page range (the repo
+  stores a relative `data/raw/<file>.pdf#page=N`, not a machine-specific
+  absolute path), and the prompt no longer asks the model to cite file paths.
+- `data/eval/demo_cache.json` is still from the old Wikipedia-era corpus;
+  rebuild it with `python api/build_demo_cache.py` (needs Ollama running).

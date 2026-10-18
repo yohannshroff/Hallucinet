@@ -15,7 +15,8 @@ Design decisions (see docs/schema.md and docs/part3_notes.md):
   after editing the CSVs is safe and idempotent.
 
 Usage:
-    python kg/load_graph.py
+    python kg/load_graph.py            # add/update (idempotent)
+    python kg/load_graph.py --reset    # wipe the existing graph first (use when the CSVs were rebuilt)
     python kg/load_graph.py --entities data/kg_seed/entities.csv \
         --relationships data/kg_seed/relationships.csv
 """
@@ -109,7 +110,7 @@ def load_relationships(session, relationships_df: pd.DataFrame, alias_index: dic
                 MATCH (a:Entity {{entity_id: $subject_id}})
                 MATCH (b:Entity {{entity_id: $object_id}})
                 MERGE (a)-[r:{relation}]->(b)
-                SET r.source = $source, r.period_tag = $period_tag, r.notes = $notes
+                SET r.source = $source, r.period_tag = $period_tag, r.notes = $notes, r.weight = $weight
             """
             session.run(
                 query,
@@ -118,6 +119,7 @@ def load_relationships(session, relationships_df: pd.DataFrame, alias_index: dic
                 source=row.get("source", ""),
                 period_tag=row.get("period_tag", ""),
                 notes=row.get("notes", ""),
+                weight=int(row.get("weight") or 1),
             )
             stats["entity_to_entity"] += 1
         else:
@@ -125,7 +127,7 @@ def load_relationships(session, relationships_df: pd.DataFrame, alias_index: dic
                 MATCH (a:Entity {{entity_id: $subject_id}})
                 MERGE (b:Concept {{name: $object_text}})
                 MERGE (a)-[r:{relation}]->(b)
-                SET r.source = $source, r.period_tag = $period_tag, r.notes = $notes
+                SET r.source = $source, r.period_tag = $period_tag, r.notes = $notes, r.weight = $weight
             """
             session.run(
                 query,
@@ -134,6 +136,7 @@ def load_relationships(session, relationships_df: pd.DataFrame, alias_index: dic
                 source=row.get("source", ""),
                 period_tag=row.get("period_tag", ""),
                 notes=row.get("notes", ""),
+                weight=int(row.get("weight") or 1),
             )
             stats["entity_to_concept"] += 1
 
@@ -144,6 +147,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--entities", type=Path, default=ENTITIES_CSV)
     parser.add_argument("--relationships", type=Path, default=RELATIONSHIPS_CSV)
+    parser.add_argument("--reset", action="store_true", help="Delete every node and relationship before loading")
     args = parser.parse_args()
 
     entities_df = pd.read_csv(args.entities, keep_default_na=False)
@@ -159,6 +163,9 @@ def main():
         sys.exit(1)
 
     with driver.session() as session:
+        if args.reset:
+            session.run("MATCH (n) DETACH DELETE n")
+            log.info("cleared the existing graph")
         ensure_constraints(session)
         entity_count = load_entities(session, entities_df)
         log.info(f"loaded {entity_count} entity nodes")

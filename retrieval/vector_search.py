@@ -8,10 +8,11 @@ Usage:
 
 import argparse
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-from common import EMBEDDING_MODEL_NAME, FAISS_INDEX_DIR, get_logger  # noqa: E402
+from common import EMBEDDING_MODEL_NAME, FAISS_INDEX_DIR, MODEL_DEVICE, configure_runtime, get_logger  # noqa: E402
 from query_index import load_index, search as faiss_search  # noqa: E402
 
 log = get_logger("vector_search")
@@ -24,12 +25,26 @@ def get_model():
     if _model is None:
         from sentence_transformers import SentenceTransformer
 
-        _model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+        configure_runtime()
+        _model = SentenceTransformer(EMBEDDING_MODEL_NAME, device=MODEL_DEVICE)
     return _model
 
 
+@lru_cache(maxsize=2)
+def _load_index_cached(index_dir: str, mtime_ns: int):
+    return load_index(Path(index_dir))
+
+
+def get_index(index_dir: Path = FAISS_INDEX_DIR):
+    """Load the FAISS index + id_map once per process, not once per query.
+    Keyed on the index file's mtime so rebuilding the index is picked up
+    without restarting the API."""
+    index_dir = Path(index_dir)
+    return _load_index_cached(str(index_dir), (index_dir / "index.faiss").stat().st_mtime_ns)
+
+
 def search(query: str, index_dir: Path = FAISS_INDEX_DIR, k: int = 5) -> list:
-    index, id_map = load_index(index_dir)
+    index, id_map = get_index(index_dir)
     return faiss_search(query, index, id_map, get_model(), k=k)
 
 

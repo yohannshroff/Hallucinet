@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-from common import get_logger  # noqa: E402
+from common import MODEL_DEVICE, configure_runtime, get_logger  # noqa: E402
 
 log = get_logger("entailment")
 
@@ -34,7 +34,8 @@ def get_model():
     if _model is None:
         from sentence_transformers import CrossEncoder
 
-        _model = CrossEncoder(NLI_MODEL_NAME)
+        configure_runtime()
+        _model = CrossEncoder(NLI_MODEL_NAME, device=MODEL_DEVICE)
         # Read the label order from the model config rather than hardcoding it --
         # different NLI checkpoints don't always agree on label ordering.
         _label_map = _model.config.id2label
@@ -46,42 +47,63 @@ def get_label_map() -> dict:
     return _label_map
 
 
-def classify_claim(claim: str, evidence_texts: list, threshold: float = ENTAILMENT_THRESHOLD) -> dict:
-    """Classify a claim against a pool of evidence texts.
+def _softmax(logits):
+    import numpy as np
 
-    Scores the claim against every evidence text and keeps the
-    highest-entailment-probability match -- i.e. "is this claim entailed by
-    ANY piece of retrieved evidence", which is the right question for a
-    RAG system pulling from multiple sources.
+    shifted = logits - logits.max(axis=-1, keepdims=True)
+    exp = np.exp(shifted)
+    return exp / exp.sum(axis=-1, keepdims=True)
 
-    Returns {"claim", "verdict", "score", "best_evidence"}. verdict is one
-    of "entailed", "contradicted", "neutral" (or "no_evidence" if
+
+def classify_claims(claims: list, evidence_texts: list, threshold: float = ENTAILMENT_THRESHOLD) -> list:
+    """Classify every claim against a pool of evidence texts in ONE batched
+    model call (all claim x evidence pairs together) instead of one call per
+    claim -- same results, far less per-call overhead.
+
+    Scores each claim against every evidence text and keeps the
+    highest-entailment-probability match, i.e. "is this claim entailed by
+    ANY piece of retrieved evidence" -- the right question for a RAG system
+    pulling from multiple sources.
+
+    Returns one {"claim", "verdict", "score", "best_evidence"} per claim.
+    verdict is "entailed", "contradicted", "neutral", or "no_evidence" (if
     evidence_texts is empty).
     """
+    if not claims:
+        return []
     if not evidence_texts:
-        return {"claim": claim, "verdict": "no_evidence", "score": 0.0, "best_evidence": None}
+        return [{"claim": c, "verdict": "no_evidence", "score": 0.0, "best_evidence": None} for c in claims]
 
-    import torch
-
+    evidence = list(dict.fromkeys(evidence_texts))  # drop exact duplicates; order preserved
     model = get_model()
-    pairs = [(evidence, claim) for evidence in evidence_texts]
-    logits = model.predict(pairs)  # numpy array, shape (len(pairs), num_labels)
-    probs = torch.softmax(torch.from_numpy(logits), dim=-1)
     label_map = get_label_map()
-
     entailment_idx = next(i for i, name in label_map.items() if name.lower() == "entailment")
-    best_i = int(torch.argmax(probs[:, entailment_idx]))
-    best_probs = {label_map[i].lower(): float(probs[best_i][i]) for i in range(probs.shape[1])}
-    best_label = max(best_probs, key=best_probs.get)
-    entailment_score = best_probs["entailment"]
 
-    verdict = "entailed" if entailment_score >= threshold else best_label
-    return {
-        "claim": claim,
-        "verdict": verdict,
-        "score": entailment_score,
-        "best_evidence": evidence_texts[best_i],
-    }
+    pairs = [(ev, claim) for claim in claims for ev in evidence]
+    probs = _softmax(model.predict(pairs, batch_size=32, show_progress_bar=False))
+
+    results = []
+    n_ev = len(evidence)
+    for ci, claim in enumerate(claims):
+        block = probs[ci * n_ev : (ci + 1) * n_ev]
+        best_i = int(block[:, entailment_idx].argmax())
+        best_probs = {label_map[i].lower(): float(block[best_i][i]) for i in range(block.shape[1])}
+        best_label = max(best_probs, key=best_probs.get)
+        entailment_score = best_probs["entailment"]
+        results.append(
+            {
+                "claim": claim,
+                "verdict": "entailed" if entailment_score >= threshold else best_label,
+                "score": entailment_score,
+                "best_evidence": evidence[best_i],
+            }
+        )
+    return results
+
+
+def classify_claim(claim: str, evidence_texts: list, threshold: float = ENTAILMENT_THRESHOLD) -> dict:
+    """Single-claim convenience wrapper around classify_claims()."""
+    return classify_claims([claim], evidence_texts, threshold=threshold)[0]
 
 
 def main():

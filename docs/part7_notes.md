@@ -3,7 +3,7 @@
 Goals: finalize a 30-40 question Q&A test set, run the vector-only vs
 graph-only vs hybrid ablation, score it, and produce the comparison chart.
 
-- Test set: [data/eval/qa_test_set.csv](../data/eval/qa_test_set.csv), 30
+- Test set: data/eval/qa_test_set.csv (removed with the earlier corpus; regenerate with the script), 30
   questions across person/location/cause/event/aftermath categories, each
   with `expected_entities` (the answer's key entity/entities) drawn
   directly from the Part 1 KG seed so ground truth is known.
@@ -13,8 +13,8 @@ graph-only vs hybrid ablation, score it, and produce the comparison chart.
   `retrieval/hybrid_retrieve.py` for this).
 - Scoring: **automated, not hand-scored** -- see "Scoring methodology"
   below for why and how. Results:
-  [docs/part7_ablation_results.csv](part7_ablation_results.csv), chart:
-  [docs/part7_accuracy_by_mode.png](part7_accuracy_by_mode.png).
+  docs/part7_ablation_results.csv (removed with the earlier corpus; regenerate with the script), chart:
+  docs/part7_accuracy_by_mode.png (removed with the earlier corpus; regenerate with the script).
 
 ## Headline numbers (90 answers, 30 questions x 3 modes)
 

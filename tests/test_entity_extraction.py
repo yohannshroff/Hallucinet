@@ -19,27 +19,38 @@ from entity_extraction import direct_substring_matches, extract_entities  # noqa
 
 
 @pytest.fixture(scope="module")
-def alias_index():
-    entities_df = pd.read_csv(ENTITIES_CSV, keep_default_na=False)
+def entities_df():
+    return pd.read_csv(ENTITIES_CSV, keep_default_na=False)
+
+
+@pytest.fixture(scope="module")
+def alias_index(entities_df):
     return build_alias_index(entities_df)
 
 
-def test_direct_substring_match_finds_exact_mention(alias_index):
+def id_of(entities_df, name):
+    """The knowledge graph is rebuilt from the book, so IDs aren't stable -- look them up by name."""
+    rows = entities_df.loc[entities_df["name"] == name, "entity_id"]
+    assert len(rows) == 1, f"expected exactly one entity named {name!r}, found {len(rows)}"
+    return rows.iloc[0]
+
+
+def test_direct_substring_match_finds_exact_mention(alias_index, entities_df):
     matches = direct_substring_matches("Who ruled Jhansi before the revolt?", alias_index)
-    assert "E023" in matches  # Jhansi
+    assert id_of(entities_df, "Jhansi") in matches
 
 
-def test_extract_entities_finds_multiple_known_entities(alias_index):
-    entity_ids = extract_entities("Why did Mangal Pandey attack officers at Barrackpore?", alias_index)
-    assert "E003" in entity_ids  # Mangal Pandey
-    assert "E025" in entity_ids  # Barrackpore
+def test_extract_entities_finds_multiple_known_entities(alias_index, entities_df):
+    entity_ids = extract_entities("Why did Nana Sahib attack the garrison at Cawnpore?", alias_index)
+    assert id_of(entities_df, "Nana Sahib") in entity_ids
+    assert id_of(entities_df, "Cawnpore") in entity_ids
 
 
-def test_extract_entities_handles_split_noun_chunk(alias_index):
-    """'Doctrine of Lapse' gets split across two noun chunks by spaCy --
-    the direct substring scan should still catch it."""
-    entity_ids = extract_entities("What was the impact of the Doctrine of Lapse?", alias_index)
-    assert "E070" in entity_ids  # Doctrine of Lapse
+def test_extract_entities_handles_multi_word_event_name(alias_index, entities_df):
+    """'Siege of Delhi' gets split across noun chunks by spaCy -- the direct
+    substring scan should still catch the whole name."""
+    entity_ids = extract_entities("What happened during the Siege of Delhi?", alias_index)
+    assert id_of(entities_df, "Siege of Delhi") in entity_ids
 
 
 def test_extract_entities_empty_for_unrelated_query(alias_index):

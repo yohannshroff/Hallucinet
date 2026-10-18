@@ -23,15 +23,22 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-from common import ENTITIES_CSV, FAISS_INDEX_DIR, build_alias_index, get_logger  # noqa: E402
+from common import ENTITIES_CSV, FAISS_INDEX_DIR, build_alias_index, get_logger, is_web_url  # noqa: E402
 
 from entity_extraction import extract_entities  # noqa: E402
-from graph_search import DEFAULT_HOPS_LIMIT, format_fact, get_driver as get_neo4j_driver, search as graph_search  # noqa: E402
+from graph_search import DEFAULT_HOPS_LIMIT, format_fact, get_shared_driver, reset_shared_driver, search as graph_search  # noqa: E402
 from vector_search import search as vector_search  # noqa: E402
 
 log = get_logger("hybrid_retrieve")
 
 RETRIEVAL_MODES = ("vector", "graph", "hybrid")
+
+
+def get_alias_index(entities_df: pd.DataFrame) -> dict:
+    """Build the name/alias -> entity_id lookup once per DataFrame, not once per question."""
+    if "alias_index" not in entities_df.attrs:
+        entities_df.attrs["alias_index"] = build_alias_index(entities_df)
+    return entities_df.attrs["alias_index"]
 
 
 def retrieve(
@@ -55,20 +62,16 @@ def retrieve(
     if mode not in RETRIEVAL_MODES:
         raise ValueError(f"mode must be one of {RETRIEVAL_MODES}, got {mode!r}")
 
-    alias_index = build_alias_index(entities_df)
-    seed_entity_ids = extract_entities(query, alias_index)
+    seed_entity_ids = extract_entities(query, get_alias_index(entities_df))
 
     graph_facts = []
     if mode in ("graph", "hybrid") and seed_entity_ids:
-        driver = get_neo4j_driver()
         try:
-            driver.verify_connectivity()
-            with driver.session() as session:
+            with get_shared_driver().session() as session:
                 graph_facts = graph_search(session, seed_entity_ids, limit_per_entity=graph_limit)
         except Exception as exc:  # noqa: BLE001
             log.info(f"graph search skipped (Neo4j unreachable: {exc})")
-        finally:
-            driver.close()
+            reset_shared_driver()
 
     vector_chunks = vector_search(query, index_dir=index_dir, k=k) if mode in ("vector", "hybrid") else []
 
@@ -99,7 +102,11 @@ def format_context_only(bundle: dict) -> str:
     if bundle["vector_chunks"]:
         lines.append("Retrieved passages:")
         for i, chunk in enumerate(bundle["vector_chunks"], start=1):
-            lines.append(f"[{i}] {chunk['title']} ({chunk['source_url']})")
+            # Web links are useful citations; a local "data/raw/book.pdf#page=N"
+            # path is just noise (and wasted prompt tokens) -- the title already
+            # carries the book name and page range.
+            source = f" ({chunk['source_url']})" if is_web_url(chunk["source_url"]) else ""
+            lines.append(f"[{i}] {chunk['title']}{source}")
             lines.append(f"    {chunk['text']}")
         lines.append("")
 

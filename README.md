@@ -1,11 +1,13 @@
 # HalluciNet
 
 RAG + GraphRAG system for reducing LLM hallucination on Indian historical
-Q&A. v1 scope: the Revolt of 1857 (~May 1857 – 1859).
+Q&A. The Revolt of 1857 is the first case study used to build and test the
+pipeline; the dataset and knowledge graph are meant to grow to cover more
+events and periods (every entity already carries a `period_tag`).
 
 > **Hypothesis:** combining graph-based and vector-based retrieval reduces
 > hallucination on Indian historical Q&A compared to vector retrieval alone,
-> measured on a curated 1857 Revolt test set.
+> measured on a curated test set (currently drawn from the 1857 case study).
 
 ## Status
 
@@ -39,10 +41,8 @@ This installs all Python dependencies (`pypdf`, `pandas`, `requests`,
 ## Pipeline
 
 ```bash
-# Part 1: extract text from PDF source books (drop PDFs in data/raw/) and
-# validate the hand-built KG seed
+# Part 1: extract text from PDF source books (drop PDFs in data/raw/)
 python scripts/ingest_pdf_sources.py
-python scripts/validate_kg_csv.py
 
 # Part 2: chunk -> embed -> index -> query
 python scripts/clean_and_chunk.py
@@ -50,8 +50,12 @@ python scripts/build_embeddings.py
 python scripts/build_faiss_index.py
 python scripts/query_index.py "Who led the resistance at Jhansi?" --k 5
 
-# Part 3: load the KG seed into Neo4j and validate it
-python kg/load_graph.py
+# Part 3: build the knowledge graph from the book (details: docs/kg_build.md), load and validate it
+python kg/find_candidates.py        # names + rule-based facts (~40 s)
+python kg/type_entities.py          # LLM types/cleans the names (~20 min, needs Ollama; cached)
+python kg/extract_facts.py          # grammar facts + NLI check + co-mentions (~45 s)
+python kg/consolidate_triples.py --min_cooc 2   # -> data/kg_seed/*.csv (seconds)
+python kg/load_graph.py --reset
 python kg/validate_graph.py --all
 
 # Part 4: hybrid retrieval (entity extraction + graph search + vector search)
@@ -71,8 +75,8 @@ python eval/chart.py   # renders docs/part7_accuracy_by_mode.png
 
 # Part 8: run the app
 python api/build_demo_cache.py     # pre-cache the 10 sample questions as a demo fallback
-uvicorn api.main:app --port 8000   # in one terminal
-streamlit run ui/app.py            # in another
+uvicorn api.main:app --port 8000   # in one terminal (endpoints: /ask /health /stats /kg)
+streamlit run ui/app.py            # in another: Ask, Compare search modes, Knowledge base
 ```
 
 Run the test suite with:
@@ -84,6 +88,36 @@ pytest tests/
 (Integration tests across `kg/`, `retrieval/`, `generation/`, `eval/`, and
 `api/` skip automatically if Neo4j, the FAISS index, or Ollama aren't
 available.)
+
+## Running it on a small laptop (8 GB Mac)
+
+Memory, not CPU, is the bottleneck: the language model alone is ~3 GB. What
+the project does about it:
+
+- **Models are loaded once and reused.** The API loads the search index,
+  embedding model, claim-checking model and spaCy at startup (about 20 s,
+  once) instead of per question; the Neo4j connection and the FAISS index
+  are shared across requests.
+- **Small helper models run on CPU with 2 threads** (`HALLUCINET_DEVICE`,
+  `HALLUCINET_THREADS`). Measured here: the Apple GPU wasn't faster for
+  them and would compete with Ollama for GPU memory.
+- **All claims are checked in one batch** rather than one model call per
+  claim — same scores, much less overhead.
+- **The language model unloads itself after 5 idle minutes**
+  (`OLLAMA_KEEP_ALIVE`) and replies are capped at 400 tokens
+  (`OLLAMA_NUM_PREDICT`).
+- **Cap Neo4j's memory.** Its defaults claim a big share of RAM; for this
+  47-node graph add these to `$(brew --prefix neo4j)/libexec/conf/neo4j.conf`
+  and restart it:
+
+  ```
+  server.memory.heap.initial_size=192m
+  server.memory.heap.max_size=384m
+  server.memory.pagecache.size=64m
+  ```
+
+Typical timings (warm): ~15 s per answer (language model) plus ~2 s for the
+trust check. The first question after the model has unloaded takes longer.
 
 ## Repo layout
 

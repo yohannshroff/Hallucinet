@@ -18,7 +18,7 @@ FastAPI backend wrapping the hybrid retriever + grounded Ollama generation
 Run with:
 
 ```bash
-uvicorn api.main:app --reload --port 8000
+uvicorn api.main:app --port 8000
 ```
 
 See [docs/part8_notes.md](../docs/part8_notes.md).

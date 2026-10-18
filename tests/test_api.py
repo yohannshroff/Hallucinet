@@ -35,16 +35,32 @@ def client():
 def test_health_endpoint(client):
     resp = client.get("/health")
     assert resp.status_code == 200
-    assert resp.json()["ollama_reachable"] is True
+    data = resp.json()
+    assert data["ollama_reachable"] is True
+    assert {"neo4j_reachable", "index_ready"} <= set(data.keys())
+
+
+def test_stats_endpoint_reports_graph_and_corpus(client):
+    resp = client.get("/stats")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["graph"]["nodes"] > 0 and data["graph"]["relationships"] > 0
+    assert data["corpus"]["chunks"] > 0
+
+
+def test_kg_endpoint_returns_tables(client):
+    data = client.get("/kg").json()
+    assert len(data["entities"]) > 0 and len(data["relationships"]) > 0
 
 
 def test_ask_endpoint_returns_expected_shape(client):
     resp = client.post("/ask", json={"question": "Who led the resistance at Jhansi?", "k": 3})
     assert resp.status_code == 200
     data = resp.json()
-    assert set(data.keys()) == {
+    assert {
         "question", "answer", "trust_score", "n_claims", "n_entailed", "seed_entities", "sources",
-    }
+        "mode", "claims", "graph_facts", "passages", "timing_ms",
+    } <= set(data.keys())
     assert len(data["answer"]) > 0
     assert "Jhansi" in data["seed_entities"] or any("Jhansi" in s for s in data["seed_entities"])
 

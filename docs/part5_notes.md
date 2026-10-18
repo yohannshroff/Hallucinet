@@ -15,7 +15,7 @@ test answer generation on 10 sample questions.
   `retrieve()` → `format_context_only()` → the prompt template → Ollama.
 - Ran all 10 questions in `data/eval/sample_questions.csv` through the full
   pipeline; transcript saved to
-  [docs/part5_sample_answers.md](part5_sample_answers.md).
+  docs/part5_sample_answers.md (removed with the earlier corpus; regenerate with the script).
 
 ## Results (manual read of the 10-question transcript)
 

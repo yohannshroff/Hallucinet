@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "generation"))
 from common import ENTITIES_CSV, get_logger  # noqa: E402
 
 from claim_splitting import split_into_claims  # noqa: E402
-from entailment import classify_claim  # noqa: E402
+from entailment import classify_claims  # noqa: E402
 from prompt_template import REFUSAL_PHRASE  # noqa: E402
 
 log = get_logger("trust_score")
@@ -50,6 +50,7 @@ RELATION_TEMPLATES = {
     "died_during": "{subject} died during {object}.",
     "member_of": "{subject} was a member of {object}.",
     "disbanded_by": "{subject} was disbanded by {object}.",
+    "associated_with": "{subject} is associated with {object}.",
 }
 
 
@@ -99,7 +100,7 @@ def compute_trust_score(answer_text: str, bundle: dict) -> dict:
     # prompt template is designed to produce (see docs/part6_notes.md).
     claims = [c for c in claims if c.strip().rstrip(".") != REFUSAL_PHRASE.rstrip(".")]
 
-    results = [classify_claim(claim, evidence_texts) for claim in claims]
+    results = classify_claims(claims, evidence_texts)
     n_entailed = sum(1 for r in results if r["verdict"] == "entailed")
 
     trust_score = (n_entailed / len(results)) if results else None

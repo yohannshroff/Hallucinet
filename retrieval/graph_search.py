@@ -82,7 +82,7 @@ def one_hop_facts(session, entity_id: str, limit: int = DEFAULT_HOPS_LIMIT) -> l
                startNode(r) = e AS is_outgoing
         // typed facts first, then the most strongly supported co-mentions: a hub entity
         // (e.g. Delhi) must not have its few informative facts crowded out by the cap
-        ORDER BY (type(r) = 'associated_with'), coalesce(r.weight, 1) DESC
+        ORDER BY (relation = 'associated_with'), coalesce(r.weight, 1) DESC
         LIMIT $limit
     """
     results = session.run(query, entity_id=entity_id, limit=limit)

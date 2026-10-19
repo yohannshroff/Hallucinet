@@ -26,3 +26,19 @@ def build_messages(question: str, context: str) -> list:
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": user_content},
     ]
+
+
+CLOSED_BOOK_REFUSAL = "I do not know."
+
+CLOSED_BOOK_SYSTEM_PROMPT = f"""You are a historical question-answering assistant for Indian history.
+
+Answer the question concisely from your own knowledge. If you are not sure of the answer, reply exactly: "{CLOSED_BOOK_REFUSAL}" Do not guess.
+"""
+
+
+def build_closed_book_messages(question: str) -> list:
+    """The no-retrieval baseline: same task, no context."""
+    return [
+        {"role": "system", "content": CLOSED_BOOK_SYSTEM_PROMPT},
+        {"role": "user", "content": f"Question: {question}"},
+    ]

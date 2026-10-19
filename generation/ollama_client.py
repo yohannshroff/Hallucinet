@@ -38,6 +38,7 @@ def chat(
     timeout: int = DEFAULT_TIMEOUT_SECONDS,
     num_predict: int = None,
     format: dict = None,
+    seed: int = None,
 ) -> str:
     """Send a /api/chat-style messages list to Ollama, return the reply text.
     `format` (optional) is a JSON schema; Ollama then constrains the reply to match it."""
@@ -56,6 +57,7 @@ def chat(
                 "temperature": temperature,
                 "num_ctx": OLLAMA_NUM_CTX,
                 "num_predict": num_predict or OLLAMA_NUM_PREDICT,
+                **({"seed": seed} if seed is not None else {}),
             },
         },
         timeout=timeout,

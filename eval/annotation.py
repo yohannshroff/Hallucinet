@@ -38,7 +38,7 @@ def export(n: int, seed: int):
     runs = runs[runs["run"] == 1]
     # Stratified: equal share per system so every system's scorer is checked.
     per_mode = max(1, n // runs["mode"].nunique())
-    sample = runs.groupby("mode", group_keys=False).apply(lambda d: d.sample(min(per_mode, len(d)), random_state=seed))
+    sample = pd.concat([d.sample(min(per_mode, len(d)), random_state=seed) for _, d in runs.groupby("mode")])
     sample = sample.sample(frac=1, random_state=seed).reset_index(drop=True)  # shuffle, so order does not hint at the system
     sample["item"] = range(1, len(sample) + 1)
     sheet = pd.DataFrame({

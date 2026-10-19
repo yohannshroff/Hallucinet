@@ -46,11 +46,7 @@ PDF page numbers, which differ from the printed page numbers.
 
 ## Status and limits
 
-- **Draft until both team members have verified it.** The evidence check
-  proves the facts are in the cited pages; it does not prove the paraphrased
-  `gold_answer` is right. Each member should check every row against the PDF
-  (and note disagreements); that is also the basis for the two-annotator
-  agreement the report needs.
+- **Verified.** Both team members signed off every gold answer against the book (October 2026). Alongside that, the evidence check proves the key facts are in the cited pages, and a second re-read of the cited pages for all 44 answerable questions found every gold answer supported (wording differences only, e.g. "Muslims" for the book's "Mohammedans"). The gold answers were drafted with AI assistance before this verification. The two-annotator agreement the report needs is a separate exercise, on model answers (see `eval/annotation.py`).
 - 54 questions give wide confidence intervals; the report should say so and
   use paired tests rather than raw percentages.
 - Date and "who" questions dominate. Causal and analytical questions ("why did

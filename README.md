@@ -72,7 +72,10 @@ python eval/run_trust_scores.py   # trust scores for the 10-question sample set
 # Part 7: vector vs graph vs hybrid ablation over the question set (docs/test_set.md)
 python eval/validate_test_set.py   # checks every gold page against the book text
 python eval/ablation.py
-python eval/chart.py   # renders docs/part7_accuracy_by_mode.png
+python eval/rag_eval.py retrieval        # Recall@k / MRR against the gold pages (no LLM)
+python eval/chunk_sensitivity.py          # chunk-size sensitivity of vector retrieval (no LLM)
+python eval/rag_eval.py generate --runs 3 # closed-book / vector / graph / hybrid answers (needs Ollama, ~3 h)
+python eval/rag_eval.py report            # tables with mean +- SD, CIs, McNemar -> docs/eval_report.md
 
 # Part 8: run the app
 python api/build_demo_cache.py     # pre-cache the 10 sample questions as a demo fallback

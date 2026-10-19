@@ -45,6 +45,7 @@ RETRIEVAL_CSV = REPO_ROOT / "docs" / "eval_retrieval.csv"
 REPORT_MD = REPO_ROOT / "docs" / "eval_report.md"
 GEN_MODES = ("closed_book", "vector", "graph", "hybrid")
 TEMPERATURE = 0.3
+LEXICAL_SUPPORT = 0.6
 
 
 def load_questions(ids=None) -> pd.DataFrame:
@@ -133,12 +134,19 @@ def score_answer(q: dict, answer: str, bundle: dict, chunks_by_group: dict) -> d
     out["trust"] = trust["trust_score"] if trust["trust_score"] is not None else math.nan
     out["n_claims"] = trust["n_claims"]
 
-    out["claim_halluc"] = math.nan
+    out["claim_halluc"] = out["claim_halluc_nli"] = math.nan
     if q["answerable"] == "yes" and not out["refused"]:
         claims = split_into_claims(answer)
         if claims:
-            res = classify_claims(claims, gold_sentences(q["gold_pages"], chunks_by_group))
-            out["claim_halluc"] = sum(r["verdict"] != "entailed" for r in res) / len(res)
+            evidence = gold_sentences(q["gold_pages"], chunks_by_group)
+            res = classify_claims(claims, evidence)
+            # A claim counts as supported if the NLI model entails it OR most of its
+            # content words sit in one stretch of the gold pages (the small NLI model
+            # misses many true paraphrases; see docs/eval_notes.md).
+            nli_ok = [r["verdict"] == "entailed" for r in res]
+            both_ok = [ok or M.lexical_support(c, evidence) >= LEXICAL_SUPPORT for ok, c in zip(nli_ok, claims)]
+            out["claim_halluc_nli"] = 1 - sum(nli_ok) / len(res)
+            out["claim_halluc"] = 1 - sum(both_ok) / len(res)
     return out
 
 
@@ -221,10 +229,10 @@ def cmd_report(args):
         out.append(f"| {m} | {metric_cell(d, 'correct')} | {metric_cell(d, 'hallucinated_answer')} | {metric_cell(d, 'refused')} |")
 
     out.append("\n## Answerable questions: quality and hallucination\n")
-    out.append("| system | correct | token-F1 | claim-level hallucination rate | trust score | citation accuracy |\n|---|---|---|---|---|---|")
+    out.append("| system | correct | token-F1 | claim-level hallucination rate | (NLI only) | trust score | citation accuracy |\n|---|---|---|---|---|---|---|")
     for m in modes:
         d = runs[(runs["mode"] == m) & (runs["answerable"] == "yes")]
-        out.append(f"| {m} | {metric_cell(d, 'correct')} | {metric_cell(d, 'f1')} | {metric_cell(d, 'claim_halluc')} | "
+        out.append(f"| {m} | {metric_cell(d, 'correct')} | {metric_cell(d, 'f1')} | {metric_cell(d, 'claim_halluc')} | {metric_cell(d, 'claim_halluc_nli')} | "
                    f"{metric_cell(d, 'trust')} | {metric_cell(d, 'citation_accuracy')} |")
 
     out.append("\n## By question type (correct)\n")

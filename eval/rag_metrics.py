@@ -50,6 +50,7 @@ def ranked_groups(bundle: dict, k: int = None) -> list:
     """Page groups in the order the generator sees them: graph facts first,
     then vector chunks (cut to the top `k`). Duplicates are kept, since
     precision should count every retrieved item."""
+    bundle = bundle or {}
     chunks = bundle.get("vector_chunks", [])
     if k is not None:
         chunks = chunks[:k]
@@ -143,3 +144,28 @@ def citation_stats(answer: str, bundle: dict, gold: list) -> dict:
         "citation_valid": sum(c in retrieved for c in cited) / n if n else math.nan,
         "citation_accuracy": sum(c in gold for c in cited) / n if n and gold else math.nan,
     }
+
+
+STOPWORDS = frozenset(
+    "a an the of in on at to for by with from and or but is was were are be been it its he she they his her their "
+    "that this which who whom as not had has have do did so than then there these those into over after before "
+    "also however source".split()
+)
+
+
+def content_words(text: str) -> set:
+    return {w for w in re.findall(r"[a-z0-9]+", text.lower()) if w not in STOPWORDS and len(w) > 1}
+
+
+def lexical_support(claim: str, evidence_sentences: list) -> float:
+    """Best share of the claim's content words found in any window of two
+    consecutive evidence sentences. A cheap second opinion for the small NLI
+    model, which scores many true paraphrases as 'neutral'."""
+    words = content_words(claim)
+    if not words or not evidence_sentences:
+        return 0.0
+    best = 0.0
+    for i in range(len(evidence_sentences)):
+        window = content_words(" ".join(evidence_sentences[i:i + 2]))
+        best = max(best, len(words & window) / len(words))
+    return best

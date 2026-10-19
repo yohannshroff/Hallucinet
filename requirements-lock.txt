@@ -1,0 +1,26 @@
+# Exact versions used for the reported results (Python 3.13.9, macOS, Apple M1).
+# Install with:  pip install -r requirements-lock.txt
+# then:          python -m spacy download en_core_web_sm   (used: core_web_sm 3.8.0)
+# Models: gemma3:4b via Ollama; cross-encoder/nli-MiniLM2-L6-H768; sentence-transformers/all-MiniLM-L6-v2.
+# Services: Neo4j (Homebrew) and Ollama (Homebrew).
+faiss-cpu==1.15.0
+fastapi==0.141.1
+fuzzywuzzy==0.18.0
+matplotlib==3.11.1
+neo4j==6.3.0
+numpy==2.5.3
+pandas==3.0.5
+pydantic==2.13.5
+pypdf==6.18.0
+pytest==9.1.1
+python-dotenv==1.2.3
+python-Levenshtein==0.27.4
+RapidFuzz==3.14.6
+requests==2.34.2
+scipy==1.18.1
+sentence-transformers==6.0.1
+spacy==3.8.16
+streamlit==1.63.0
+torch==2.14.0
+transformers==5.17.0
+uvicorn==0.52.4

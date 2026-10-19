@@ -125,7 +125,7 @@ def main():
 
     if not args.questions.exists():
         log.info(f"no test set at {args.questions} -- the earlier one (written from the old graph) was removed; "
-                 "write a new question set from the book (columns: id, question, expected_entities, category, notes)")
+                 "see docs/test_set.md for how the question set is built and validated")
         sys.exit(1)
     questions_df = pd.read_csv(args.questions, keep_default_na=False)
     if args.ids:

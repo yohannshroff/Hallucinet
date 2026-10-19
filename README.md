@@ -69,7 +69,8 @@ python generation/run_sample_questions.py   # runs the 10-question sample set
 python eval/trust_score.py "Who led the resistance at Jhansi?"
 python eval/run_trust_scores.py   # trust scores for the 10-question sample set
 
-# Part 7: vector vs graph vs hybrid ablation over 30 questions
+# Part 7: vector vs graph vs hybrid ablation over the question set (docs/test_set.md)
+python eval/validate_test_set.py   # checks every gold page against the book text
 python eval/ablation.py
 python eval/chart.py   # renders docs/part7_accuracy_by_mode.png
 

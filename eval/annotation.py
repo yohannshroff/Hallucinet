@@ -2,6 +2,7 @@
 
     python eval/annotation.py export --n 60      # writes one blank sheet per annotator
     python eval/annotation.py kappa              # after both sheets are filled in
+    python eval/annotation.py gold               # sheet for checking the gold answers against the book
 
 Each annotator opens their own sheet, reads the question, the gold answer and
 the model's answer, and fills in ONE column, `human_correct` (1 or 0):
@@ -55,6 +56,18 @@ def export(n: int, seed: int):
     print(f"wrote {len(sheet)} items to {', '.join(str(p) for p in SHEETS.values())}")
 
 
+def gold_sheet():
+    """One row per question for checking the gold answers against the book."""
+    qa = pd.read_csv(QA, keep_default_na=False)
+    sheet = qa[["id", "question", "gold_answer", "gold_pages", "evidence_terms", "answerable"]].copy()
+    sheet["book_says_this_1_or_0"] = ""
+    sheet["notes_or_correction"] = ""
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    path = OUT_DIR / "gold_answer_check.csv"
+    sheet.to_csv(path, index=False)
+    print(f"wrote {len(sheet)} rows to {path}")
+
+
 def kappa():
     a = pd.read_csv(SHEETS["a"]).set_index("item")["human_correct"]
     b = pd.read_csv(SHEETS["b"]).set_index("item")["human_correct"]
@@ -76,8 +89,9 @@ def main():
     e.add_argument("--n", type=int, default=60)
     e.add_argument("--seed", type=int, default=7)
     sub.add_parser("kappa")
+    sub.add_parser("gold")
     args = p.parse_args()
-    export(args.n, args.seed) if args.cmd == "export" else kappa()
+    {"export": lambda: export(args.n, args.seed), "kappa": kappa, "gold": gold_sheet}[args.cmd]()
 
 
 if __name__ == "__main__":

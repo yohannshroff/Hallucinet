@@ -1,0 +1,1099 @@
+[
+  {
+    "question": "How old was Bahadur Shah II, King of Delhi, when the mutineers from Meerut reached Delhi?",
+    "answer": " Bahadur Shah II was eighty-two years old when the mutineers from Meerut arrived at Delhi [1].",
+    "mode": "hybrid",
+    "trust_score": 1.0,
+    "n_claims": 1,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Delhi",
+      "King of Delhi",
+      "Meerut",
+      "Bahadur Shah"
+    ],
+    "sources": [
+      {
+        "title": "Siege of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=461"
+      },
+      {
+        "title": "Fall of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "title": "Massacre at Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=153"
+      },
+      {
+        "title": "Mutiny of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "Bahadur Shah ruled Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "title": "Storming of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=269"
+      },
+      {
+        "title": "India associated_with Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "title": "Delhi associated_with Archdale Wilson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "title": "Delhi associated_with Hodson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "title": "Delhi associated_with Kurnaul",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "title": "Delhi associated_with Lucknow",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=353"
+      },
+      {
+        "title": "Delhi associated_with Punjab",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=129"
+      },
+      {
+        "title": "Delhi associated_with Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "title": "Delhi associated_with Lahore Gate",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "title": "Delhi associated_with Nicholson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=317"
+      },
+      {
+        "title": "King of Delhi associated_with Bahadur Shah",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "India associated_with King of Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "title": "King of Delhi associated_with Bakht Khan",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      },
+      {
+        "title": "Meerut associated_with Hewitt",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "title": "Meerut associated_with Hurchundpore",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=117"
+      },
+      {
+        "title": "Meerut associated_with Carmichael-Smyth",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 457-460)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Bahadur Shah II was eighty-two years old when the mutineers from Meerut arrived at Delhi",
+        "verdict": "entailed",
+        "score": 0.99,
+        "best_evidence": "Rebels and Fugitives • Bahadur Shah II, King of Delhi • mutineers from Meerut arrive at Delhi • massacre of Europeans in Delhi, 11 May 1857 • mutiny of Delhi garrison • the Magazine blown up •flight of British families from Delhi • Bahadur Shah II, King of Delhi, was then eighty-two years old."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Siege of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=461"
+      },
+      {
+        "text": "Fall of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "text": "Massacre at Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=153"
+      },
+      {
+        "text": "Mutiny of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Bahadur Shah --ruled--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "text": "Storming of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=269"
+      },
+      {
+        "text": "Delhi --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "India --associated_with--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "text": "Delhi --associated_with--> Archdale Wilson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "text": "Delhi --associated_with--> Hodson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "text": "Delhi --associated_with--> Kurnaul",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "text": "Delhi --associated_with--> Lucknow",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=353"
+      },
+      {
+        "text": "Delhi --associated_with--> Punjab",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=129"
+      },
+      {
+        "text": "Delhi --associated_with--> Thomas Metcalfe",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "text": "Delhi --associated_with--> Indian Mutiny",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "text": "Delhi --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Delhi --associated_with--> John Lawrence",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "text": "Delhi --associated_with--> Lahore Gate",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "text": "Delhi --associated_with--> Lawrence",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "text": "Delhi --associated_with--> Nicholson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=317"
+      },
+      {
+        "text": "King of Delhi --associated_with--> Bahadur Shah",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "Meerut --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "India --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "text": "East India Company --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "King of Delhi --associated_with--> Bakht Khan",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      },
+      {
+        "text": "Mutiny at Meerut --located_in--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "text": "Meerut --associated_with--> Hewitt",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Archdale Wilson --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "text": "Meerut --associated_with--> Mutiny at Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Meerut --associated_with--> Hugh Gough",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Agra --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "text": "Meerut --associated_with--> Hurchundpore",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=117"
+      },
+      {
+        "text": "Meerut --associated_with--> Dragoon Guards",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Meerut --associated_with--> Carmichael-Smyth",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "text": "Meerut --associated_with--> Bahadur Shah",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Delhi --associated_with--> Bahadur Shah",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "text": "East India Company --associated_with--> Bahadur Shah",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "snippet": "Rebels and Fugitives • Bahadur Shah II, King of Delhi • mutineers from Meerut arrive at Delhi • massacre of Europeans in Delhi, 11 May 1857 • mutiny of Delhi garrison • the Magazine blown up •flight of British families from Delhi • Bahadur Shah II, King of Delhi, was then eighty-two years old. As a young man he had been renowned for his athleticism, his...",
+        "score": 0.646,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "snippet": "marked the policies of his renowned ancestor, the Moghul Emperor, Akbar the Great. He refrained from eating beef; he visited Hindu temples wearing a mark on his forehead and the Brahmanic thread round his neck; he showed his approval of Hindu festivals by watching them from a high tower in the palace; he appointed several Hindus to important offices in his...",
+        "score": 0.614,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 293-296)",
+        "snippet": "PART TWO The King of Delhi • Bahadur Shah at Delhi • conditions in the city, May to September, 1857 • the King's sons - sepoys' depredations • arrival of Bakht Khan, 2 July - growing disorder • On the day after the mutinous sepoys from Meerut had been admitted into Delhi, the King had held a durbar in the Diwan-i-Khas for the first time in fifteen years....",
+        "score": 0.605,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "snippet": "the man's action with the words, 'There is no cause for shame in what he has done.'2 Bahadur Shah's family could trace their ancestry to that most powerful Tartar conqueror, Tamerlane, who had invaded India in 1398. But Bahadur Shah himself had no power. A pensioner of the British, he lived in his vast palace in some comfort, surrounded by an enormous...",
+        "score": 0.558,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 457-460)",
+        "snippet": "(FDPC (NAI), 7-9, q. Sen, 365-6.) Despite these defiant words, Syed Muhammad Hasan Khan was subsequently persuaded to surrender to the British authorities. But other leaders who shared his views, including Beni Madho of Shankarpur, Devi Baksh of Gonda and Golab Singh of Biswah, refused to do so and died in the jungles of Nepal. 7. Edwardes, Red Year,...",
+        "score": 0.55,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=457"
+      }
+    ],
+    "timing_ms": {
+      "answer": 24729,
+      "trust_check": 3361
+    }
+  },
+  {
+    "question": "Which general, commanding the Meerut Division, rejected the plea that the 3rd Light Cavalry troopers had been misled by rumours?",
+    "answer": "Major-General W. H. Hewitt rejected the plea that the men had been misled by rumours. (Source: [2] pp. 81-84)",
+    "mode": "hybrid",
+    "trust_score": 1.0,
+    "n_claims": 1,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Meerut"
+    ],
+    "sources": [
+      {
+        "title": "Mutiny at Meerut located_in Meerut",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "title": "Delhi associated_with Meerut",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "Meerut associated_with Hewitt",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "title": "Archdale Wilson associated_with Meerut",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "title": "Meerut associated_with Hurchundpore",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=117"
+      },
+      {
+        "title": "Meerut associated_with Carmichael-Smyth",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 97-100)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 101-104)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Major-General W. H. Hewitt rejected the plea that the men had been misled by rumours.",
+        "verdict": "entailed",
+        "score": 0.994,
+        "best_evidence": "A recommendation for mercy, on the grounds that the men, previously of good character, had been misled by rumours, was rejected by the Commander of the Meerut Division, Major-General W. H. Hewitt, who held that this only made their offence more culpable."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Mutiny at Meerut --located_in--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "text": "Delhi --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Meerut --associated_with--> Hewitt",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Archdale Wilson --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "text": "Meerut --associated_with--> Mutiny at Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Meerut --associated_with--> Hugh Gough",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Agra --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "text": "Meerut --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Meerut --associated_with--> Hurchundpore",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=117"
+      },
+      {
+        "text": "Meerut --associated_with--> Dragoon Guards",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "text": "Meerut --associated_with--> Carmichael-Smyth",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "text": "Meerut --associated_with--> Bahadur Shah",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 77-80)",
+        "snippet": "sort just now. No other Colonel thought of doing such a thing, as they knew at this unsettled time their men would refuse to be the first to fire these cartridges . . . The men themselves humbly petitioned the Colonel to put the parade off till this disturbance in India had gone over, in fact pointing out to him what he ought to have seen himself. He . . ....",
+        "score": 0.623,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 81-84)",
+        "snippet": "Mutiny at Meerut • 79 On receiving the findings of the Meerut court of inquiry, a courtmartial of all eighty-five men was recommended by the Judge Advocate-General and approved by the Commander-in-Chief. At their subsequent trial, by the votes of all but one of the fifteen native officers who were members of the court, the accused were convicted and...",
+        "score": 0.587,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 97-100)",
+        "snippet": "have witnessed many painful sights, but I shall never forget my feelings that day as I saw our poor fellows being brought in, their faces distorted with all the agonies of a violent death, and hacked about in every conceivable way . .. But we had no time to indulge in sad reflections, for reports now reached us that, besides the 3rd Cavalry troopers, the...",
+        "score": 0.582,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=97"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 101-104)",
+        "snippet": "Rebels and Fugitives • 99 where they were only because they believed the European troops would arrive any moment from Meerut. They kept asking when these troops were likely to be in Delhi; and the European officers replied with an assumed confidence which became less convincing as the morning wore on. By the early afternoon, however, they were feeling more...",
+        "score": 0.542,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=101"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 97-100)",
+        "snippet": "went home for breakfast. His wife, Harriet, had the meal with him, their two small children having had theirs already with the Breton maid. There were musk melons on the table. Outside on the veranda the household tailor sat stitching quietly. It seemed to be a morning like any other.10 Breakfast in the regimental messes was served as usual, the officers...",
+        "score": 0.536,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=97"
+      }
+    ],
+    "timing_ms": {
+      "answer": 13713,
+      "trust_check": 2676
+    }
+  },
+  {
+    "question": "On what date was Jhansi captured?",
+    "answer": "Jhansi was captured on 3 April 1858 [source: data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393].",
+    "mode": "hybrid",
+    "trust_score": 1.0,
+    "n_claims": 1,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Jhansi"
+    ],
+    "sources": [
+      {
+        "title": "Massacre at Jhansi located_in Jhansi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393"
+      },
+      {
+        "title": "Siege of Jhansi located_in Jhansi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=405"
+      },
+      {
+        "title": "Jhansi associated_with Rani",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=401"
+      },
+      {
+        "title": "Jhansi associated_with Tatya Tope",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=409"
+      },
+      {
+        "title": "Jhansi associated_with Ranee",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=457"
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Jhansi was captured on 3 April 1858",
+        "verdict": "entailed",
+        "score": 0.992,
+        "best_evidence": "Jhansi captured, 3 April 1858 •"
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Massacre at Jhansi --located_in--> Jhansi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393"
+      },
+      {
+        "text": "Siege of Jhansi --located_in--> Jhansi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=405"
+      },
+      {
+        "text": "Jhansi --associated_with--> Rani",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=401"
+      },
+      {
+        "text": "Jhansi --associated_with--> Hugh Rose",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393"
+      },
+      {
+        "text": "Jhansi --associated_with--> Tatya Tope",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=409"
+      },
+      {
+        "text": "Jhansi --associated_with--> Sagar",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=405"
+      },
+      {
+        "text": "Jhansi --associated_with--> Ranee",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=457"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 401-404)",
+        "snippet": "shall not surrender my Jhansi,' she declared; and she issued an appeal to the Court of Directors in London. The appeal was rejected; and the Rani's resentment had been increased when she was told that she would be expected to pay her late husband's debts out of her own pension.31 In the three years that had passed since the annexation of Jhansi, the Rani...",
+        "score": 0.552,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=401"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 409-412)",
+        "snippet": "• 385 leading nobles of Gwalior, as well as the officers of the army, were persuaded that if the rebels established themselves in Gwalior other Indian princes, who had so far remained neutral, would join in their cause. The rebel leaders accordingly marched on Gwalior with eleven thousand men and twelve guns. The Maharajah opposed them near Morar. But after...",
+        "score": 0.502,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=409"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 401-404)",
+        "snippet": "in Malwa nor in Bengal was as fierce or costly, though, as the battles in Bundelkhand where the sepoys at Jhansi had mutinied, murdered all but one of their officers, released the convicts from the gaol and marched upon the town fort where the rest of the Europeans in Jhansi had taken refuge. The Europeans, after firing the fort guns at their assailants,...",
+        "score": 0.497,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=401"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 393-396)",
+        "snippet": "The Last of the Rebels • Continued resistance of the talukdars • Walpole's campaign in Rohilkhand • his defeat at Ruiya, 15 April 1858 - Campbell's victory over Khan Bahadur Khan outside Bareilly, 5 May 1858 • death of the Maulvi, 5 June • the mutiny at Indore, 1 July 1857 - the Rani of Jhansi • massacre at Jhansi, 8 June 1857 • Sir Hugh Rose arrives at...",
+        "score": 0.495,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 409-412)",
+        "snippet": "The Last of the Rebels • 383 They had endorsed her decision to reject Sir Hugh Rose's demand for the city, and had responded enthusiastically to her proclamation: 'We fight for independence. In the words of Lord Krishna, we will, if we are victorious, enjoy the fruits of victory; if defeated and killed on the field of battle, we shall surely earn eternal...",
+        "score": 0.492,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=409"
+      }
+    ],
+    "timing_ms": {
+      "answer": 9626,
+      "trust_check": 2936
+    }
+  },
+  {
+    "question": "What was the population of Delhi in 1857?",
+    "answer": "The provided context does not contain enough information to answer this question.",
+    "mode": "hybrid",
+    "trust_score": null,
+    "n_claims": 0,
+    "n_entailed": 0,
+    "seed_entities": [
+      "Delhi"
+    ],
+    "sources": [
+      {
+        "title": "Siege of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=461"
+      },
+      {
+        "title": "Fall of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "title": "Massacre at Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=153"
+      },
+      {
+        "title": "Mutiny of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "Bahadur Shah ruled Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "title": "Storming of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=269"
+      },
+      {
+        "title": "India associated_with Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "title": "Delhi associated_with Archdale Wilson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "title": "Delhi associated_with Hodson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "title": "Delhi associated_with Kurnaul",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "title": "Delhi associated_with Lucknow",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=353"
+      },
+      {
+        "title": "Delhi associated_with Punjab",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=129"
+      },
+      {
+        "title": "Delhi associated_with Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "title": "Delhi associated_with Lahore Gate",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "title": "Delhi associated_with Nicholson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=317"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 465-468)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 293-296)",
+        "url": ""
+      }
+    ],
+    "claims": [],
+    "graph_facts": [
+      {
+        "text": "Siege of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=461"
+      },
+      {
+        "text": "Fall of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "text": "Massacre at Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=153"
+      },
+      {
+        "text": "Mutiny of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Bahadur Shah --ruled--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "text": "Storming of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=269"
+      },
+      {
+        "text": "Delhi --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "India --associated_with--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "text": "Delhi --associated_with--> Archdale Wilson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "text": "Delhi --associated_with--> Hodson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "text": "Delhi --associated_with--> Kurnaul",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "text": "Delhi --associated_with--> Lucknow",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=353"
+      },
+      {
+        "text": "Delhi --associated_with--> Punjab",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=129"
+      },
+      {
+        "text": "Delhi --associated_with--> Thomas Metcalfe",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "text": "Delhi --associated_with--> Indian Mutiny",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "text": "Delhi --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Delhi --associated_with--> John Lawrence",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "text": "Delhi --associated_with--> Lahore Gate",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "text": "Delhi --associated_with--> Lawrence",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "text": "Delhi --associated_with--> Nicholson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=317"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 465-468)",
+        "snippet": "A Reminder from one who was Present' (Nineteenth Century and After, October 1911). Stokes, Eric. 'Rural Revolt in the Great Rebellion of 1857' (Historical Journal, XI, 1969). — 'The Context of the 1857 Mutiny Rebellion in India' (Past and Present, 46, August 1970). Sumner, Percy (ed.). 'Indian Mutiny Recollections of Bugler Johnson' (JSAHR, Vol. XX,Autumn...",
+        "score": 0.523,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 293-296)",
+        "snippet": "PART TWO The King of Delhi • Bahadur Shah at Delhi • conditions in the city, May to September, 1857 • the King's sons - sepoys' depredations • arrival of Bakht Khan, 2 July - growing disorder • On the day after the mutinous sepoys from Meerut had been admitted into Delhi, the King had held a durbar in the Diwan-i-Khas for the first time in fifteen years....",
+        "score": 0.489,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 317-320)",
+        "snippet": "parts of the country. There were officers on his staff who supported his view that this would be the more sensible course. But Baird Smith was convinced that to abandon Delhi and its communications with the Punjab would be an unforgivable error; it would lead all India to suppose that we 'retreated because we were beaten'. Certainly more heavy guns were...",
+        "score": 0.479,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=317"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 465-468)",
+        "snippet": "1858). Campbell, Sir George. Memoirs of My Indian Career 2 vols. (London, 1893). Campbell, Robert. The Indian Mutiny: Its Causes and Remedies (London, 1857). Cardew, Major F. G. Hodson's Horse, 1857-1922 (London, 1928). Case, Mrs [Adelaide], Day by Day at Lucknow: A Journal of the Siege of Lucknow (London, 1858). Cave-Browne, The Rev. John. The Punjab and...",
+        "score": 0.472,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 461-464)",
+        "snippet": "Colvin, Benares, 1873). Spencer, Margaret. Personal Reminiscences of the Indian Mutiny (Clifton. 1905). Steuart, Mary E. (ed.). Reminiscences of Lieutenant-Colonel Thomas Ruddiman Steuart (1900). Thackeray, Colonel E. T. Two Indian Campaigns in 1857-58 (Chatham, 1896). Thurburn, Lieutenant-Colonel F. A. V. Reminiscences of the Indian Rebellion of 1857-1858...",
+        "score": 0.456,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=461"
+      }
+    ],
+    "timing_ms": {
+      "answer": 8344,
+      "trust_check": 276
+    }
+  },
+  {
+    "question": "What was the grease on the new Enfield rifle cartridges made from, and why was that a problem for native troops?",
+    "answer": "The grease on the new Enfield rifle cartridges was made from tallow, which was considered the longest-lasting lubricant. However, as the Adjutant-General of the Bengal Army realized, tallow contained beef fat, which was degrading to Hindus, and pig fat, which was offensive to Mohammedans [1, 3]. This caused suspicion among the sepoys that these were used instead of mutton or goat fat [3].",
+    "mode": "hybrid",
+    "trust_score": 0.6666666666666666,
+    "n_claims": 3,
+    "n_entailed": 2,
+    "seed_entities": [
+      "Enfield"
+    ],
+    "sources": [
+      {
+        "title": "Maude associated_with Enfield",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=205"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 57-60)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 73-76)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 77-80)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "The grease on the new Enfield rifle cartridges was made from tallow, which was considered the longest-lasting lubricant.",
+        "verdict": "neutral",
+        "score": 0.003,
+        "best_evidence": "The grease was tallow which, so experiments had shown, lasted longer as a lubricant than the wax and vegetable oil used with the bullets for the old rifle."
+      },
+      {
+        "claim": "However, as the Adjutant-General of the Bengal Army realized, tallow contained beef fat, which was degrading to Hindus, and pig fat, which was offensive to Mohammedans",
+        "verdict": "entailed",
+        "score": 0.984,
+        "best_evidence": "But the problem with tallow, as the Adjutant-General of the Bengal Army had realized, was that,whereas it was entirely unobjectionable to European troops, it was certainly not so to native troops for if it contained beef fat it would be degrading to Hindus and if it contained pig fat it would be offensive to Mohammedans."
+      },
+      {
+        "claim": "This caused suspicion among the sepoys that these were used instead of mutton or goat fat",
+        "verdict": "entailed",
+        "score": 0.959,
+        "best_evidence": "Since beef and pig fat were the cheapest animal fats available, the sepoys' suspicion that these were used instead of mutton or goat fat was far from unreasonable."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Maude --associated_with--> Enfield",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=205"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 57-60)",
+        "snippet": "so experiments had shown, lasted longer as a lubricant than the wax and vegetable oil used with the bullets for the old rifle. But the problem with tallow, as the Adjutant-General of the Bengal Army had realized, was that,whereas it was entirely unobjectionable to European troops, it was certainly not so to native troops for if it contained beef fat it...",
+        "score": 0.628,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=57"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 73-76)",
+        "snippet": "of the Enfield cartridges, expressing to Calcutta his own opinion that they were indeed covered with a huge quantity of grease.44 Calcutta did not agree that the firing practice should be suspended. A new drill had been devised: the men would not in future be required to bite the cartridges; they could tear the ends off with their fingers. So, objections to...",
+        "score": 0.625,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=73"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 57-60)",
+        "snippet": "Soldiers and Sepoys • 55 Rifles of the old pattern had two grooves in their bores. They were loaded by ramming a charge of powder down the muzzle followed by a bullet which, to ease its way down the rifling, was wrapped in a patch of cloth lubricated with a mixture of wax and vegetable oil. The new rifle had three grooves, and the powder and bullet were...",
+        "score": 0.579,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=57"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 57-60)",
+        "snippet": "At that time no outcry had been raised against them. Since then, however, the greased paper having proved suitable for the climate, further cartridges had been sent out from England; and manufacture of them had begun in India where no specification for the composition of the tallow was given to the contractors. Since beef and pig fat were the cheapest...",
+        "score": 0.571,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=57"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 77-80)",
+        "snippet": "the new cartridges, so Wilson learned, that had caused all the trouble.1 The new Enfield rifle which was to fire these cartridges had been issued at Meerut at the beginning of January 1857 to one of the two European regiments there, the 60th Rifles, which had later also been issued with ten rounds of ammunition per man. But when the skirmishers of a native...",
+        "score": 0.564,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      }
+    ],
+    "timing_ms": {
+      "answer": 26066,
+      "trust_check": 4608
+    }
+  },
+  {
+    "question": "Who captured the King of Delhi, and what became of the King afterwards?",
+    "answer": "William Hodson captured the King of Delhi, and what became of him is detailed in passages [1], [2], and [5].\n\n*   Hodson captured the King of Delhi with fifty of his troopers and offered to bring him back to Delhi for trial. (Source: [1], pp. 297-300)\n*   The King retreated no farther than the tomb of the Emperor Humayun five miles south of the palace on the road to Muttra. (Source: [5], pp. 337-340)\n*   Hakim Ahsanullah Khan advised the King to retreat further, stating that the English would not regard him as guilty of the mutiny. (Source: [5], pp. 337-340)",
+    "mode": "hybrid",
+    "trust_score": 0.25,
+    "n_claims": 4,
+    "n_entailed": 1,
+    "seed_entities": [
+      "Delhi",
+      "King of Delhi"
+    ],
+    "sources": [
+      {
+        "title": "Siege of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=461"
+      },
+      {
+        "title": "Fall of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "title": "Massacre at Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=153"
+      },
+      {
+        "title": "Mutiny of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "Bahadur Shah ruled Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "title": "Storming of Delhi located_in Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=269"
+      },
+      {
+        "title": "India associated_with Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "title": "Delhi associated_with Archdale Wilson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "title": "Delhi associated_with Hodson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "title": "Delhi associated_with Kurnaul",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "title": "Delhi associated_with Lucknow",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=353"
+      },
+      {
+        "title": "Delhi associated_with Punjab",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=129"
+      },
+      {
+        "title": "Delhi associated_with Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "title": "Delhi associated_with Lahore Gate",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "title": "Delhi associated_with Nicholson",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=317"
+      },
+      {
+        "title": "King of Delhi associated_with Bahadur Shah",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "India associated_with King of Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "title": "King of Delhi associated_with Bakht Khan",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 301-304)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 305-308)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 337-340)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "William Hodson captured the King of Delhi, and what became of him is detailed in passages",
+        "verdict": "neutral",
+        "score": 0.008,
+        "best_evidence": "Learning of his presence there from a spy, William Hodson, who had already come to profitable terms with the King's wife, Zinat Mahal, offered to go out to capture him and to bring him back to Delhi for trial."
+      },
+      {
+        "claim": ". * Hodson captured the King of Delhi with fifty of his troopers and offered to bring him back to Delhi for trial.",
+        "verdict": "contradiction",
+        "score": 0.006,
+        "best_evidence": "So Hodson set out with fifty of his troopers; and, halting at the gateway of the tomb, sent in two emissaries to say that if the King surrendered, his life - together with the lives of his wife and young son who were both with"
+      },
+      {
+        "claim": "The King retreated no farther than the tomb of the Emperor Humayun five miles south of the palace on the road to Muttra.",
+        "verdict": "entailed",
+        "score": 0.992,
+        "best_evidence": "The King had accordingly retreated no farther than the tomb of the Emperor Humayun five miles south of the palace on the road to Muttra."
+      },
+      {
+        "claim": "337-340) * Hakim Ahsanullah Khan advised the King to retreat further, stating that the English would not regard him as guilty of the mutiny.",
+        "verdict": "contradiction",
+        "score": 0.007,
+        "best_evidence": "That evening Bakht Khan came to the durbar and complained that the soldiers were no longer obeying his orders."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Siege of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=461"
+      },
+      {
+        "text": "Fall of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "text": "Massacre at Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=153"
+      },
+      {
+        "text": "Mutiny of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Bahadur Shah --ruled--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "text": "Storming of Delhi --located_in--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=269"
+      },
+      {
+        "text": "Delhi --associated_with--> Meerut",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "India --associated_with--> Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "text": "Delhi --associated_with--> Archdale Wilson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "text": "Delhi --associated_with--> Hodson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "text": "Delhi --associated_with--> Kurnaul",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "text": "Delhi --associated_with--> Lucknow",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=353"
+      },
+      {
+        "text": "Delhi --associated_with--> Punjab",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=129"
+      },
+      {
+        "text": "Delhi --associated_with--> Thomas Metcalfe",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=105"
+      },
+      {
+        "text": "Delhi --associated_with--> Indian Mutiny",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "text": "Delhi --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Delhi --associated_with--> John Lawrence",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=121"
+      },
+      {
+        "text": "Delhi --associated_with--> Lahore Gate",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "text": "Delhi --associated_with--> Lawrence",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=341"
+      },
+      {
+        "text": "Delhi --associated_with--> Nicholson",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=317"
+      },
+      {
+        "text": "King of Delhi --associated_with--> Bahadur Shah",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "Meerut --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "India --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "text": "East India Company --associated_with--> King of Delhi",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "King of Delhi --associated_with--> Bakht Khan",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 297-300)",
+        "snippet": "The King of Delhi • 271 Collectorate and were refusing to share it with them. Exasperated by the noise and importunity, the King told the Princes to clear all the regiments, with one exception, out of the city and to encamp them outside the gates and along the sandy river bed beneath the palace walls.6 While the Princes were endeavouring, with indifferent...",
+        "score": 0.606,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 301-304)",
+        "snippet": "That evening Bakht Khan came to the durbar and complained that the soldiers were no longer obeying his orders. The King wearily replied, 'Tell them, then, to leave the city ... It is quite clear to me that the English will ultimately recapture Delhi, and will kill me.'33 The King continued to make his inspections of the forts and gun emplacements, but they...",
+        "score": 0.599,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=301"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 305-308)",
+        "snippet": "The King of Delhi • 279 Fully five thousand men from various quarters poured into Delhi as Ghazis . . . dressed in blue tunics and green turbans [recorded Syed Mubarak Shah], All these Ghazis received two annas a day from the King. They usually joined in the attacks on the British lines . . . Several of the fanatics engaged in hand to hand contact and great...",
+        "score": 0.583,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=305"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 301-304)",
+        "snippet": "The King of Delhi • 275 the King; and the disorder in the city was aggravated by the increased cannonading from the British camp, which killed many people within the walls, and by the coming of the heavy rains. The rains induced the officers of the army to seek permission to leave their camps outside the walls. The King granted them permission, so the...",
+        "score": 0.583,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=301"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 337-340)",
+        "snippet": "himself from the rebel cause.' Recollect you are the King,' Hakim Ahsanullah Khan is believed to have said to him. 'It is not right for you to go. The army of the English mutinied against their masters, fought with them and have been utterly routed and dispersed. What has your Majesty to do with them . . . The English will not regard you as guilty.'15 The...",
+        "score": 0.583,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=337"
+      }
+    ],
+    "timing_ms": {
+      "answer": 31281,
+      "trust_check": 6509
+    }
+  }
+]

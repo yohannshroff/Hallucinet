@@ -40,7 +40,7 @@ VERDICT_TEXT = {
     "no_evidence": "No evidence was retrieved",
 }
 
-st.set_page_config(page_title="HalluciNet", page_icon="📜", layout="wide")
+st.set_page_config(page_title="HalluciNet", page_icon="📜", layout="wide", initial_sidebar_state="expanded")
 
 # --------------------------------------------------------------------------
 # Backend access
@@ -187,79 +187,112 @@ def status_dot(ok) -> str:
 
 
 # --------------------------------------------------------------------------
+# Look and feel: muted steel-blue palette, serif title, chat-style layout
+# --------------------------------------------------------------------------
+
+st.markdown(
+    """
+<style>
+:root { --ink:#17394D; --ink-soft:#4A6B7C; --side:#7FA6B8; --page:#D5E1E8; --edge:#2F5F7A; --card:#EEF3F6; }
+.stApp { background: var(--page); color: var(--ink); }
+[data-testid="stHeader"] { background: transparent; }
+section[data-testid="stSidebar"] { background: var(--side); border-right: 1px solid #6B95A8; }
+section[data-testid="stSidebar"] * { color: var(--ink); }
+h1, h2, h3, .serif { font-family: Georgia, "Times New Roman", serif !important; color: var(--ink); letter-spacing: -0.01em; }
+.brand { font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 1.25rem; margin: 0 0 0.9rem 0; }
+.eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: #274A5E; margin: 1.1rem 0 0.4rem 0; }
+.hero { text-align: center; padding-top: 14vh; }
+.hero .serif { font-size: 3.2rem; font-weight: 700; margin: 0; }
+.hero p { font-size: 1.05rem; color: var(--ink-soft); margin: 0.6rem 0 1.4rem 0; }
+section[data-testid="stSidebar"] .stButton > button { background: rgba(255,255,255,0.10); border: 1px solid var(--edge); border-radius: 3px; color: var(--ink); justify-content: flex-start; text-align: left; font-weight: 500; }
+section[data-testid="stSidebar"] .stButton > button:hover { background: rgba(255,255,255,0.28); border-color: var(--ink); }
+section[data-testid="stSidebar"] .st-key-recent .stButton > button { border: none; background: transparent; padding: 0.15rem 0.2rem; font-weight: 400; }
+section[data-testid="stSidebar"] .st-key-recent .stButton > button:hover { background: rgba(255,255,255,0.22); }
+[data-baseweb="select"] > div, [data-testid="stTextInput"] input { background: #C9DAE3; border-color: var(--edge); }
+div[data-testid="stChatInput"] { background: #FFFFFF; border: 1.5px solid #6B95A8; border-radius: 3px; }
+div[data-testid="stChatInput"] > div:first-child { background: #FFFFFF !important; }
+div[data-testid="stChatInput"] textarea, [data-testid="stChatInputTextArea"] { color: var(--ink); height: auto !important; min-height: 28px !important; max-height: 140px !important; field-sizing: content; }
+div[data-testid="stChatInput"] button { background: var(--ink) !important; color: #fff !important; border-radius: 3px; }
+div[data-testid="stBottom"], div[data-testid="stBottom"] > div { background: var(--page); }
+div[data-testid="stBottom"] > div::after { content: "Every answer is checked claim by claim against the retrieved evidence."; display: block; text-align: center; font-size: 0.78rem; color: var(--ink-soft); padding: 0 0 0.6rem 0; }
+div[data-testid="stVerticalBlockBorderWrapper"] { background: var(--card); border-color: #9DB8C6; }
+.stButton > button[kind="primary"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+button[data-baseweb="tab"] { color: var(--ink-soft); }
+button[data-baseweb="tab"][aria-selected="true"] { color: var(--ink); }
+[data-testid="stPills"] button { background: #C4D6E0; border: 1px solid #8FB0C0; color: var(--ink); }
+[data-testid="stPills"] button:hover { background: #B4CCD8; }
+.block-container { padding-top: 2rem; max-width: 980px; }
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+# --------------------------------------------------------------------------
 # Sidebar
 # --------------------------------------------------------------------------
 
+VIEWS = ["Ask", "Compare", "Knowledge base", "How it works"]
 st.session_state.setdefault("history", [])
 st.session_state.setdefault("view", None)
+st.session_state.setdefault("nav", "Ask")
+
+
+def new_question():
+    st.session_state.view = None
+    st.session_state["nav"] = "Ask"
+
 
 with st.sidebar:
-    st.header("Settings")
-    mode = st.radio("How should it search?", list(MODES), format_func=MODES.get, index=0)
-    k = st.slider("Book passages to retrieve", 1, 10, 5, disabled=(mode == "graph"))
+    st.markdown('<div class="brand">HalluciNet</div>', unsafe_allow_html=True)
+    st.button("+ New question", on_click=new_question, width="stretch")
+    st.radio("View", VIEWS, key="nav", label_visibility="collapsed")
 
-    st.divider()
+    st.markdown('<div class="eyebrow">Recent</div>', unsafe_allow_html=True)
+    with st.container(key="recent"):
+        if not st.session_state.history:
+            st.caption("No questions yet")
+        for i, entry in enumerate(reversed(st.session_state.history[-6:])):
+            label = entry["question"] if len(entry["question"]) < 38 else entry["question"][:36] + "…"
+            if st.button(label, key=f"hist_{i}", width="stretch", help=entry["question"]):
+                st.session_state.view = entry
+                st.session_state["nav"] = "Ask"
+                st.rerun()
+
     health = api_get("/health")
-    st.subheader("System")
+    st.markdown('<div class="eyebrow">System</div>', unsafe_allow_html=True)
     if health is None:
         st.markdown("🔴 Backend not reachable")
         st.caption(f"Start it with `uvicorn api.main:app --port 8000` (looking at {API_URL}).")
     else:
-        st.markdown(f"{status_dot(health.get('ollama_reachable'))} Language model (Ollama)")
-        st.markdown(f"{status_dot(health.get('neo4j_reachable'))} Knowledge graph (Neo4j)")
-        st.markdown(f"{status_dot(health.get('index_ready'))} Book search index")
+        st.markdown(
+            f"{status_dot(health.get('ollama_reachable'))} Model &nbsp; "
+            f"{status_dot(health.get('neo4j_reachable'))} Graph &nbsp; "
+            f"{status_dot(health.get('index_ready'))} Index"
+        )
         if not health.get("ollama_reachable"):
             st.caption("Without the language model, only saved demo answers are available.")
-    if st.button("Refresh status", width="stretch"):
-        api_get.clear()
-        st.rerun()
 
-    if st.session_state.history:
-        st.divider()
-        st.subheader("Recent questions")
-        for i, entry in enumerate(reversed(st.session_state.history[-6:])):
-            if st.button(entry["question"], key=f"hist_{i}", width="stretch"):
-                st.session_state.view = entry
+    st.markdown('<div class="eyebrow">Settings</div>', unsafe_allow_html=True)
+    mode = st.selectbox("Retrieval mode", list(MODES), format_func=MODE_SHORT.get, index=0)
+    k = st.slider("Vector top-k", 1, 10, 5, disabled=(mode == "graph"))
+    st.caption("If the API is unreachable, answers fall back to pre-cached results.")
 
-# --------------------------------------------------------------------------
-# Main page
-# --------------------------------------------------------------------------
-
-st.title("HalluciNet")
-st.caption("Questions about Indian history, answered only from the loaded sources — each answer comes with a trust score and its evidence.")
-
-tab_ask, tab_compare, tab_kb, tab_how = st.tabs(["Ask", "Compare search modes", "Knowledge base", "How it works"])
+nav = st.session_state.get("nav", "Ask")
 
 # ---- Ask -----------------------------------------------------------------
-with tab_ask:
-
-    def set_question(text: str):
-        st.session_state["question"] = text
-        st.session_state["run_question"] = text
-
-    def submit_question():
-        st.session_state["run_question"] = st.session_state.get("question", "").strip()
+if nav == "Ask":
 
     def pick_example():
         text = st.session_state.get("example_pick")
         if text:
-            set_question(text)
+            st.session_state["run_question"] = text
             st.session_state["example_pick"] = None  # so the same example can be picked again
 
-    examples = example_questions()
-    if examples:
-        st.pills("Try one of these:", examples, key="example_pick", on_change=pick_example)
+    prompt = st.chat_input("Ask a question about the 1857 Revolt...")
+    to_run = (prompt or "").strip() or st.session_state.pop("run_question", None)
 
-    with st.form("ask_form", border=False):
-        st.text_input(
-            "Ask a question about Indian history",
-            key="question",
-            placeholder="Who led the resistance at Jhansi?",
-        )
-        st.form_submit_button("Ask", type="primary", on_click=submit_question)
-
-    to_run = st.session_state.pop("run_question", None)
     if to_run:
+        st.subheader(to_run)
         with st.spinner("Searching the sources and writing an answer… (the first question can take a bit longer while the model loads)"):
             result, from_cache, error = answer_question(to_run, mode, k)
         if result is None:
@@ -269,22 +302,30 @@ with tab_ask:
             entry = {**result, "from_cache": from_cache}
             st.session_state.history.append(entry)
             st.session_state.view = entry
+            st.rerun()
 
     view = st.session_state.view
     if view:
         st.subheader(view["question"])
         render_result(view, from_cache=view.get("from_cache", False))
-    else:
-        st.caption("Pick an example above or type your own question.")
+    elif not to_run:
+        st.markdown(
+            '<div class="hero"><div class="serif">HalluciNet</div>'
+            "<p>Grounded answers on the Revolt of 1857, with a trust score for every response.</p></div>",
+            unsafe_allow_html=True,
+        )
+        examples = example_questions()
+        if examples:
+            st.pills("Try one of these:", examples, key="example_pick", on_change=pick_example, label_visibility="collapsed")
 
 # ---- Compare -------------------------------------------------------------
-with tab_compare:
+if nav == "Compare":
     st.markdown(
         "The same question, answered three ways. This is the heart of the project: does combining the "
         "knowledge graph with book search give more trustworthy answers than either alone?"
     )
     st.caption("This asks the language model three times, so it takes roughly three times as long.")
-    cmp_question = st.text_input("Question to compare", value="Who led the resistance at Jhansi?", key="cmp_question")
+    cmp_question = st.text_input("Question to compare", value="Which general, commanding the Meerut Division, rejected the plea that the 3rd Light Cavalry troopers had been misled by rumours?", key="cmp_question")
     if st.button("Compare all three", type="primary", disabled=not cmp_question.strip()):
         results = {}
         progress = st.progress(0.0, text="Starting…")
@@ -313,7 +354,7 @@ with tab_compare:
                 st.caption(f"{res.get('n_entailed', '?')} of {res.get('n_claims', '?')} claims supported")
 
 # ---- Knowledge base ------------------------------------------------------
-with tab_kb:
+if nav == "Knowledge base":
     stats = api_get("/stats")
     kg = api_get("/kg")
     if stats is None or kg is None:
@@ -369,7 +410,7 @@ with tab_kb:
         st.caption(f"{len(table)} rows")
 
 # ---- How it works --------------------------------------------------------
-with tab_how:
+if nav == "How it works":
     st.markdown(
         """
 **1. Find the evidence.** Your question is matched against two stores: a small *knowledge graph* of people, places and

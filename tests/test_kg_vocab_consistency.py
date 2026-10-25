@@ -23,3 +23,12 @@ def test_all_relations_are_known():
     relationships = pd.read_csv(RELATIONSHIPS_CSV, keep_default_na=False)
     unknown = set(relationships["relation"]) - RELATION_VOCAB
     assert not unknown, f"relationships.csv uses relation(s) not in RELATION_VOCAB: {unknown}"
+
+
+def test_no_excluded_generic_names_became_entities():
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "kg"))
+    from extract_facts import EXCLUDED_NAMES
+
+    entities = pd.read_csv(ENTITIES_CSV, keep_default_na=False)
+    leaked = set(entities["name"]) & EXCLUDED_NAMES
+    assert not leaked, f"generic names in entities.csv (re-run kg/consolidate_triples.py): {leaked}"

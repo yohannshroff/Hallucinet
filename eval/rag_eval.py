@@ -6,6 +6,7 @@ Three steps, so the cheap ones never need the language model:
     python eval/rag_eval.py retrieval            # Recall@k / MRR / precision. No Ollama. Seconds.
     python eval/rag_eval.py generate --runs 3    # answers + scores. Needs Ollama. Slow; resumable.
     python eval/rag_eval.py report               # tables with mean+-SD, 95% CIs, McNemar. No models.
+    python eval/rag_eval.py citations            # re-score citations in saved runs. No Ollama. Minutes.
 
 `generate` appends one line per (question, mode, run) to
 data/eval/runs/generation.jsonl and skips lines already there, so it can be
@@ -67,7 +68,7 @@ def cmd_retrieval(args):
         gold = M.parse_gold_pages(q["gold_pages"])
         for mode in ("vector", "graph", "hybrid"):
             bundle = retrieve(q["question"], entities_df, k=max(ks), mode=mode)
-            for k in ks if mode != "graph" else [0]:  # graph results do not depend on k
+            for k in ks:  # graph mode returns graph-guided passages, so it depends on k too
                 groups = M.ranked_groups(bundle, k=k)
                 rows.append({
                     "id": q["id"], "hop_type": q["hop_type"], "mode": mode, "k": k,
@@ -105,7 +106,7 @@ def gold_sentences(gold_pages: str, chunks_by_group: dict) -> list:
 
 def load_chunks_by_group() -> dict:
     by_group = {}
-    with open(CHUNKS_JSONL) as f:
+    with open(CHUNKS_JSONL, encoding="utf-8") as f:
         for line in f:
             c = json.loads(line)
             g = M.chunk_group(c)
@@ -117,7 +118,7 @@ def load_chunks_by_group() -> dict:
 def done_keys() -> set:
     if not RUNS_JSONL.exists():
         return set()
-    return {(r["id"], r["mode"], r["run"]) for r in map(json.loads, RUNS_JSONL.read_text().splitlines() if RUNS_JSONL.stat().st_size else [])}
+    return {(r["id"], r["mode"], r["run"]) for r in map(json.loads, RUNS_JSONL.read_text(encoding="utf-8").splitlines() if RUNS_JSONL.stat().st_size else [])}
 
 
 def score_answer(q: dict, answer: str, bundle: dict, chunks_by_group: dict) -> dict:
@@ -167,7 +168,7 @@ def cmd_generate(args):
     jobs = [(q, mode, run) for run in range(1, args.runs + 1) for mode in args.modes for _, q in df.iterrows()]
     jobs = [j for j in jobs if (j[0]["id"], j[1], j[2]) not in done]
     log.info(f"{len(jobs)} answers to generate")
-    with open(RUNS_JSONL, "a") as f:
+    with open(RUNS_JSONL, "a", encoding="utf-8") as f:
         for i, (q, mode, run) in enumerate(jobs, 1):
             q = q.to_dict() if hasattr(q, "to_dict") else q
             t0 = time.time()
@@ -186,10 +187,33 @@ def cmd_generate(args):
             log.info(f"[{i}/{len(jobs)}] {q['id']} {mode} run{run}: correct={row['correct']}")
 
 
+def cmd_citations(args):
+    """Re-score citations in generation.jsonl without the LLM: retrieval is
+    deterministic, so each bundle is rebuilt and the saved answer re-checked."""
+    from hybrid_retrieve import retrieve
+
+    questions = {q["id"]: q for q in load_questions().to_dict(orient="records")}
+    entities_df = pd.read_csv(ENTITIES_CSV, keep_default_na=False)
+    rows = [json.loads(l) for l in RUNS_JSONL.read_text(encoding="utf-8").splitlines() if l.strip()]
+    bundles = {}
+    for i, row in enumerate(rows, 1):
+        q = questions.get(row["id"])
+        if q is None or row["mode"] == "closed_book":
+            continue
+        key = (row["id"], row["mode"], row["k"])
+        if key not in bundles:
+            bundles[key] = retrieve(q["question"], entities_df, k=row["k"], mode=row["mode"])
+        row.update(M.citation_stats(row["answer"], bundles[key], M.parse_gold_pages(q["gold_pages"])))
+        if i % 20 == 0:
+            log.info(f"[{i}/{len(rows)}] re-scored")
+    RUNS_JSONL.write_text("".join(json.dumps(r, default=float) + "\n" for r in rows), encoding="utf-8")
+    log.info(f"re-scored citations for {len(rows)} rows in {RUNS_JSONL}")
+
+
 # ------------------------------------------------------------------- report
 
 def load_runs() -> pd.DataFrame:
-    return pd.DataFrame([json.loads(l) for l in RUNS_JSONL.read_text().splitlines()])
+    return pd.DataFrame([json.loads(l) for l in RUNS_JSONL.read_text(encoding="utf-8").splitlines()])
 
 
 def fmt(mean, sd=None, ci=None) -> str:
@@ -254,7 +278,7 @@ def cmd_report(args):
     if RETRIEVAL_CSV.exists():
         out.append("\n## Retrieval (answerable questions)\n")
         out.append(retrieval_markdown(pd.read_csv(RETRIEVAL_CSV)))
-    REPORT_MD.write_text("\n".join(out) + "\n")
+    REPORT_MD.write_text("\n".join(out) + "\n", encoding="utf-8")
     log.info(f"wrote {REPORT_MD}")
     print("\n".join(out))
 
@@ -272,6 +296,8 @@ def main():
     g.add_argument("--k", type=int, default=5)
     g.add_argument("--ids", nargs="+")
     g.set_defaults(fn=cmd_generate)
+    c = sub.add_parser("citations")
+    c.set_defaults(fn=cmd_citations)
     rep = sub.add_parser("report")
     rep.set_defaults(fn=cmd_report)
     args = p.parse_args()

@@ -54,6 +54,8 @@ python scripts/query_index.py "Who led the resistance at Jhansi?" --k 5
 python kg/find_candidates.py        # names + rule-based facts (~40 s)
 python kg/type_entities.py          # LLM types/cleans the names (~20 min, needs Ollama; cached)
 python kg/extract_facts.py          # grammar facts + NLI check + co-mentions (~45 s)
+python kg/draft_facts.py            # LLM + grammar draft typed facts for hand review (~1-2 h, needs Ollama; cached)
+python kg/draft_facts.py export     # after filling in data/kg_build/review_facts.csv -> data/kg_seed/verified_facts.csv
 python kg/consolidate_triples.py --min_cooc 2   # -> data/kg_seed/*.csv (seconds)
 python kg/load_graph.py --reset
 python kg/validate_graph.py --all
@@ -122,6 +124,38 @@ the project does about it:
 
 Typical timings (warm): ~15 s per answer (language model) plus ~2 s for the
 trust check. The first question after the model has unloaded takes longer.
+
+## Running it on Windows
+
+Target: a 16 GB laptop, CPU only. The Python code is cross-platform; only
+the service setup differs.
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned   # once, lets the venv activate
+py -m venv .venv; .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+setx PYTHONUTF8 1                                      # then open a new terminal
+```
+
+- **Ollama:** install "Ollama for Windows", then `ollama pull gemma3:4b`.
+  Set user environment variables `OLLAMA_MAX_LOADED_MODELS=1`,
+  `OLLAMA_NUM_PARALLEL=1`, `OLLAMA_KEEP_ALIVE=2m` and restart Ollama.
+- **Neo4j in Docker:** first cap Docker's memory in
+  `%UserProfile%\.wslconfig` (`[wsl2]`, `memory=3GB`, `processors=4`; then
+  `wsl --shutdown`), then:
+
+  ```powershell
+  docker run -d --name neo4j -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=neo4j/<password> `
+    -e NEO4J_server_memory_heap_max__size=512m -e NEO4J_server_memory_pagecache_size=64m neo4j:5
+  ```
+
+  `docker stop neo4j` / `docker start neo4j` when not in use.
+- `copy .env.example .env` and set `NEO4J_PASSWORD`; keep `OLLAMA_NUM_CTX`
+  at 4096 (a smaller window cuts long prompts).
+- Run the pipeline above. For long evaluation runs use `--runs 1` (the model
+  is deterministic) and batches via `--ids`; it resumes after Ctrl+C. Don't
+  run the app and the evaluation at the same time.
 
 ## Repo layout
 

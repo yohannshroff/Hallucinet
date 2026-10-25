@@ -87,8 +87,10 @@ VERB_RULES = {
 TITLE_RELATION = {
     "commander-in-chief": "commanded", "commander": "commanded", "leader": "led", "ruler": "ruled",
     "king": "ruled", "emperor": "ruled", "raja": "ruled", "rajah": "ruled", "nawab": "ruled", "begum": "ruled",
-    "queen": "ruled", "maharaja": "ruled", "maharajah": "ruled", "governor": "ruled", "governor-general": "ruled",
-    "chief commissioner": "ruled", "commissioner": "ruled",
+    "queen": "ruled", "maharaja": "ruled", "maharajah": "ruled",
+    # officials ran a province for the Company; they did not rule it
+    "governor": "administered", "governor-general": "administered",
+    "chief commissioner": "administered", "commissioner": "administered",
 }
 
 
@@ -104,13 +106,23 @@ EXCLUDED_NAMES = {
     "Mutineers", "Rebels", "Cheer", "Mohurram", "Diwan", "Native Infantry", "Magazine", "Ridge", "Veranda",
     "London", "Edinburgh",  # almost always publication places in footnotes
     "Queen", "Rajah", "Nawab", "Brahmin", "Brahmins", "Maulvi", "Treasury", "Nana", "Sepoys", "Native",
+    "Adjutant", "Fort", "Court", "Council", "Maharajah", "Mohammedan", "Highland", "Herbert", "Arthur",
+    "Enfield", "Norfolk", "Cape",  # the rifle factory, an English county, a ship's route -- not places in the revolt
+    "Sen",  # a historian cited in the notes
+    "Arnhem Agincourt",  # "the battles of Arnhem, Agincourt ..." -- a comparison, not a battle of 1857
+}
+
+# Names the typing step got wrong.
+TYPE_OVERRIDES = {
+    "Sagar": "Location", "Colvin": "Person", "Craigie": "Person",
+    "Gwalior Contingent": "Organization", "Goojurs": "Organization",
 }
 
 
 def load_lexicon(path: Path) -> dict:
     types = json.loads(path.read_text(encoding="utf-8"))
     return {
-        name: LLM_TYPE_TO_SCHEMA_TYPE[t]
+        name: TYPE_OVERRIDES.get(name, LLM_TYPE_TO_SCHEMA_TYPE[t])
         for name, t in types.items()
         if t in LLM_TYPE_TO_SCHEMA_TYPE and name not in EXCLUDED_NAMES
     }
@@ -171,30 +183,14 @@ def appositive_facts(sentence: str, person_re, other_re):
         yield m.group("p"), TITLE_RELATION[m.group("t").lower()], m.group("o"), "appositive:" + m.group("t").lower()
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--chunks", type=Path, default=CHUNKS_JSONL)
-    parser.add_argument("--types", type=Path, default=ENTITY_TYPES_JSON)
-    parser.add_argument("--out", type=Path, default=EXTRACTED_JSONL)
-    args = parser.parse_args()
-
+def entity_sentences(docs: list, lexicon: dict):
+    """Parse the book and yield (meta, sent span, sentence text, {root token index: surface})
+    for every usable sentence that names 2+ entities. Shared with kg/draft_facts.py."""
     import spacy
-    from entailment import _softmax, get_label_map, get_model
-    from trust_score import fact_to_sentence
 
-    lexicon = load_lexicon(args.types)
     all_re = lexicon_regex(lexicon)
-    people_re = lexicon_regex([n for n, t in lexicon.items() if t == "Person"])
-    other_re = lexicon_regex([n for n, t in lexicon.items() if t != "Person"])
     nlp = spacy.load("en_core_web_sm")
     nlp.max_length = 2_000_000
-
-    docs = reconstruct_documents(args.chunks)
-    log.info(f"{len(lexicon)} typed entities; parsing {len(docs)} documents ...")
-
-    records = []  # [(meta, sentence, facts)]
-    pair_sentences = Counter()  # (a, b) -> number of sentences mentioning both
-    pair_docs = {}  # (a, b) -> Counter of doc ids
     for doc, meta in zip(nlp.pipe((d["text"] for d in docs), batch_size=4), docs):
         by_sentence = {}  # sentence start index -> (sent span, {root token index: surface})
         for m in all_re.finditer(doc.text):
@@ -209,26 +205,55 @@ def main():
             n_words = len(sentence.split())
             if len(roots) < 2 or n_words < MIN_SENTENCE_WORDS or n_words > MAX_SENTENCE_WORDS or BIBLIOGRAPHY_RE.search(sentence):
                 continue
-            ents_by_root = {i: surface for i, surface in roots.items() if surface in lexicon}
-            names = sorted(set(ents_by_root.values()))
-            if 2 <= len(names) <= MAX_ENTITIES_FOR_COOCCURRENCE:
-                for i, a in enumerate(names):
-                    for b in names[i + 1 :]:
-                        pair_sentences[(a, b)] += 1
-                        pair_docs.setdefault((a, b), Counter())[meta["doc_id"]] += 1
-            found = list(verb_facts(sent, ents_by_root)) + list(appositive_facts(sentence, people_re, other_re))
-            facts, seen = [], set()
-            for subj, rel, obj, rule in found:
-                if subj in lexicon and obj in lexicon and (subj, rel, obj) not in seen:
-                    seen.add((subj, rel, obj))
-                    facts.append(
-                        {
-                            "subject": subj, "subject_type": lexicon[subj], "relation": rel,
-                            "object": obj, "object_type": lexicon[obj], "rule": rule,
-                        }
-                    )
-            if facts:
-                records.append((meta, sentence, facts))
+            yield meta, sent, sentence, {i: surface for i, surface in roots.items() if surface in lexicon}
+
+
+def grammar_facts(sent, sentence: str, ents_by_root: dict, lexicon: dict, people_re, other_re) -> list:
+    """Verb-frame and appositive facts in one sentence, de-duplicated, with entity types."""
+    found = list(verb_facts(sent, ents_by_root)) + list(appositive_facts(sentence, people_re, other_re))
+    facts, seen = [], set()
+    for subj, rel, obj, rule in found:
+        if subj in lexicon and obj in lexicon and (subj, rel, obj) not in seen:
+            seen.add((subj, rel, obj))
+            facts.append(
+                {
+                    "subject": subj, "subject_type": lexicon[subj], "relation": rel,
+                    "object": obj, "object_type": lexicon[obj], "rule": rule,
+                }
+            )
+    return facts
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--chunks", type=Path, default=CHUNKS_JSONL)
+    parser.add_argument("--types", type=Path, default=ENTITY_TYPES_JSON)
+    parser.add_argument("--out", type=Path, default=EXTRACTED_JSONL)
+    args = parser.parse_args()
+
+    from entailment import _softmax, get_label_map, get_model
+    from trust_score import fact_to_sentence
+
+    lexicon = load_lexicon(args.types)
+    people_re = lexicon_regex([n for n, t in lexicon.items() if t == "Person"])
+    other_re = lexicon_regex([n for n, t in lexicon.items() if t != "Person"])
+
+    docs = reconstruct_documents(args.chunks)
+    log.info(f"{len(lexicon)} typed entities; parsing {len(docs)} documents ...")
+
+    records = []  # [(meta, sentence, facts)]
+    pair_sentences = Counter()  # (a, b) -> number of sentences mentioning both
+    pair_docs = {}  # (a, b) -> Counter of doc ids
+    for meta, sent, sentence, ents_by_root in entity_sentences(docs, lexicon):
+        names = sorted(set(ents_by_root.values()))
+        if 2 <= len(names) <= MAX_ENTITIES_FOR_COOCCURRENCE:
+            for i, a in enumerate(names):
+                for b in names[i + 1 :]:
+                    pair_sentences[(a, b)] += 1
+                    pair_docs.setdefault((a, b), Counter())[meta["doc_id"]] += 1
+        facts = grammar_facts(sent, sentence, ents_by_root, lexicon, people_re, other_re)
+        if facts:
+            records.append((meta, sentence, facts))
 
     n_facts = sum(len(f) for _, _, f in records)
     log.info(f"{n_facts} candidate facts from {len(records)} sentences; checking each against its sentence with the NLI model ...")

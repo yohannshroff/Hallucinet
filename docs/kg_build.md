@@ -22,6 +22,8 @@ Run in order; each stage caches its output so nothing slow is repeated.
 | 1. Find names | `kg/find_candidates.py` | spaCy | ~40 s | `mentions.json`, `candidates.jsonl` (gitignored: quote book sentences) |
 | 2. Type and clean names | `kg/type_entities.py` | local LLM (`gemma3:4b`) | ~20 min | `entity_types.json` |
 | 3. Extract facts | `kg/extract_facts.py` | spaCy parse + NLI model | ~45 s | `extracted.jsonl`, `cooccurrence.jsonl` |
+| 3b. Draft facts for review | `kg/draft_facts.py` | local LLM + grammar rules + NLI model | ~1-2 h (cached, resumable) | `review_facts.csv`, `draft_cache.json` (gitignored: quote book sentences) |
+| 3c. Review by hand, then export | you, then `kg/draft_facts.py export` | none | ~1-2 h review | `data/kg_seed/verified_facts.csv` |
 | 4. Consolidate | `kg/consolidate_triples.py` | none | seconds | `data/kg_seed/entities.csv`, `relationships.csv` |
 | 5. Load | `kg/load_graph.py --reset` | Neo4j | seconds | the graph database |
 
@@ -49,11 +51,36 @@ What each stage does:
    scored by the project's NLI model against its source sentence; only facts
    with entailment >= 0.5 are kept. The same pass counts which entity pairs
    are mentioned in the same sentence.
+3b. **Draft facts for review.** For every entity pair co-mentioned in 2+
+   sentences, up to 3 of those sentences go to the local LLM, which picks one
+   controlled relation (or "none") per pair, constrained by a JSON schema to
+   the sentence's names and the relation list. The grammar facts of stage 3
+   are added, type-impossible facts dropped, and each fact is scored by the
+   NLI model against its sentence. One row per fact goes to
+   `review_facts.csv`, best-supported first; re-running keeps decisions
+   already made.
+3c. **Review.** Fill in `decision` for each row: `accept`, `reject`, or `fix`
+   (with `fixed_subject` / `fixed_relation` / `fixed_object`). Judge each fact
+   by its sentence alone. `kg/draft_facts.py export` writes
+   `verified_facts.csv` (names, relation, page, decision; no book text, so it
+   is committed). Rejections are kept too, so a wrong grammar fact (e.g. the
+   commissioner "Campbell" merged into Colin Campbell) stays out of the graph.
 4. **Consolidate.** Merges name variants (surname -> the one matching full
    name when that name is common enough; spelling variants of people and
    places), drops facts whose entity types make the relation impossible (the
    table in the script), and keeps `associated_with` edges for pairs seen in 2+
-   sentences, at most the 6 strongest per entity.
+   sentences, at most the 6 strongest per entity. Accepted facts from
+   `verified_facts.csv` are kept as certain; rejected ones are removed from
+   every other source. "Rani" is renamed "Rani of Jhansi" with the aliases
+   questions use (Lakshmibai, ...).
+
+### Keeping the evaluation fair
+
+The typed facts are drafted pair by pair from the whole book, never from the
+evaluation questions (`data/eval/qa_test_set.csv`) or their gold answers.
+While reviewing, do not add or accept a fact because a test question needs
+it; accept it only if its sentence states it. Otherwise the graph would be
+fitted to the test set and the graph/hybrid scores would be inflated.
 
 ## What did not work (and why the graph looks the way it does)
 
@@ -85,6 +112,9 @@ weaker evidence than a typed fact. Consequences for the evaluation:
 python kg/find_candidates.py        # ~40 s
 python kg/type_entities.py          # ~20 min, needs Ollama; resumable
 python kg/extract_facts.py          # ~45 s
+python kg/draft_facts.py            # ~1-2 h, needs Ollama; resumable (--limit 20 for a pilot)
+#   ... fill in the decision column of data/kg_build/review_facts.csv ...
+python kg/draft_facts.py export     # -> data/kg_seed/verified_facts.csv
 python kg/consolidate_triples.py --min_cooc 2
 python kg/load_graph.py --reset     # wipes and reloads Neo4j
 ```

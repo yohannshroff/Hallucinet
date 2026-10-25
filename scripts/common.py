@@ -5,6 +5,7 @@ directory (they all resolve paths relative to the repo root, not to cwd).
 
 import logging
 import os
+import re
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -30,6 +31,9 @@ CANDIDATES_JSONL = KG_BUILD_DIR / "candidates.jsonl"  # rule-based facts (contai
 ENTITY_TYPES_JSON = KG_BUILD_DIR / "entity_types.json"  # LLM-assigned type per name (names only)
 COOCCURRENCE_JSONL = KG_BUILD_DIR / "cooccurrence.jsonl"  # entity pairs co-mentioned in sentences: names, counts, page; no book text
 EXTRACTED_JSONL = KG_BUILD_DIR / "extracted.jsonl"  # grammar-extracted facts + NLI score: names, relations, source page; no book text
+DRAFT_CACHE_JSON = KG_BUILD_DIR / "draft_cache.json"  # LLM fact drafts per sentence (quote evidence from the book -> gitignored)
+REVIEW_FACTS_CSV = KG_BUILD_DIR / "review_facts.csv"  # drafted facts for hand review, with their book sentence (gitignored)
+VERIFIED_FACTS_CSV = KG_SEED_DIR / "verified_facts.csv"  # hand-reviewed facts: names, relation, page, decision; no book text
 
 PROCESSED_DIR = DATA_DIR / "processed"
 CHUNKS_JSONL = PROCESSED_DIR / "chunks.jsonl"
@@ -40,6 +44,21 @@ FAISS_INDEX_FILE = FAISS_INDEX_DIR / "index.faiss"
 ID_MAP_JSON = FAISS_INDEX_DIR / "id_map.json"
 
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
+
+# Chunking (scripts/clean_and_chunk.py; kg/book_text.py stitches chunks back together with the
+# same overlap). 60-word windows rank the right passage first more often than 180-word ones
+# (docs/eval_chunk_sensitivity.md: hit@1 0.50 vs 0.39) and keep the LLM prompt short.
+CHUNK_SIZE_WORDS = 60
+CHUNK_OVERLAP_WORDS = 15
+
+# PDF pages of each book that hold the narrative, keyed by the book title (its PDF file name).
+# Outside them are the jacket, title and contents pages and the glossary, chronological
+# table, notes, bibliography and index: noise for retrieval (the model cited the
+# chronology's dates as source numbers). No test-set gold page lies outside (57-420).
+# A book without an entry is searched in full.
+NARRATIVE_PAGES = {
+    "The Great Mutiny - India 1857 by Christopher Hibbert": (13, 420),
+}
 
 # Neo4j connection config (Part 3+), read from .env -- see docs/manual_setup_neo4j.md
 NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
@@ -68,7 +87,7 @@ RELATION_VOCAB = {
     "led", "ruled", "fought_against", "allied_with", "killed", "executed",
     "captured", "besieged", "located_in", "part_of", "caused_by", "triggered",
     "succeeded_by", "appointed_by", "commanded", "declared_emperor_by",
-    "died_during", "member_of", "disbanded_by",
+    "died_during", "member_of", "disbanded_by", "administered",
     "associated_with",  # co-mentioned in the same sentences (see kg/extract_facts.py)
 }
 
@@ -90,6 +109,22 @@ def build_alias_index(entities_df) -> dict:
                 if alias:
                     index[alias.lower()] = row["entity_id"]
     return index
+
+
+def bundle_passages(bundle: dict) -> list:
+    """The passages the LLM sees for a retrieval bundle, in rank order:
+    `passages` (vector and/or graph-guided, see retrieval/hybrid_retrieve.py),
+    falling back to `vector_chunks` for bundles cached before that field existed."""
+    return bundle.get("passages", bundle.get("vector_chunks", []))
+
+
+def is_narrative(title: str) -> bool:
+    """Whether a chunk titled 'Book (pp. a-b)' lies within its book's NARRATIVE_PAGES."""
+    m = re.match(r"^(.*) \(pp\. (\d+)-(\d+)\)$", title)
+    if not m or m.group(1) not in NARRATIVE_PAGES:
+        return True
+    first, last = NARRATIVE_PAGES[m.group(1)]
+    return int(m.group(3)) >= first and int(m.group(2)) <= last
 
 
 def configure_runtime() -> None:

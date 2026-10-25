@@ -33,7 +33,7 @@ SHEETS = {"a": OUT_DIR / "sheet_annotator_1.csv", "b": OUT_DIR / "sheet_annotato
 
 
 def export(n: int, seed: int):
-    runs = pd.DataFrame([json.loads(l) for l in RUNS.read_text().splitlines()])
+    runs = pd.DataFrame([json.loads(l) for l in RUNS.read_text(encoding="utf-8").splitlines()])
     qa = pd.read_csv(QA, keep_default_na=False).set_index("id")
     runs = runs[runs["run"] == 1]
     # Stratified: equal share per system so every system's scorer is checked.

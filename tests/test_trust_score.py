@@ -76,5 +76,18 @@ def test_evidence_texts_from_bundle_splits_chunks_into_sentences():
         "vector_chunks": [{"text": "The act ended Company rule. The British Crown took over administration."}],
     }
     texts = evidence_texts_from_bundle(bundle)
-    assert len(texts) == 2
-    assert "ended Company rule" in texts[0]
+    # each sentence, plus each sentence with the one before it (so "She ..." keeps who "she" is)
+    assert texts == [
+        "The act ended Company rule.",
+        "The British Crown took over administration.",
+        "The act ended Company rule. The British Crown took over administration.",
+    ]
+
+
+def test_meta_sentences_about_the_context_are_not_scored():
+    pytest.importorskip("sentence_transformers")
+    from trust_score import compute_trust_score
+
+    bundle = {"graph_facts": [], "vector_chunks": [{"text": "Hodson captured the King of Delhi at Humayun's tomb."}]}
+    result = compute_trust_score("The provided context contains several passages about Delhi. Hodson captured the King of Delhi.", bundle)
+    assert [c["claim"] for c in result["claims"]] == ["Hodson captured the King of Delhi."]

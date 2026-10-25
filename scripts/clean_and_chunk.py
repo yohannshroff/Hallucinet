@@ -1,15 +1,16 @@
 """Clean the fetched Wikipedia text and split it into overlapping word-window
 chunks for embedding.
 
-Chunking: 180-word windows with 40-word overlap (stride 140), sized to stay
-comfortably under MiniLM's ~256-subtoken limit after word->subtoken
-expansion.
+Chunking: 60-word windows with 15-word overlap (stride 45) by default
+(CHUNK_SIZE_WORDS / CHUNK_OVERLAP_WORDS in scripts/common.py). Smaller
+windows rank the right passage first more often than the earlier 180/40
+(docs/eval_chunk_sensitivity.md) and keep the LLM prompt short.
 
 Usage:
     python scripts/clean_and_chunk.py
     python scripts/clean_and_chunk.py --input_dir data/raw/text \
         --manifest data/raw/sources_manifest.csv \
-        --output data/processed/chunks.jsonl --chunk_size 180 --overlap 40
+        --output data/processed/chunks.jsonl --chunk_size 60 --overlap 15
 """
 
 import argparse
@@ -19,7 +20,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from common import CHUNKS_JSONL, RAW_TEXT_DIR, SOURCES_MANIFEST_CSV, get_logger
+from common import CHUNK_OVERLAP_WORDS, CHUNK_SIZE_WORDS, CHUNKS_JSONL, RAW_TEXT_DIR, SOURCES_MANIFEST_CSV, get_logger
 
 log = get_logger("clean_and_chunk")
 
@@ -46,7 +47,7 @@ def clean_text(raw: str) -> str:
     return raw.strip()
 
 
-def chunk_words(words: list, chunk_size: int = 180, overlap: int = 40) -> list:
+def chunk_words(words: list, chunk_size: int = CHUNK_SIZE_WORDS, overlap: int = CHUNK_OVERLAP_WORDS) -> list:
     """Split a word list into overlapping windows. Returns a list of word lists."""
     if not words:
         return []
@@ -93,8 +94,8 @@ def main():
     parser.add_argument("--input_dir", type=Path, default=RAW_TEXT_DIR)
     parser.add_argument("--manifest", type=Path, default=SOURCES_MANIFEST_CSV)
     parser.add_argument("--output", type=Path, default=CHUNKS_JSONL)
-    parser.add_argument("--chunk_size", type=int, default=180)
-    parser.add_argument("--overlap", type=int, default=40)
+    parser.add_argument("--chunk_size", type=int, default=CHUNK_SIZE_WORDS)
+    parser.add_argument("--overlap", type=int, default=CHUNK_OVERLAP_WORDS, help="Must match kg/book_text.py, which uses the same constant")
     args = parser.parse_args()
 
     manifest = pd.read_csv(args.manifest)

@@ -98,7 +98,7 @@ def main():
         lines.append(f"| {size} ({meta.loc[size, 'overlap']}) | {meta.loc[size, 'n_chunks']} | {k} | {r.hit:.3f} | {r.recall:.3f} | {r.mrr:.3f} | {r.precision:.3f} |")
     md = "\n".join(lines)
     OUT_MD.write_text(f"# Chunk-size sensitivity (vector retrieval, {len(qa)} answerable questions)\n\n"
-                      f"Embedding model reads at most {model.max_seq_length} word pieces per chunk.\n\n{md}\n")
+                      f"Embedding model reads at most {model.max_seq_length} word pieces per chunk.\n\n{md}\n", encoding="utf-8")
     print(md)
 
 

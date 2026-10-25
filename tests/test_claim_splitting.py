@@ -12,7 +12,27 @@ from claim_splitting import split_into_claims, strip_citations  # noqa: E402
 
 
 def test_strip_citations_removes_bracketed_refs():
-    assert strip_citations("Rani Lakshmibai ruled Jhansi [1, 2].") == "Rani Lakshmibai ruled Jhansi ."
+    assert strip_citations("Rani Lakshmibai ruled Jhansi [1, 2].") == "Rani Lakshmibai ruled Jhansi."
+
+
+@pytest.mark.parametrize("raw, clean", [
+    # the citation styles the model actually produced (from UI screenshots)
+    ("Colin Campbell was an ally of James Outram (data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393).",
+     "Colin Campbell was an ally of James Outram."),
+    ("Hugh Rose led the resistance. [data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=409], [data/raw/x.pdf#page=5]",
+     "Hugh Rose led the resistance."),
+    ("*   **Havelock's force leaves Allahabad** (Source [The Great Mutiny - India 1857 by Christopher Hibbert (pp. 197-200)], [12]).",
+     "Havelock's force leaves Allahabad."),
+    ("Wickins described the socks (Source , pp. 213-216).", "Wickins described the socks."),
+    ("She was shot in the back. Source: , , ,", "She was shot in the back."),
+])
+def test_strip_citations_removes_paths_sources_pages_and_markdown(raw, clean):
+    assert strip_citations(raw) == clean
+
+
+def test_split_into_claims_drops_lead_ins_and_treats_bullets_as_sentences():
+    answer = "Here's what it reveals:\n* Havelock left Allahabad for Cawnpore on 7 July\n* Neill stayed behind at Allahabad (Source [2])."
+    assert split_into_claims(answer) == ["Havelock left Allahabad for Cawnpore on 7 July.", "Neill stayed behind at Allahabad."]
 
 
 def test_strip_citations_removes_url_brackets():

@@ -55,12 +55,15 @@ def warm_up() -> None:
     try:
         from entailment import get_model as get_nli
         from entity_extraction import get_nlp
+        from rerank import RERANK, get_reranker
         from vector_search import get_index, get_model as get_embedder
 
         get_entities_df()
         get_nlp()
         get_embedder()
         get_nli()
+        if RERANK:
+            get_reranker()
         if FAISS_INDEX_FILE.exists():
             get_index(FAISS_INDEX_DIR)
         log.info(f"warm-up finished in {time.perf_counter() - started:.1f}s")

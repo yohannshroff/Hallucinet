@@ -32,7 +32,11 @@ ever mean adding new `period_tag` *values*, never new columns.
 `led`, `ruled`, `fought_against`, `allied_with`, `killed`, `executed`,
 `captured`, `besieged`, `located_in`, `part_of`, `caused_by`, `triggered`,
 `succeeded_by`, `appointed_by`, `commanded`, `declared_emperor_by`,
-`died_during`, `member_of`, `disbanded_by`, `associated_with`.
+`died_during`, `member_of`, `disbanded_by`, `administered`, `associated_with`.
+
+`administered` is for a civil official over the place or body they ran
+("Henry Lawrence, the Chief Commissioner of Oudh"); `ruled` is kept for
+sovereigns (kings, nawabs, ranis).
 
 `associated_with` is the one non-semantic relation: two entities that are
 repeatedly mentioned in the same sentences of the source text (the note on

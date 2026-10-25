@@ -1,279 +1,246 @@
 entity_id,name,entity_type,aliases,period_tag,description
-E001,India,Location,,1857_revolt,Location named 217 times in the source book; appears in 26 graph fact(s).
-E002,Delhi,Location,,1857_revolt,Location named 191 times in the source book; appears in 34 graph fact(s).
-E003,Lucknow,Location,,1857_revolt,Location named 118 times in the source book; appears in 37 graph fact(s).
-E004,Europeans,Location,,1857_revolt,Location named 90 times in the source book; appears in 1 graph fact(s).
-E005,Havelock,Person,,1857_revolt,Person named 84 times in the source book; appears in 18 graph fact(s).
-E006,Archdale Wilson,Person,Brigadier Wilson;Wilson,1857_revolt,Person named 72 times in the source book; appears in 13 graph fact(s).
-E007,Nana Sahib,Person,,1857_revolt,Person named 69 times in the source book; appears in 15 graph fact(s).
+E001,India,Location,,1857_revolt,Location named 217 times in the source book; appears in 37 graph fact(s).
+E002,Delhi,Location,,1857_revolt,Location named 191 times in the source book; appears in 37 graph fact(s).
+E003,Lucknow,Location,,1857_revolt,Location named 118 times in the source book; appears in 40 graph fact(s).
+E004,Henry Havelock,Person,General Havelock;Havelock,1857_revolt,Person named 90 times in the source book; appears in 24 graph fact(s).
+E005,James Outram,Person,Outram,1857_revolt,Person named 78 times in the source book; appears in 16 graph fact(s).
+E006,Archdale Wilson,Person,Brigadier Wilson;Wilson,1857_revolt,Person named 72 times in the source book; appears in 12 graph fact(s).
+E007,Nana Sahib,Person,,1857_revolt,Person named 69 times in the source book; appears in 14 graph fact(s).
 E008,Cawnpore,Location,,1857_revolt,Location named 66 times in the source book; appears in 28 graph fact(s).
-E009,Outram,Person,,1857_revolt,Person named 65 times in the source book; appears in 16 graph fact(s).
-E010,Colin Campbell,Person,Campbell,1857_revolt,Person named 64 times in the source book; appears in 21 graph fact(s).
-E011,Agra,Location,,1857_revolt,Location named 61 times in the source book; appears in 7 graph fact(s).
-E012,Lawrence,Person,,1857_revolt,Person named 58 times in the source book; appears in 9 graph fact(s).
-E013,Meerut,Location,,1857_revolt,Location named 57 times in the source book; appears in 12 graph fact(s).
-E014,Thornhill,Person,,1857_revolt,Person named 54 times in the source book; appears in 4 graph fact(s).
-E015,Sikhs,Organization,,1857_revolt,Organization named 50 times in the source book; appears in 4 graph fact(s).
-E016,Neill,Person,,1857_revolt,Person named 46 times in the source book; appears in 11 graph fact(s).
-E017,Canning,Person,,1857_revolt,Person named 39 times in the source book; appears in 7 graph fact(s).
-E018,Oudh,Location,,1857_revolt,Location named 39 times in the source book; appears in 15 graph fact(s).
-E019,England,Location,,1857_revolt,Location named 37 times in the source book; appears in 3 graph fact(s).
-E020,Hodson,Person,,1857_revolt,Person named 36 times in the source book; appears in 4 graph fact(s).
+E009,Colin Campbell,Person,Campbell,1857_revolt,Person named 64 times in the source book; appears in 25 graph fact(s).
+E010,Agra,Location,,1857_revolt,Location named 61 times in the source book; appears in 10 graph fact(s).
+E011,Lawrence,Person,,1857_revolt,Person named 58 times in the source book; appears in 11 graph fact(s).
+E012,Meerut,Location,,1857_revolt,Location named 57 times in the source book; appears in 13 graph fact(s).
+E013,Thornhill,Person,,1857_revolt,Person named 54 times in the source book; appears in 5 graph fact(s).
+E014,Sikhs,Organization,,1857_revolt,Organization named 50 times in the source book; appears in 4 graph fact(s).
+E015,Neill,Person,,1857_revolt,Person named 46 times in the source book; appears in 10 graph fact(s).
+E016,William Hodson,Person,Hodson,1857_revolt,Person named 44 times in the source book; appears in 7 graph fact(s).
+E017,Oudh,Location,,1857_revolt,Location named 39 times in the source book; appears in 19 graph fact(s).
+E018,Canning,Person,,1857_revolt,Person named 39 times in the source book; appears in 8 graph fact(s).
+E019,John Nicholson,Person,Nicholson,1857_revolt,Person named 39 times in the source book; appears in 7 graph fact(s).
+E020,England,Location,,1857_revolt,Location named 37 times in the source book; appears in 6 graph fact(s).
 E021,Frederick Roberts,Person,Robert;Roberts,1857_revolt,Person named 34 times in the source book; appears in 6 graph fact(s).
-E022,Indian Mutiny,Event,Indian Rebellion;Mutiny;Sepoy Revolt,1857_revolt,Event named 33 times in the source book; appears in 6 graph fact(s).
-E023,Nicholson,Person,,1857_revolt,Person named 32 times in the source book; appears in 4 graph fact(s).
-E024,East India Company,Organization,Company,1857_revolt,Organization named 32 times in the source book; appears in 9 graph fact(s).
-E025,Jhansi,Location,,1857_revolt,Location named 31 times in the source book; appears in 7 graph fact(s).
-E026,Allahabad,Location,,1857_revolt,Location named 30 times in the source book; appears in 8 graph fact(s).
-E027,Tatya Tope,Person,,1857_revolt,Person named 30 times in the source book; appears in 11 graph fact(s).
-E028,Punjab,Location,,1857_revolt,Location named 29 times in the source book; appears in 12 graph fact(s).
-E029,Tytler,Person,,1857_revolt,Person named 28 times in the source book; appears in 7 graph fact(s).
-E030,Inglis,Person,,1857_revolt,Person named 26 times in the source book; appears in 6 graph fact(s).
-E031,Muttra,Location,,1857_revolt,Location named 25 times in the source book; appears in 4 graph fact(s).
-E032,Mrs Inglis,Person,,1857_revolt,Person named 25 times in the source book; appears in 2 graph fact(s).
-E033,Wheeler,Person,Wheler,1857_revolt,Person named 24 times in the source book; appears in 4 graph fact(s).
-E034,Baird Smith,Person,Smith,1857_revolt,Person named 24 times in the source book; appears in 6 graph fact(s).
-E035,Malleson,Person,,1857_revolt,Person named 23 times in the source book; appears in 4 graph fact(s).
-E036,Siege of Lucknow,Event,,1857_revolt,Event named 23 times in the source book; appears in 5 graph fact(s).
-E037,Martin Gubbins,Person,Gubbins,1857_revolt,Person named 23 times in the source book; appears in 3 graph fact(s).
+E022,Indian Mutiny,Event,Indian Rebellion;Mutiny;Sepoy Revolt,1857_revolt,Event named 33 times in the source book; appears in 9 graph fact(s).
+E023,East India Company,Organization,Company,1857_revolt,Organization named 32 times in the source book; appears in 11 graph fact(s).
+E024,Jhansi,Location,,1857_revolt,Location named 31 times in the source book; appears in 6 graph fact(s).
+E025,Allahabad,Location,,1857_revolt,Location named 30 times in the source book; appears in 7 graph fact(s).
+E026,Tatya Tope,Person,,1857_revolt,Person named 30 times in the source book; appears in 12 graph fact(s).
+E027,Punjab,Location,,1857_revolt,Location named 29 times in the source book; appears in 18 graph fact(s).
+E028,Tytler,Person,,1857_revolt,Person named 28 times in the source book; appears in 7 graph fact(s).
+E029,Inglis,Person,,1857_revolt,Person named 26 times in the source book; appears in 6 graph fact(s).
+E030,Mrs Inglis,Person,,1857_revolt,Person named 25 times in the source book; appears in 2 graph fact(s).
+E031,Muttra,Location,,1857_revolt,Location named 25 times in the source book; appears in 6 graph fact(s).
+E032,Wheeler,Person,Wheler,1857_revolt,Person named 24 times in the source book; appears in 4 graph fact(s).
+E033,Baird Smith,Person,Smith,1857_revolt,Person named 24 times in the source book; appears in 6 graph fact(s).
+E034,Siege of Lucknow,Event,,1857_revolt,Event named 23 times in the source book; appears in 6 graph fact(s).
+E035,Martin Gubbins,Person,Gubbins,1857_revolt,Person named 23 times in the source book; appears in 3 graph fact(s).
+E036,Malleson,Person,,1857_revolt,Person named 23 times in the source book; appears in 3 graph fact(s).
+E037,Madeline Jackson,Person,Jackson;Madeline,1857_revolt,Person named 20 times in the source book; appears in 5 graph fact(s).
 E038,William Howard Russell,Person,Russell,1857_revolt,Person named 20 times in the source book; appears in 1 graph fact(s).
 E039,Garnet Wolseley,Person,Wolseley,1857_revolt,Person named 19 times in the source book; appears in 4 graph fact(s).
 E040,Vibart,Person,,1857_revolt,Person named 19 times in the source book; appears in 2 graph fact(s).
-E041,Calcutta,Location,,1857_revolt,Location named 18 times in the source book; appears in 20 graph fact(s).
-E042,Hugh Rose,Person,Rose,1857_revolt,Person named 18 times in the source book; appears in 6 graph fact(s).
-E043,Kashmir Gate,Location,,1857_revolt,Location named 18 times in the source book; appears in 1 graph fact(s).
-E044,Gurkhas,Organization,,1857_revolt,Organization named 18 times in the source book; appears in 1 graph fact(s).
-E045,Mrs Case,Person,,1857_revolt,Person named 17 times in the source book; appears in 2 graph fact(s).
-E046,Henry Lawrence,Person,,1857_revolt,Person named 16 times in the source book; appears in 4 graph fact(s).
-E047,British Government,Organization,,1857_revolt,Organization named 16 times in the source book; appears in 3 graph fact(s).
-E048,Bengal,Location,,1857_revolt,Location named 15 times in the source book; appears in 6 graph fact(s).
-E049,Lady Canning,Person,,1857_revolt,Person named 15 times in the source book; appears in 1 graph fact(s).
-E050,Dalhousie,Person,,1857_revolt,Person named 15 times in the source book; appears in 4 graph fact(s).
-E051,Arrah,Location,,1857_revolt,Location named 15 times in the source book; appears in 5 graph fact(s).
-E052,Hugh Gough,Person,Gough,1857_revolt,Person named 15 times in the source book; appears in 1 graph fact(s).
-E053,Siege of Delhi,Event,,1857_revolt,Event named 15 times in the source book; appears in 1 graph fact(s).
+E041,Gurkhas,Organization,,1857_revolt,Organization named 18 times in the source book; appears in 1 graph fact(s).
+E042,Hugh Rose,Person,Rose,1857_revolt,Person named 18 times in the source book; appears in 7 graph fact(s).
+E043,Calcutta,Location,,1857_revolt,Location named 18 times in the source book; appears in 20 graph fact(s).
+E044,Harry Havelock,Person,Harry,1857_revolt,Person named 18 times in the source book; appears in 4 graph fact(s).
+E045,Kashmir Gate,Location,,1857_revolt,Location named 18 times in the source book; appears in 1 graph fact(s).
+E046,Rani of Jhansi,Person,Lakshmi Bai;Lakshmibai;Ranee;Rani;Rani Lakshmibai,1857_revolt,Person named 18 times in the source book; appears in 3 graph fact(s).
+E047,Hearsey,Person,General Hearsey,1857_revolt,Person named 17 times in the source book; appears in 3 graph fact(s).
+E048,Mrs Case,Person,,1857_revolt,Person named 17 times in the source book; appears in 2 graph fact(s).
+E049,Henry Lawrence,Person,,1857_revolt,Person named 16 times in the source book; appears in 5 graph fact(s).
+E050,British Government,Organization,,1857_revolt,Organization named 16 times in the source book; appears in 5 graph fact(s).
+E051,Siege of Delhi,Event,,1857_revolt,Event named 15 times in the source book; appears in 1 graph fact(s).
+E052,Dalhousie,Person,,1857_revolt,Person named 15 times in the source book; appears in 4 graph fact(s).
+E053,Hugh Gough,Person,Gough,1857_revolt,Person named 15 times in the source book; appears in 1 graph fact(s).
 E054,Charles Ewart,Person,Ewart,1857_revolt,Person named 15 times in the source book; appears in 2 graph fact(s).
-E055,Hewitt,Person,,1857_revolt,Person named 15 times in the source book; appears in 3 graph fact(s).
-E056,Mackenzie,Person,,1857_revolt,Person named 14 times in the source book; appears in 1 graph fact(s).
-E057,Gwalior,Location,,1857_revolt,Location named 14 times in the source book; appears in 4 graph fact(s).
-E058,Craigie,Location,,1857_revolt,Location named 14 times in the source book; appears in 1 graph fact(s).
-E059,Rani,Person,,1857_revolt,Person named 14 times in the source book; appears in 3 graph fact(s).
-E060,Reid,Person,,1857_revolt,Person named 14 times in the source book; appears in 2 graph fact(s).
-E061,Colvin,Organization,,1857_revolt,Organization named 14 times in the source book; appears in 3 graph fact(s).
-E062,Edwards,Person,Edward,1857_revolt,Person named 13 times in the source book; appears in 1 graph fact(s).
-E063,Fatehgarh,Location,,1857_revolt,Location named 13 times in the source book; appears in 3 graph fact(s).
-E064,Quevillart,Person,,1857_revolt,Person named 13 times in the source book; appears in 1 graph fact(s).
-E065,Kurnaul,Location,,1857_revolt,Location named 13 times in the source book; appears in 3 graph fact(s).
-E066,Ambala,Location,,1857_revolt,Location named 13 times in the source book; appears in 3 graph fact(s).
-E067,Ganges,Location,,1857_revolt,Location named 13 times in the source book; appears in 5 graph fact(s).
-E068,Maude,Person,,1857_revolt,Person named 13 times in the source book; appears in 4 graph fact(s).
-E069,James Outram,Person,,1857_revolt,Person named 13 times in the source book; appears in 2 graph fact(s).
-E070,Alambagh,Location,,1857_revolt,Location named 13 times in the source book; appears in 5 graph fact(s).
-E071,Madeline Jackson,Person,Jackson,1857_revolt,Person named 13 times in the source book; appears in 4 graph fact(s).
+E055,Lady Canning,Person,,1857_revolt,Person named 15 times in the source book; appears in 1 graph fact(s).
+E056,Hewitt,Person,,1857_revolt,Person named 15 times in the source book; appears in 4 graph fact(s).
+E057,Arrah,Location,,1857_revolt,Location named 15 times in the source book; appears in 5 graph fact(s).
+E058,Bengal,Location,,1857_revolt,Location named 15 times in the source book; appears in 7 graph fact(s).
+E059,Gwalior,Location,,1857_revolt,Location named 14 times in the source book; appears in 5 graph fact(s).
+E060,Mackenzie,Person,,1857_revolt,Person named 14 times in the source book; appears in 1 graph fact(s).
+E061,Colvin,Person,,1857_revolt,Person named 14 times in the source book; appears in 2 graph fact(s).
+E062,Reid,Person,,1857_revolt,Person named 14 times in the source book; appears in 2 graph fact(s).
+E063,Craigie,Person,,1857_revolt,Person named 14 times in the source book; appears in 1 graph fact(s).
+E064,Ganges,Location,,1857_revolt,Location named 13 times in the source book; appears in 5 graph fact(s).
+E065,Maude,Person,,1857_revolt,Person named 13 times in the source book; appears in 4 graph fact(s).
+E066,Fatehgarh,Location,,1857_revolt,Location named 13 times in the source book; appears in 4 graph fact(s).
+E067,Kalpi,Location,,1857_revolt,Location named 13 times in the source book; appears in 3 graph fact(s).
+E068,Bahadur Shah,Person,King of Delhi,1857_revolt,Person named 13 times in the source book; appears in 7 graph fact(s).
+E069,Ambala,Location,,1857_revolt,Location named 13 times in the source book; appears in 4 graph fact(s).
+E070,Edwards,Person,Edward,1857_revolt,Person named 13 times in the source book; appears in 1 graph fact(s).
+E071,Quevillart,Person,,1857_revolt,Person named 13 times in the source book; appears in 1 graph fact(s).
 E072,Thomas Metcalfe,Person,Metcalfe,1857_revolt,Person named 13 times in the source book; appears in 3 graph fact(s).
-E073,John Lawrence,Person,,1857_revolt,Person named 13 times in the source book; appears in 6 graph fact(s).
-E074,Hearsey,Person,,1857_revolt,Person named 13 times in the source book; appears in 2 graph fact(s).
-E075,Kalpi,Location,,1857_revolt,Location named 13 times in the source book; appears in 3 graph fact(s).
-E076,China,Location,,1857_revolt,Location named 13 times in the source book; appears in 1 graph fact(s).
+E073,Alambagh,Location,,1857_revolt,Location named 13 times in the source book; appears in 5 graph fact(s).
+E074,Kurnaul,Location,,1857_revolt,Location named 13 times in the source book; appears in 3 graph fact(s).
+E075,John Lawrence,Person,,1857_revolt,Person named 13 times in the source book; appears in 9 graph fact(s).
+E076,Dilkusha,Location,,1857_revolt,Location named 12 times in the source book; appears in 3 graph fact(s).
 E077,Anson,Person,,1857_revolt,Person named 12 times in the source book; appears in 2 graph fact(s).
-E078,Dragoon Guards,Organization,,1857_revolt,Organization named 12 times in the source book; appears in 3 graph fact(s).
+E078,Main Guard,Location,,1857_revolt,Location named 12 times in the source book; appears in 1 graph fact(s).
 E079,Kaiser Bagh,Location,,1857_revolt,Location named 12 times in the source book; appears in 1 graph fact(s).
-E080,Dilkusha,Location,,1857_revolt,Location named 12 times in the source book; appears in 2 graph fact(s).
+E080,Dragoon Guards,Organization,,1857_revolt,Organization named 12 times in the source book; appears in 4 graph fact(s).
 E081,Kavanagh,Person,,1857_revolt,Person named 12 times in the source book; appears in 2 graph fact(s).
-E082,Enfield,Location,,1857_revolt,Location named 12 times in the source book; appears in 1 graph fact(s).
-E083,Kaye,Person,,1857_revolt,Person named 12 times in the source book; appears in 2 graph fact(s).
-E084,Main Guard,Location,,1857_revolt,Location named 12 times in the source book; appears in 1 graph fact(s).
+E082,Barnard,Person,General Barnard,1857_revolt,Person named 12 times in the source book; appears in 4 graph fact(s).
+E083,Kaye,Person,,1857_revolt,Person named 12 times in the source book; appears in 1 graph fact(s).
+E084,Bengal Army,Organization,,1857_revolt,Organization named 11 times in the source book; appears in 1 graph fact(s).
 E085,Gilbert Hadow,Person,Dr Hadow,1857_revolt,Person named 11 times in the source book; appears in 2 graph fact(s).
-E086,North-Western Provinces,Location,,1857_revolt,Location named 11 times in the source book; appears in 3 graph fact(s).
-E087,Mutiny at Meerut,Event,,1857_revolt,Event named 11 times in the source book; appears in 3 graph fact(s).
+E086,Barrackpore,Location,,1857_revolt,Location named 11 times in the source book; appears in 5 graph fact(s).
+E087,Mutiny at Meerut,Event,,1857_revolt,Event named 11 times in the source book; appears in 4 graph fact(s).
 E088,Fall of Lucknow,Event,,1857_revolt,Event named 11 times in the source book; appears in 5 graph fact(s).
-E089,Mowbray Thomson,Person,Thomson,1857_revolt,Person named 11 times in the source book; appears in 2 graph fact(s).
-E090,Barrackpore,Location,,1857_revolt,Location named 11 times in the source book; appears in 3 graph fact(s).
-E091,Mangal Pande,Person,,1857_revolt,Person named 11 times in the source book; appears in 2 graph fact(s).
-E092,Bithur,Location,,1857_revolt,Location named 11 times in the source book; appears in 4 graph fact(s).
-E093,Bengal Army,Organization,,1857_revolt,Organization named 11 times in the source book; appears in 1 graph fact(s).
-E094,Goojurs,Person,,1857_revolt,Person named 10 times in the source book; appears in 1 graph fact(s).
-E095,Harry,Person,,1857_revolt,Person named 10 times in the source book; appears in 2 graph fact(s).
-E096,Bareilly,Location,,1857_revolt,Location named 10 times in the source book; appears in 4 graph fact(s).
-E097,Fatehpur,Location,,1857_revolt,Location named 10 times in the source book; appears in 1 graph fact(s).
-E098,Machi Bhawan,Location,,1857_revolt,Location named 10 times in the source book; appears in 1 graph fact(s).
-E099,Relief of Lucknow,Event,,1857_revolt,Event named 10 times in the source book; appears in 1 graph fact(s).
-E100,Bombay,Location,,1857_revolt,Location named 10 times in the source book; appears in 2 graph fact(s).
-E101,Mrs Orr,Person,,1857_revolt,Person named 10 times in the source book; appears in 4 graph fact(s).
+E089,Gordon,Person,,1857_revolt,Person named 11 times in the source book; appears in 1 graph fact(s).
+E090,Mowbray Thomson,Person,Thomson,1857_revolt,Person named 11 times in the source book; appears in 2 graph fact(s).
+E091,Mangal Pande,Person,,1857_revolt,Person named 11 times in the source book; appears in 1 graph fact(s).
+E092,North-Western Provinces,Location,,1857_revolt,Location named 11 times in the source book; appears in 6 graph fact(s).
+E093,Bithur,Location,,1857_revolt,Location named 11 times in the source book; appears in 4 graph fact(s).
+E094,Bareilly,Location,,1857_revolt,Location named 10 times in the source book; appears in 5 graph fact(s).
+E095,Fatehpur,Location,,1857_revolt,Location named 10 times in the source book; appears in 1 graph fact(s).
+E096,Relief of Lucknow,Event,,1857_revolt,Event named 10 times in the source book; appears in 1 graph fact(s).
+E097,Bombay,Location,,1857_revolt,Location named 10 times in the source book; appears in 2 graph fact(s).
+E098,Mrs Orr,Person,,1857_revolt,Person named 10 times in the source book; appears in 4 graph fact(s).
+E099,Machi Bhawan,Location,,1857_revolt,Location named 10 times in the source book; appears in 1 graph fact(s).
+E100,Goojurs,Organization,,1857_revolt,Organization named 10 times in the source book; appears in 1 graph fact(s).
+E101,Lahore Gate,Location,,1857_revolt,Location named 9 times in the source book; appears in 1 graph fact(s).
 E102,Government House,Location,,1857_revolt,Location named 9 times in the source book; appears in 2 graph fact(s).
-E103,King of Delhi,Person,,1857_revolt,Person named 9 times in the source book; appears in 6 graph fact(s).
-E104,Sen,Person,,1857_revolt,Person named 9 times in the source book; appears in 3 graph fact(s).
-E105,Maharajah,Person,,1857_revolt,Person named 9 times in the source book; appears in 2 graph fact(s).
-E106,Lahore Gate,Location,,1857_revolt,Location named 9 times in the source book; appears in 1 graph fact(s).
-E107,Holkar,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
-E108,Herbert Edwardes,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
-E109,Harry Havelock,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
-E110,William Hodson,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
-E111,Khan Bahadur Khan,Person,,1857_revolt,Person named 8 times in the source book; appears in 3 graph fact(s).
-E112,Jumna,Location,,1857_revolt,Location named 8 times in the source book; appears in 2 graph fact(s).
-E113,Dinapore,Location,,1857_revolt,Location named 8 times in the source book; appears in 4 graph fact(s).
-E114,Bashiratganj,Location,,1857_revolt,Location named 8 times in the source book; appears in 1 graph fact(s).
-E115,Joyce,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
-E116,Carmichael-Smyth,Person,,1857_revolt,Person named 8 times in the source book; appears in 2 graph fact(s).
-E117,Robert Biddulph,Person,Biddulph,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E118,Knyvett,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E119,Jones,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E120,Moti Mahal,Location,,1857_revolt,Location named 7 times in the source book; appears in 2 graph fact(s).
-E121,Mirza Moghul,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E122,Bengal Fusiliers,Organization,,1857_revolt,Organization named 7 times in the source book; appears in 5 graph fact(s).
-E123,Shepherd,Person,,1857_revolt,Person named 7 times in the source book; appears in 2 graph fact(s).
-E124,Windham,Person,,1857_revolt,Person named 7 times in the source book; appears in 3 graph fact(s).
+E103,Herbert Edwardes,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
+E104,Holkar,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
+E105,Bashiratganj,Location,,1857_revolt,Location named 8 times in the source book; appears in 1 graph fact(s).
+E106,Dinapore,Location,,1857_revolt,Location named 8 times in the source book; appears in 4 graph fact(s).
+E107,Carmichael-Smyth,Person,,1857_revolt,Person named 8 times in the source book; appears in 2 graph fact(s).
+E108,Khan Bahadur Khan,Person,,1857_revolt,Person named 8 times in the source book; appears in 5 graph fact(s).
+E109,Jumna,Location,,1857_revolt,Location named 8 times in the source book; appears in 3 graph fact(s).
+E110,Joyce,Person,,1857_revolt,Person named 8 times in the source book; appears in 1 graph fact(s).
+E111,Bakht Khan,Person,,1857_revolt,Person named 7 times in the source book; appears in 2 graph fact(s).
+E112,Hamilton,Person,,1857_revolt,Person named 7 times in the source book; appears in 4 graph fact(s).
+E113,Jones,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
+E114,Kabul Gate,Location,,1857_revolt,Location named 7 times in the source book; appears in 1 graph fact(s).
+E115,Shepherd,Person,,1857_revolt,Person named 7 times in the source book; appears in 2 graph fact(s).
+E116,Bihar,Location,,1857_revolt,Location named 7 times in the source book; appears in 1 graph fact(s).
+E117,Mirza Moghul,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
+E118,Bengal Fusiliers,Organization,,1857_revolt,Organization named 7 times in the source book; appears in 5 graph fact(s).
+E119,Knyvett,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
+E120,Windham,Person,,1857_revolt,Person named 7 times in the source book; appears in 3 graph fact(s).
+E121,Gambier,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
+E122,Robert Biddulph,Person,Biddulph,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
+E123,Moti Mahal,Location,,1857_revolt,Location named 7 times in the source book; appears in 2 graph fact(s).
+E124,Gardner,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
 E125,Baillie Guard Gate,Location,,1857_revolt,Location named 7 times in the source book; appears in 1 graph fact(s).
-E126,Kabul Gate,Location,,1857_revolt,Location named 7 times in the source book; appears in 1 graph fact(s).
-E127,Bihar,Location,,1857_revolt,Location named 7 times in the source book; appears in 1 graph fact(s).
-E128,Gardner,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E129,John Nicholson,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E130,Madeline,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E131,Gambier,Person,,1857_revolt,Person named 7 times in the source book; appears in 1 graph fact(s).
-E132,Bakht Khan,Person,,1857_revolt,Person named 7 times in the source book; appears in 2 graph fact(s).
-E133,Hamilton,Person,,1857_revolt,Person named 7 times in the source book; appears in 4 graph fact(s).
-E134,Mountstuart,Person,,1857_revolt,Person named 6 times in the source book; appears in 2 graph fact(s).
-E135,Kabul,Location,,1857_revolt,Location named 6 times in the source book; appears in 2 graph fact(s).
-E136,Barnard,Person,,1857_revolt,Person named 6 times in the source book; appears in 2 graph fact(s).
-E137,Bhurtpore,Location,,1857_revolt,Location named 6 times in the source book; appears in 2 graph fact(s).
-E138,Dr Fayrer,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
-E139,Mark Thornhill,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
-E140,Gumti,Location,,1857_revolt,Location named 6 times in the source book; appears in 2 graph fact(s).
-E141,Begum,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
-E142,Macdowell,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
-E143,General Barnard,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
-E144,Adjutant,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
-E145,Mohammedan,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E146,Berhampore,Location,,1857_revolt,Location named 5 times in the source book; appears in 1 graph fact(s).
-E147,Kunwar Singh,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E148,Gwalior Contingent,Location,,1857_revolt,Location named 5 times in the source book; appears in 1 graph fact(s).
-E149,Battle of Cawnpore,Event,,1857_revolt,Event named 5 times in the source book; appears in 1 graph fact(s).
-E150,Bengal Artillery,Organization,,1857_revolt,Organization named 5 times in the source book; appears in 2 graph fact(s).
-E151,Nepal,Location,,1857_revolt,Location named 5 times in the source book; appears in 2 graph fact(s).
-E152,Madras,Location,,1857_revolt,Location named 5 times in the source book; appears in 4 graph fact(s).
-E153,Holmes,Person,,1857_revolt,Person named 5 times in the source book; appears in 3 graph fact(s).
-E154,Indian Army,Organization,,1857_revolt,Organization named 5 times in the source book; appears in 1 graph fact(s).
-E155,Madras Fusiliers,Organization,,1857_revolt,Organization named 5 times in the source book; appears in 3 graph fact(s).
-E156,Jang Bahadur,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E157,Baugh,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E158,Man Singh,Person,,1857_revolt,Person named 5 times in the source book; appears in 2 graph fact(s).
-E159,Rees,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E160,Azimullah,Person,,1857_revolt,Person named 5 times in the source book; appears in 3 graph fact(s).
-E161,Ripley,Person,,1857_revolt,Person named 5 times in the source book; appears in 2 graph fact(s).
-E162,Rao Sahib,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E163,Europe,Location,,1857_revolt,Location named 5 times in the source book; appears in 2 graph fact(s).
-E164,Arthur,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E165,Hewson,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E166,Fort,Location,,1857_revolt,Location named 5 times in the source book; appears in 1 graph fact(s).
-E167,Hindu Rao,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
-E168,Rohilkhand,Location,,1857_revolt,Location named 5 times in the source book; appears in 4 graph fact(s).
-E169,Hope Grant,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
-E170,Bahadur Shah,Person,,1857_revolt,Person named 4 times in the source book; appears in 5 graph fact(s).
-E171,Chinhat,Location,,1857_revolt,Location named 4 times in the source book; appears in 4 graph fact(s).
-E172,William Tayler,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
-E173,Satichaura Ghat,Location,,1857_revolt,Location named 4 times in the source book; appears in 2 graph fact(s).
-E174,Patna,Location,,1857_revolt,Location named 4 times in the source book; appears in 3 graph fact(s).
-E175,Lahore,Location,,1857_revolt,Location named 4 times in the source book; appears in 3 graph fact(s).
-E176,Graves,Person,,1857_revolt,Person named 4 times in the source book; appears in 1 graph fact(s).
-E177,Fall of Delhi,Event,,1857_revolt,Event named 4 times in the source book; appears in 1 graph fact(s).
-E178,Delhi Force,Organization,,1857_revolt,Organization named 4 times in the source book; appears in 2 graph fact(s).
-E179,Highland,Location,,1857_revolt,Location named 4 times in the source book; appears in 1 graph fact(s).
-E180,Zinat Mahal,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
-E181,Lloyd,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
-E182,Norfolk,Location,,1857_revolt,Location named 4 times in the source book; appears in 1 graph fact(s).
-E183,Walpole,Person,,1857_revolt,Person named 4 times in the source book; appears in 3 graph fact(s).
-E184,Governor-General,Organization,,1857_revolt,Organization named 4 times in the source book; appears in 4 graph fact(s).
-E185,Wilberforce,Person,,1857_revolt,Person named 4 times in the source book; appears in 1 graph fact(s).
-E186,Wajid Ali,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
-E187,Lang,Person,,1857_revolt,Person named 4 times in the source book; appears in 1 graph fact(s).
-E188,Banthira,Location,,1857_revolt,Location named 4 times in the source book; appears in 1 graph fact(s).
-E189,General Hearsey,Person,,1857_revolt,Person named 4 times in the source book; appears in 1 graph fact(s).
-E190,Intelligence Department,Organization,,1857_revolt,Organization named 3 times in the source book; appears in 1 graph fact(s).
-E191,Hurchundpore,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E192,General Havelock,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E193,Secrora,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E194,Hugh Chichester,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E195,Henry Havelock,Person,,1857_revolt,Person named 3 times in the source book; appears in 3 graph fact(s).
+E126,Begum,Person,,1857_revolt,Person named 6 times in the source book; appears in 2 graph fact(s).
+E127,Kabul,Location,,1857_revolt,Location named 6 times in the source book; appears in 2 graph fact(s).
+E128,Macdowell,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
+E129,Mountstuart,Person,,1857_revolt,Person named 6 times in the source book; appears in 2 graph fact(s).
+E130,Gumti,Location,,1857_revolt,Location named 6 times in the source book; appears in 2 graph fact(s).
+E131,Bhurtpore,Location,,1857_revolt,Location named 6 times in the source book; appears in 2 graph fact(s).
+E132,Mark Thornhill,Person,,1857_revolt,Person named 6 times in the source book; appears in 2 graph fact(s).
+E133,Dr Fayrer,Person,,1857_revolt,Person named 6 times in the source book; appears in 1 graph fact(s).
+E134,Hewson,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E135,Europe,Location,,1857_revolt,Location named 5 times in the source book; appears in 3 graph fact(s).
+E136,Battle of Cawnpore,Event,,1857_revolt,Event named 5 times in the source book; appears in 1 graph fact(s).
+E137,Jang Bahadur,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E138,Hindu Rao,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E139,Rees,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E140,Ripley,Person,,1857_revolt,Person named 5 times in the source book; appears in 2 graph fact(s).
+E141,Madras Fusiliers,Organization,,1857_revolt,Organization named 5 times in the source book; appears in 4 graph fact(s).
+E142,Man Singh,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E143,Madras,Location,,1857_revolt,Location named 5 times in the source book; appears in 4 graph fact(s).
+E144,Azimullah,Person,,1857_revolt,Person named 5 times in the source book; appears in 3 graph fact(s).
+E145,Holmes,Person,,1857_revolt,Person named 5 times in the source book; appears in 2 graph fact(s).
+E146,Kunwar Singh,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E147,Baugh,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E148,Nepal,Location,,1857_revolt,Location named 5 times in the source book; appears in 2 graph fact(s).
+E149,Rohilkhand,Location,,1857_revolt,Location named 5 times in the source book; appears in 5 graph fact(s).
+E150,Bengal Artillery,Organization,,1857_revolt,Organization named 5 times in the source book; appears in 3 graph fact(s).
+E151,Berhampore,Location,,1857_revolt,Location named 5 times in the source book; appears in 1 graph fact(s).
+E152,Gwalior Contingent,Organization,,1857_revolt,Organization named 5 times in the source book; appears in 2 graph fact(s).
+E153,Indian Army,Organization,,1857_revolt,Organization named 5 times in the source book; appears in 2 graph fact(s).
+E154,Rao Sahib,Person,,1857_revolt,Person named 5 times in the source book; appears in 1 graph fact(s).
+E155,Fall of Delhi,Event,,1857_revolt,Event named 4 times in the source book; appears in 1 graph fact(s).
+E156,Chinhat,Location,,1857_revolt,Location named 4 times in the source book; appears in 4 graph fact(s).
+E157,Satichaura Ghat,Location,,1857_revolt,Location named 4 times in the source book; appears in 3 graph fact(s).
+E158,Hope Grant,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
+E159,Angad,Person,,1857_revolt,Person named 4 times in the source book; appears in 1 graph fact(s).
+E160,Banthira,Location,,1857_revolt,Location named 4 times in the source book; appears in 1 graph fact(s).
+E161,Patna,Location,,1857_revolt,Location named 4 times in the source book; appears in 3 graph fact(s).
+E162,Governor-General,Organization,,1857_revolt,Organization named 4 times in the source book; appears in 5 graph fact(s).
+E163,Delhi Force,Organization,,1857_revolt,Organization named 4 times in the source book; appears in 3 graph fact(s).
+E164,Zinat Mahal,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
+E165,Lahore,Location,,1857_revolt,Location named 4 times in the source book; appears in 5 graph fact(s).
+E166,Lloyd,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
+E167,Wajid Ali,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
+E168,William Tayler,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
+E169,Wilberforce,Person,,1857_revolt,Person named 4 times in the source book; appears in 1 graph fact(s).
+E170,Graves,Person,,1857_revolt,Person named 4 times in the source book; appears in 1 graph fact(s).
+E171,Walpole,Person,,1857_revolt,Person named 4 times in the source book; appears in 2 graph fact(s).
+E172,Ross Mangles,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E173,Jiwan Bakht,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E174,C. H. Mecham,Person,,1857_revolt,Person named 3 times in the source book; appears in 2 graph fact(s).
+E175,Mirza Abu Bakr,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E176,Hugh Chichester,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E177,Rajah of Banpur,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E178,Thomas Cadell,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E179,Massacre at Cawnpore,Event,,1857_revolt,Event named 3 times in the source book; appears in 2 graph fact(s).
+E180,Secrora,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E181,Poona,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E182,Renaud,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E183,Rahatgarh,Location,,1857_revolt,Location named 3 times in the source book; appears in 2 graph fact(s).
+E184,Greenway,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E185,Unao,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E186,Shah Najaf,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E187,Mrs Gardner,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E188,William Sleeman,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E189,Hurchundpore,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E190,Ireland,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E191,Crommelin,Person,,1857_revolt,Person named 3 times in the source book; appears in 2 graph fact(s).
+E192,Jagdishpur,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E193,Sagar,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E194,House of the Ladies,Location,,1857_revolt,Location named 3 times in the source book; appears in 3 graph fact(s).
+E195,Ferozepore,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
 E196,Mutiny at Indore,Event,,1857_revolt,Event named 3 times in the source book; appears in 1 graph fact(s).
-E197,Ireland,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E198,Jagdishpur,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E199,Rajah of Banpur,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E200,Ross Mangles,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E201,Cape,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E202,Court,Location,,1857_revolt,Location named 3 times in the source book; appears in 2 graph fact(s).
-E203,Bertrand,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E204,Council,Organization,,1857_revolt,Organization named 3 times in the source book; appears in 2 graph fact(s).
-E205,Massacre at Cawnpore,Event,,1857_revolt,Event named 3 times in the source book; appears in 1 graph fact(s).
-E206,Thomas Cadell,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E207,Rahatgarh,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E208,Court of Directors,Organization,,1857_revolt,Organization named 3 times in the source book; appears in 1 graph fact(s).
-E209,Ranee,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E210,Shah Najaf,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E211,Capture of Lucknow,Event,,1857_revolt,Event named 3 times in the source book; appears in 1 graph fact(s).
-E212,Poona,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E213,House of the Ladies,Location,,1857_revolt,Location named 3 times in the source book; appears in 2 graph fact(s).
-E214,Mrs Gardner,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E215,Herbert,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E216,Jiwan Bakht,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E217,Unao,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E218,Sagar,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E219,Mirza Abu Bakr,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E220,Durand,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E221,Greenway,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E222,C. H. Mecham,Person,,1857_revolt,Person named 3 times in the source book; appears in 2 graph fact(s).
-E223,Chakar Kothi,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E224,Ferozepore,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
-E225,Crommelin,Person,,1857_revolt,Person named 3 times in the source book; appears in 2 graph fact(s).
-E226,William Sleeman,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
-E227,Battle of Plassey,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E228,Siege of Cawnpore,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E229,Massacre at Jhansi,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E230,Massacre of Europeans,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E231,Battle of Badli,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E232,Massacre at Satichaura Ghat,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E233,Dhar,Location,,1857_revolt,Location named 2 times in the source book; appears in 1 graph fact(s).
-E234,Siege of Arrah,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E235,Defence of Lucknow,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
-E236,Mutiny of Lucknow,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E237,Mutiny at Sialkot,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E238,Mutiny at Dinapore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E239,Storming of Delhi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E240,Mutiny at Ferozepore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E241,Kotah,Location,,1857_revolt,Location named 1 times in the source book; appears in 1 graph fact(s).
-E242,Battle of Arnhem Agincourt,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E243,Defence of Cawnpore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E244,Mutiny at Nusseerabad,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E245,Siege of Dhar,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E246,Massacre at Aurangabad,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E247,Mutiny of Delhi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E248,Siege of Jhansi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E249,Capture of Gwalior,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E250,Siege of Lucknow Machi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E251,Battle of Banda,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E252,Recapture of Lucknow,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E253,Relief of Lucknow Havelock,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E254,Battle of Chinhat,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E255,Mutiny at Bareilly,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E256,Battle of Kotah,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E257,Battle of Gwalior,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E258,Mutiny at Wazirabad,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E259,Massacre of Firinghis'.14 But,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E260,Mutiny at Cawnpore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E261,Nusseerabad,Location,,1857_revolt,Location named 1 times in the source book; appears in 1 graph fact(s).
-E262,Mutiny at Mhow,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E263,Battle at Chinhat,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E264,Banda,Location,,1857_revolt,Location named 1 times in the source book; appears in 1 graph fact(s).
-E265,Mutiny of Bhurtpore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E266,Mutiny at Gwalior,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E267,Massacre at Delhi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
-E268,Plassey,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E269,Indore,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E270,Aurangabad,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E271,Lucknow Machi,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E272,Mhow,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E273,Wazirabad,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E274,Firinghis'.14 But,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E275,Lucknow Havelock,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E276,Badli,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E277,Arnhem Agincourt,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
-E278,Sialkot,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
+E197,Court of Directors,Organization,,1857_revolt,Organization named 3 times in the source book; appears in 1 graph fact(s).
+E198,Chakar Kothi,Location,,1857_revolt,Location named 3 times in the source book; appears in 1 graph fact(s).
+E199,Intelligence Department,Organization,,1857_revolt,Organization named 3 times in the source book; appears in 2 graph fact(s).
+E200,Capture of Lucknow,Event,,1857_revolt,Event named 3 times in the source book; appears in 1 graph fact(s).
+E201,Robert Dunlop,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E202,Durand,Person,,1857_revolt,Person named 3 times in the source book; appears in 1 graph fact(s).
+E203,Siege of Cawnpore,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
+E204,Siege of Arrah,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
+E205,Defence of Lucknow,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
+E206,Massacre at Jhansi,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
+E207,Battle of Badli,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
+E208,Dhar,Location,,1857_revolt,Location named 2 times in the source book; appears in 1 graph fact(s).
+E209,Massacre at Satichaura Ghat,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
+E210,Battle of Plassey,Event,,1857_revolt,Event named 2 times in the source book; appears in 1 graph fact(s).
+E211,Mutiny of Bhurtpore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E212,Mutiny at Wazirabad,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E213,Massacre at Delhi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E214,Battle of Banda,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E215,Capture of Gwalior,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E216,Massacre at Aurangabad,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E217,Storming of Delhi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E218,Mutiny at Cawnpore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E219,Nusseerabad,Location,,1857_revolt,Location named 1 times in the source book; appears in 1 graph fact(s).
+E220,Mutiny at Mhow,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E221,Banda,Location,,1857_revolt,Location named 1 times in the source book; appears in 1 graph fact(s).
+E222,Mutiny at Nusseerabad,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E223,Mutiny at Sialkot,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E224,Mutiny of Delhi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E225,Mutiny at Ferozepore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E226,Defence of Cawnpore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E227,Mutiny of Lucknow,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E228,Siege of Dhar,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E229,Mutiny at Gwalior,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E230,Battle of Gwalior,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E231,Kotah,Location,,1857_revolt,Location named 1 times in the source book; appears in 1 graph fact(s).
+E232,Mutiny at Dinapore,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E233,Battle of Chinhat,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E234,Mutiny at Bareilly,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E235,Battle of Kotah,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E236,Siege of Jhansi,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E237,Battle at Chinhat,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E238,Recapture of Lucknow,Event,,1857_revolt,Event named 1 times in the source book; appears in 1 graph fact(s).
+E239,Indore,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
+E240,Sialkot,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
+E241,Wazirabad,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
+E242,Mhow,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
+E243,Aurangabad,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
+E244,Plassey,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).
+E245,Badli,Location,,1857_revolt,Location named 0 times in the source book; appears in 1 graph fact(s).

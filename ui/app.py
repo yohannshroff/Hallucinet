@@ -1,6 +1,10 @@
-"""Streamlit frontend for HalluciNet: ask a question, get a grounded answer
-with a trust score and the evidence behind it; compare retrieval modes;
-browse what's in the knowledge base. Calls the FastAPI backend in api/main.py.
+"""Streamlit frontend for HalluciNet: ask questions in a chat, get grounded
+answers with a trust score and the evidence behind them; compare retrieval
+modes; browse what's in the knowledge base. Calls the FastAPI backend in
+api/main.py.
+
+Styling: base colours and fonts in .streamlit/config.toml, everything else in
+ui/styles.css (injected once below). Layout code here only adds class names.
 
 Usage:
     # in one terminal:
@@ -9,8 +13,10 @@ Usage:
     streamlit run ui/app.py
 """
 
+import html
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
@@ -25,6 +31,7 @@ from common import REPO_ROOT  # noqa: E402
 API_URL = os.environ.get("HALLUCINET_API_URL", "http://localhost:8000")
 DEMO_CACHE_PATH = REPO_ROOT / "data" / "eval" / "demo_cache.json"
 SAMPLE_QUESTIONS_CSV = REPO_ROOT / "data" / "eval" / "sample_questions.csv"
+STYLES_CSS = Path(__file__).with_name("styles.css")
 
 MODES = {
     "hybrid": "Hybrid: knowledge graph + book passages (recommended)",
@@ -32,15 +39,18 @@ MODES = {
     "vector": "Passages only: book text search",
 }
 MODE_SHORT = {"hybrid": "Hybrid", "graph": "Graph only", "vector": "Passages only"}
-VERDICT_ICON = {"entailed": "✅", "contradicted": "❌", "neutral": "⚠️", "no_evidence": "⚠️"}
 VERDICT_TEXT = {
-    "entailed": "Supported by the evidence",
-    "contradicted": "Contradicted by the evidence",
+    "entailed": "Supported",
+    "contradicted": "Contradicted",
+    "contradiction": "Contradicted by the evidence",  # the NLI model's own label
     "neutral": "Not found in the evidence",
-    "no_evidence": "No evidence was retrieved",
+    "no_evidence": "No evidence retrieved",
 }
+PAGES = {"chat": "Ask", "compare": "Compare modes", "kb": "Knowledge base", "how": "How it works"}
+K_MIN, K_MAX = 1, 10
 
-st.set_page_config(page_title="HalluciNet", page_icon="📜", layout="wide")
+st.set_page_config(page_title="HalluciNet", layout="centered", initial_sidebar_state="expanded")
+st.markdown(f"<style>{STYLES_CSS.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 
 # --------------------------------------------------------------------------
 # Backend access
@@ -80,7 +90,7 @@ def query_demo_cache(question: str):
 
 
 @st.cache_data(show_spinner=False)
-def example_questions(limit: int = 6) -> list:
+def example_questions(limit: int = 3) -> list:
     if not SAMPLE_QUESTIONS_CSV.exists():
         return []
     df = pd.read_csv(SAMPLE_QUESTIONS_CSV)
@@ -103,187 +113,391 @@ def answer_question(question: str, mode: str, k: int):
 
 
 # --------------------------------------------------------------------------
-# Rendering
+# Rendering helpers
 # --------------------------------------------------------------------------
 
 
-def trust_banner(result: dict):
+def esc(text) -> str:
+    return html.escape(str(text), quote=False)
+
+
+def label(text: str):
+    st.markdown(f'<div class="hn-label">{esc(text)}</div>', unsafe_allow_html=True)
+
+
+def secondary(text: str):
+    st.markdown(f'<div class="hn-secondary">{text}</div>', unsafe_allow_html=True)
+
+
+def rule():
+    st.markdown('<hr class="hn-rule">', unsafe_allow_html=True)
+
+
+def header_bar(left: str, right: str = ""):
+    st.markdown(
+        f'<div class="hn-header"><span class="hn-header-q">{esc(left)}</span>'
+        f'<span class="hn-header-meta">{esc(right)}</span></div>',
+        unsafe_allow_html=True,
+    )
+
+
+FACT_ARROW_RE = re.compile(r"\s*--([\w-]+)-->\s*")
+
+
+def readable_fact(text: str) -> str:
+    """'Hodson --captured--> Bahadur Shah' -> 'Hodson captured Bahadur Shah'."""
+    return FACT_ARROW_RE.sub(lambda m: f" {m.group(1).replace('_', ' ')} ", text)
+
+
+PAGES_RE = r"\(?\bpp?\.\s*(\d+)\s*[-–]\s*(\d+)\)?"
+TITLE_PAGES_RE = re.compile(r"^(.*?)(?: - [^()]*)?\s*\(pp\. (\d+)-(\d+)\)$")
+PAGE_ANCHOR_RE = re.compile(r"#page=(\d+)")
+
+
+def short_title(title: str) -> str:
+    """'The Great Mutiny - India 1857 by Christopher Hibbert (pp. 401-404)' -> 'The Great Mutiny, pp. 401–404'."""
+    m = TITLE_PAGES_RE.match(title)
+    return f"{m.group(1)}, pp. {m.group(2)}–{m.group(3)}" if m else title
+
+
+def page_range(source: dict):
+    """(first, last) book page a source covers, or None."""
+    m = re.search(PAGES_RE, source.get("full_title", ""))
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    m = PAGE_ANCHOR_RE.search(str(source.get("url", "")))
+    return (int(m.group(1)), int(m.group(1))) if m else None
+
+
+def build_sources(result: dict) -> list:
+    """One numbered list for the answer's citations: graph facts, then book passages
+    -- the order and numbering the LLM saw. Old demo-cache entries only have `sources`."""
+    out = []
+    for f in result.get("graph_facts") or []:
+        title = f.get("sentence") or readable_fact(f["text"])
+        m = PAGE_ANCHOR_RE.search(f.get("source", ""))
+        if m:
+            title = f"{title.rstrip('.')} · p. {m.group(1)}"
+        out.append({"title": title, "kind": "Knowledge graph", "url": f.get("source", ""), "snippet": ""})
+    for p in result.get("passages") or []:
+        out.append({
+            "title": short_title(p["title"]), "full_title": p["title"], "kind": "Book passage",
+            "url": p.get("source", ""), "snippet": p.get("snippet", ""), "passage": True,
+        })
+    if not out:
+        for s in result.get("sources") or []:
+            out.append({"title": s["title"], "kind": "Source", "url": s.get("url", ""), "snippet": ""})
+    for n, s in enumerate(out, start=1):
+        s["n"] = n
+    return out
+
+
+def dedupe_after_stop(m, mark: str) -> str:
+    """'[3][6]. [6][7]' -> '[3][6][7].': markers repeated after the full stop join the ones before it."""
+    before = re.findall(mark, m.group(1))
+    extra = [x for x in re.findall(mark, m.group(2)) if x not in before]
+    return "".join(before + extra) + "."
+
+
+# "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393", bare or in brackets
+PDF_PATH_RE = r"[\[(]?\s*(?:\S*/)?[^()\[\]/\n<>]*\.pdf(?:#page=(?P<page>\d+))?\s*[\])]?"
+
+
+def cite(answer: str, sources: list) -> str:
+    """Escape the answer, then replace the LLM's source numbers ([2] = source 2), inline
+    URLs, file paths, passage titles and page ranges with [n] markers that match the
+    source list. A file path that matches no source is dropped; anything else is left."""
+    passages = [s for s in sources if s.get("passage")]
+    by_url = {s["url"]: s["n"] for s in sources if str(s["url"]).startswith("http")}
+    by_title = {s["full_title"]: s["n"] for s in passages}
+    by_pages = {}
+    for s in passages:
+        m = re.search(PAGES_RE, s["full_title"])
+        if m:
+            by_pages.setdefault(f"{m.group(1)}-{m.group(2)}", s["n"])
+
+    def on_page(page: int):
+        hits = [s["n"] for s in sources if (r := page_range(s)) and r[0] <= page <= r[1]]
+        return hits[0] if hits else None
+
+    alternatives = [rf"(?P<path>{PDF_PATH_RE})", r"(?P<url>https?://[^\s)\]]*[^\s)\].,;:])"]  # trailing punctuation stays in the sentence
+    if by_title:
+        alternatives.append("(?P<title>" + "|".join(re.escape(esc(t)) for t in sorted(by_title, key=len, reverse=True)) + ")")
+    alternatives += [f"(?P<pages>{PAGES_RE})", r"\[(?P<idx>\d+(?:\s*,\s*\d+)*)\]"]  # [2] or [3, 6]
+    pattern = re.compile("|".join(alternatives))
+    by_esc_title = {esc(t): n for t, n in by_title.items()}
+
+    def marker(n: int) -> str:
+        return f'<span class="hn-cite">[{n}]</span>'
+
+    def replace(m):
+        if m.group("path"):
+            n = on_page(int(m.group("page"))) if m.group("page") else None
+            return marker(n) if n else ""
+        if m.group("url"):
+            n = by_url.get(m.group("url"))
+        elif by_title and m.group("title"):
+            n = by_esc_title[m.group("title")]
+        elif m.group("pages"):
+            nums = re.findall(r"\d+", m.group("pages"))
+            n = by_pages.get(f"{nums[0]}-{nums[1]}")
+        else:
+            # a number outside the source list points at nothing, so it is dropped
+            return "".join(marker(i) for i in map(int, re.findall(r"\d+", m.group("idx"))) if 1 <= i <= len(sources))
+        return marker(n) if n else m.group(0)
+
+    mark = r"<span class=\"hn-cite\">\[\d+\]</span>"
+    text = pattern.sub(replace, esc(answer))
+    text = re.sub(rf"({mark})(\s*\1)+", r"\1", text)  # "[2] [2]" -> "[2]"
+    text = re.sub(rf"({mark})\s*,\s*(?={mark})", r"\1", text)  # "[2], [4]" -> "[2][4]"
+    text = re.sub(rf"\(\s*(?:[Ss]ources?:?\s*)?((?:{mark}[,;\s]*)+)\)", r"\1", text)  # "(Source: [2])" -> "[2]"
+    text = re.sub(rf"\b[Ss]ources?:\s*((?:{mark}[,;\s]*)+)", r"\1", text)  # "Source: [2]" -> "[2]"
+    text = re.sub(r"\(\s*(?:[Ss]ources?:?)?[\s,;]*\)|\b[Ss]ources?:[\s,;]*$", "", text)  # empty leftovers
+    text = re.sub(r" +([.,;])", r"\1", text)
+    text = re.sub(rf"((?:{mark})+)\.\s*((?:{mark})+)", lambda m: dedupe_after_stop(m, mark), text)  # "[6]. [6]" -> "[6]."
+    return text.strip()
+
+
+def trust_block(result: dict):
     score = result.get("trust_score")
     n_claims, n_ok = result.get("n_claims"), result.get("n_entailed")
+    label("Trust score")
     if score is None:
-        st.info("**Trust score: not applicable.** The answer made no factual claims to check (for example, it said the sources don't cover this).")
+        st.markdown('<div class="hn-trust-value">n/a</div>', unsafe_allow_html=True)
+        secondary("Not applicable: the answer made no checkable claims (for example, it said the sources don't cover this).")
         return
-    detail = f"{n_ok} of {n_claims} claims in this answer are backed by the retrieved evidence."
-    if score >= 0.75:
-        st.success(f"**Trust score {score:.0%} — well supported.** {detail}")
-    elif score >= 0.4:
-        st.warning(f"**Trust score {score:.0%} — partly supported.** {detail} Check the sources below.")
-    else:
-        st.error(f"**Trust score {score:.0%} — weakly supported.** {detail} Treat this answer with caution.")
-    st.progress(min(max(score, 0.0), 1.0))
+    width = min(max(score, 0.0), 1.0) * 100
+    noun = "claim" if n_claims == 1 else "claims"
+    st.markdown(
+        f'<div class="hn-trust-value">{score:.0%}</div>'
+        f'<div class="hn-bar"><div style="width:{width:.1f}%"></div></div>',
+        unsafe_allow_html=True,
+    )
+    secondary(f"{n_ok} of {n_claims} {noun} supported by the evidence")
 
 
-def render_result(result: dict, from_cache: bool = False):
-    if from_cache:
-        st.info("A live answer couldn't be generated (the language model may be switched off), so this is a saved answer from the demo cache.")
+def claims_block(result: dict):
+    claims = result.get("claims") or []
+    with st.expander("Claim-by-claim check"):
+        if not claims:
+            st.markdown("No per-claim breakdown is available for this answer.")
+        for c in claims:
+            # HTML, not markdown: an asterisk left in a claim would otherwise turn into bold/italics
+            verdict = VERDICT_TEXT.get(c["verdict"], c["verdict"].capitalize())
+            evidence = f'<div class="hn-claim-ev">Closest evidence: {esc(c["best_evidence"])}</div>' if c.get("best_evidence") else ""
+            st.markdown(
+                f'<div class="hn-claim"><div class="hn-claim-text">{esc(c["claim"])}</div>'
+                f'<div class="hn-claim-verdict">{esc(verdict)} · support {c["score"]:.0%}</div>{evidence}</div>',
+                unsafe_allow_html=True,
+            )
 
-    with st.container(border=True):
-        st.markdown(result["answer"])
 
-    trust_banner(result)
+def sources_block(sources: list):
+    label("Sources")
+    if not sources:
+        secondary("No sources were retrieved for this question.")
+        return
+    rows = []
+    for s in sources:
+        row = (
+            f'<span class="hn-src-n">[{s["n"]}]</span><span class="hn-src-title">{esc(s["title"])}</span>'
+            f'<span class="hn-src-kind">{s["kind"]}</span>'
+        )
+        if s["snippet"]:
+            rows.append(f'<details class="hn-src"><summary>{row}</summary><blockquote>{esc(s["snippet"])}</blockquote></details>')
+        else:
+            rows.append(f'<div class="hn-src"><div class="hn-src-row">{row}</div></div>')
+    st.markdown(f'<div class="hn-sources">{"".join(rows)}</div>', unsafe_allow_html=True)
 
-    meta = []
+
+def meta_line(result: dict):
+    parts = []
+    if result.get("seed_entities"):
+        parts.append("Recognised: " + esc(", ".join(result["seed_entities"])))
     if result.get("mode"):
-        meta.append(MODE_SHORT.get(result["mode"], result["mode"]))
+        parts.append(MODE_SHORT.get(result["mode"], result["mode"]))
     timing = result.get("timing_ms") or {}
     if timing:
-        meta.append(f"answered in {(timing.get('answer', 0) + timing.get('trust_check', 0)) / 1000:.1f}s")
-    if result.get("seed_entities"):
-        meta.append("recognised: " + ", ".join(result["seed_entities"]))
-    if meta:
-        st.caption(" · ".join(meta))
-
-    graph_facts = result.get("graph_facts") or []
-    passages = result.get("passages") or []
-    claims = result.get("claims") or []
-    legacy_sources = result.get("sources") or []
-
-    tab_sources, tab_claims = st.tabs(["Sources", "Claim-by-claim check"])
-
-    with tab_sources:
-        if not (graph_facts or passages or legacy_sources):
-            st.write("No sources were retrieved for this question.")
-        if graph_facts:
-            st.markdown("**Knowledge graph facts**")
-            for fact in graph_facts:
-                link = f" — [source]({fact['source']})" if str(fact.get("source", "")).startswith("http") else ""
-                st.markdown(f"- {fact['text']}{link}")
-        if passages:
-            st.markdown("**Book passages**")
-            for p in passages:
-                with st.expander(f"{p['title']} · {p['score']:.0%} match"):
-                    st.markdown(f"> {p['snippet']}")
-        if legacy_sources and not (graph_facts or passages):
-            # demo-cache entries from before the richer response format
-            for s in legacy_sources:
-                st.markdown(f"- [{s['title']}]({s['url']})" if s.get("url") else f"- {s['title']}")
-
-    with tab_claims:
-        if not claims:
-            st.write("No per-claim breakdown is available for this answer.")
-        for c in claims:
-            icon = VERDICT_ICON.get(c["verdict"], "•")
-            st.markdown(f"{icon} **{c['claim']}**  \n{VERDICT_TEXT.get(c['verdict'], c['verdict'])} (confidence {c['score']:.0%})")
-            if c.get("best_evidence"):
-                st.caption(f"Closest evidence: {c['best_evidence']}")
+        parts.append(f"{(timing.get('answer', 0) + timing.get('trust_check', 0)) / 1000:.1f} s")
+    if parts:
+        secondary(" · ".join(parts))
 
 
-def counts_frame(counts: dict) -> pd.DataFrame:
-    return pd.DataFrame({"type": list(counts), "count": list(counts.values())})
+def render_answer(entry: dict, idx: int):
+    st.markdown('<div class="hn-label">HalluciNet</div>', unsafe_allow_html=True)
+    result = entry.get("result")
+    if result is None:
+        secondary(
+            "Couldn't get an answer: a live answer isn't available right now and this question isn't in the demo cache."
+            f"<br>{esc(entry.get('error', ''))}"
+        )
+        return
+    sources = build_sources(result)
+    with st.container(key=f"answer_{idx}"):
+        st.markdown(cite(result["answer"], sources), unsafe_allow_html=True)
+    if entry.get("from_cache"):
+        secondary("Saved answer from the demo cache: a live answer couldn't be generated (the language model may be switched off).")
+    rule()
+    trust_block(result)
+    claims_block(result)
+    rule()
+    sources_block(sources)
+    rule()
+    meta_line(result)
 
 
-def status_dot(ok) -> str:
-    return "🟢" if ok else "🔴"
+# --------------------------------------------------------------------------
+# State and actions
+# --------------------------------------------------------------------------
+
+st.session_state.setdefault("messages", [])  # [{question, result, from_cache, error}]
+st.session_state.setdefault("selected", None)
+st.session_state.setdefault("page", "chat")
+st.session_state.setdefault("k", 5)
+st.session_state.setdefault("mode", "hybrid")
+
+
+def new_question():
+    st.session_state.messages = []
+    st.session_state.selected = None
+    st.session_state.page = "chat"
+
+
+def select_message(i: int):
+    st.session_state.selected = i
+    st.session_state.page = "chat"
+    st.session_state.scroll_to = i
+
+
+def go_to(page: str):
+    st.session_state.page = page
+
+
+def ask(text: str):
+    st.session_state.run_question = text
+    st.session_state.page = "chat"
 
 
 # --------------------------------------------------------------------------
 # Sidebar
 # --------------------------------------------------------------------------
 
-st.session_state.setdefault("history", [])
-st.session_state.setdefault("view", None)
-
 with st.sidebar:
-    st.header("Settings")
-    mode = st.radio("How should it search?", list(MODES), format_func=MODES.get, index=0)
-    k = st.slider("Book passages to retrieve", 1, 10, 5, disabled=(mode == "graph"))
+    st.markdown('<div class="hn-wordmark">HalluciNet</div>', unsafe_allow_html=True)
+    st.button("New question", key="new_question", on_click=new_question, width="stretch")
 
-    st.divider()
-    health = api_get("/health")
-    st.subheader("System")
-    if health is None:
-        st.markdown("🔴 Backend not reachable")
-        st.caption(f"Start it with `uvicorn api.main:app --port 8000` (looking at {API_URL}).")
-    else:
-        st.markdown(f"{status_dot(health.get('ollama_reachable'))} Language model (Ollama)")
-        st.markdown(f"{status_dot(health.get('neo4j_reachable'))} Knowledge graph (Neo4j)")
-        st.markdown(f"{status_dot(health.get('index_ready'))} Book search index")
-        if not health.get("ollama_reachable"):
-            st.caption("Without the language model, only saved demo answers are available.")
-    if st.button("Refresh status", width="stretch"):
-        api_get.clear()
+    messages = st.session_state.messages
+    if messages:
+        label("Recent")
+        with st.container(key="recent"):
+            for i in reversed(range(len(messages))):
+                st.button(
+                    messages[i]["question"], key=f"recent_{i}", width="stretch",
+                    type="primary" if i == st.session_state.selected else "secondary",
+                    on_click=select_message, args=(i,),
+                )
+
+    with st.container(key="nav"):
+        for page, page_label in PAGES.items():
+            if page != st.session_state.page:
+                st.button(page_label, key=f"nav_{page}", type="tertiary", on_click=go_to, args=(page,))
+
+    with st.container(key="settings"):
+        label("Settings")
+        mode = st.selectbox("Retrieval mode", list(MODES), format_func=MODE_SHORT.get, key="mode", help=None)
+        secondary(esc(MODES[mode]))
+        st.markdown(
+            f'<div class="hn-slider-head"><span>Vector top-k</span><span>{st.session_state.k}</span></div>',
+            unsafe_allow_html=True,
+        )
+        k = st.slider("Vector top-k", K_MIN, K_MAX, key="k", label_visibility="collapsed", disabled=(mode == "graph"))
+        st.markdown(f'<div class="hn-slider-range"><span>{K_MIN}</span><span>{K_MAX}</span></div>', unsafe_allow_html=True)
+
+        health = api_get("/health")
+        if health is None:
+            status = f"Backend not reachable at {esc(API_URL)}. Start it with <code>uvicorn api.main:app --port 8000</code>."
+        else:
+            on_off = lambda ok: "on" if ok else "off"  # noqa: E731
+            status = (
+                f"Language model {on_off(health.get('ollama_reachable'))} · Graph {on_off(health.get('neo4j_reachable'))}"
+                f" · Search index {on_off(health.get('index_ready'))}"
+            )
+        secondary(status + "<br>If the backend or the language model is unavailable, saved demo answers are shown instead.")
+        with st.container(key="refresh"):
+            if st.button("Refresh status", type="tertiary"):
+                api_get.clear()
+                st.rerun()
+
+settings_meta = f"{MODE_SHORT[mode]} · top-k {k}" if mode != "graph" else MODE_SHORT[mode]
+
+# --------------------------------------------------------------------------
+# Chat page
+# --------------------------------------------------------------------------
+
+
+def chat_page():
+    prompt = st.chat_input("Ask about Indian history")
+    if prompt and prompt.strip():
+        st.session_state.run_question = prompt.strip()
+    pending = st.session_state.pop("run_question", None)
+    messages = st.session_state.messages
+
+    if not messages and not pending:
+        with st.container(key="empty"):
+            st.markdown(
+                '<p class="hn-title">HalluciNet</p>'
+                '<p class="hn-subtitle">Questions about Indian history, answered only from the loaded sources.</p>',
+                unsafe_allow_html=True,
+            )
+            with st.container(key="examples"):
+                for i, q in enumerate(example_questions()):
+                    st.button(q, key=f"example_{i}", type="tertiary", on_click=ask, args=(q,))
+        return
+
+    sel = st.session_state.selected
+    current = pending or (messages[sel]["question"] if sel is not None and sel < len(messages) else messages[-1]["question"])
+    header_bar(current, settings_meta)
+
+    for i, entry in enumerate(messages):
+        st.markdown(f'<div id="hn-msg-{i}"></div>', unsafe_allow_html=True)
+        with st.chat_message("user"):
+            st.markdown(esc(entry["question"]))
+        with st.chat_message("assistant"):
+            render_answer(entry, i)
+
+    if pending:
+        with st.chat_message("user"):
+            st.markdown(esc(pending))
+        with st.chat_message("assistant"):
+            with st.spinner("Searching the sources and writing an answer… (the first question can take longer while the model loads)"):
+                result, from_cache, error = answer_question(pending, mode, k)
+        if result is not None:
+            result.setdefault("question", pending)
+        messages.append({"question": pending, "result": result, "from_cache": from_cache, "error": error})
+        st.session_state.selected = len(messages) - 1
         st.rerun()
 
-    if st.session_state.history:
-        st.divider()
-        st.subheader("Recent questions")
-        for i, entry in enumerate(reversed(st.session_state.history[-6:])):
-            if st.button(entry["question"], key=f"hist_{i}", width="stretch"):
-                st.session_state.view = entry
+    target = st.session_state.pop("scroll_to", None)
+    if target is not None:  # target is a message index (int), never user text
+        with st.container(key="scroller"):
+            st.iframe(
+                f"<script>window.parent.document.getElementById('hn-msg-{int(target)}')?.scrollIntoView({{behavior: 'smooth'}});</script>",
+                height=1,
+            )
+
 
 # --------------------------------------------------------------------------
-# Main page
+# Other pages
 # --------------------------------------------------------------------------
 
-st.title("HalluciNet")
-st.caption("Questions about Indian history, answered only from the loaded sources — each answer comes with a trust score and its evidence.")
 
-tab_ask, tab_compare, tab_kb, tab_how = st.tabs(["Ask", "Compare search modes", "Knowledge base", "How it works"])
-
-# ---- Ask -----------------------------------------------------------------
-with tab_ask:
-
-    def set_question(text: str):
-        st.session_state["question"] = text
-        st.session_state["run_question"] = text
-
-    def submit_question():
-        st.session_state["run_question"] = st.session_state.get("question", "").strip()
-
-    def pick_example():
-        text = st.session_state.get("example_pick")
-        if text:
-            set_question(text)
-            st.session_state["example_pick"] = None  # so the same example can be picked again
-
-    examples = example_questions()
-    if examples:
-        st.pills("Try one of these:", examples, key="example_pick", on_change=pick_example)
-
-    with st.form("ask_form", border=False):
-        st.text_input(
-            "Ask a question about Indian history",
-            key="question",
-            placeholder="Who led the resistance at Jhansi?",
-        )
-        st.form_submit_button("Ask", type="primary", on_click=submit_question)
-
-    to_run = st.session_state.pop("run_question", None)
-    if to_run:
-        with st.spinner("Searching the sources and writing an answer… (the first question can take a bit longer while the model loads)"):
-            result, from_cache, error = answer_question(to_run, mode, k)
-        if result is None:
-            st.error(f"Couldn't get an answer: a live answer isn't available right now and this question isn't in the demo cache.\n\n`{error}`")
-        else:
-            result.setdefault("question", to_run)
-            entry = {**result, "from_cache": from_cache}
-            st.session_state.history.append(entry)
-            st.session_state.view = entry
-
-    view = st.session_state.view
-    if view:
-        st.subheader(view["question"])
-        render_result(view, from_cache=view.get("from_cache", False))
-    else:
-        st.caption("Pick an example above or type your own question.")
-
-# ---- Compare -------------------------------------------------------------
-with tab_compare:
+def compare_page():
+    header_bar("Compare search modes", settings_meta)
     st.markdown(
         "The same question, answered three ways. This is the heart of the project: does combining the "
         "knowledge graph with book search give more trustworthy answers than either alone?"
     )
-    st.caption("This asks the language model three times, so it takes roughly three times as long.")
+    secondary("This asks the language model three times, so it takes roughly three times as long.")
     cmp_question = st.text_input("Question to compare", value="Who led the resistance at Jhansi?", key="cmp_question")
     if st.button("Compare all three", type="primary", disabled=not cmp_question.strip()):
         results = {}
@@ -296,80 +510,89 @@ with tab_compare:
         st.session_state["compare_results"] = {"question": cmp_question.strip(), "results": results}
 
     cmp = st.session_state.get("compare_results")
-    if cmp:
-        st.subheader(cmp["question"])
-        cols = st.columns(len(MODES))
-        for col, m in zip(cols, MODES):
-            res = cmp["results"].get(m, {})
-            with col:
-                st.markdown(f"**{MODE_SHORT[m]}**")
-                if "error" in res:
-                    st.error("No answer (backend unreachable).")
-                    continue
-                score = res.get("trust_score")
-                st.metric("Trust score", "n/a" if score is None else f"{score:.0%}")
-                with st.container(border=True):
-                    st.markdown(res["answer"])
-                st.caption(f"{res.get('n_entailed', '?')} of {res.get('n_claims', '?')} claims supported")
+    if not cmp:
+        return
+    rule()
+    label(cmp["question"])
+    cols = st.columns(len(MODES))
+    for col, m in zip(cols, MODES):
+        res = cmp["results"].get(m, {})
+        with col:
+            label(MODE_SHORT[m])
+            if "error" in res:
+                secondary("No answer (backend unreachable).")
+                continue
+            trust_block(res)
+            rule()
+            with st.container(key=f"answer_cmp_{m}"):
+                st.markdown(cite(res["answer"], build_sources(res)), unsafe_allow_html=True)
 
-# ---- Knowledge base ------------------------------------------------------
-with tab_kb:
+
+def counts_frame(counts: dict) -> pd.DataFrame:
+    return pd.DataFrame({"type": list(counts), "count": list(counts.values())})
+
+
+def kb_page():
+    header_bar("Knowledge base")
     stats = api_get("/stats")
     kg = api_get("/kg")
     if stats is None or kg is None:
-        st.warning("The backend isn't reachable, so the knowledge base can't be shown. Start it with `uvicorn api.main:app --port 8000`.")
+        secondary("The backend isn't reachable, so the knowledge base can't be shown. Start it with <code>uvicorn api.main:app --port 8000</code>.")
+        return
+    graph, corpus = stats["graph"], stats["corpus"]
+    numbers = [("Graph nodes", graph["nodes"]), ("Relationships", graph["relationships"]), ("Passages", f"{corpus['chunks']:,}"), ("Words", f"{corpus['words']:,}")]
+    st.markdown(
+        '<div class="hn-stats">'
+        + "".join(f'<div><div class="hn-stat-value">{v}</div><div class="hn-stat-label">{esc(n)}</div></div>' for n, v in numbers)
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+    secondary(
+        ("Live counts from the Neo4j graph database." if stats["neo4j_live"] else "Neo4j isn't reachable — showing counts from the seed files.")
+        + f" Period(s) loaded: {esc(', '.join(stats['periods']))}. More events and periods will be added over time."
+    )
+    rule()
+    c1, c2 = st.columns(2)
+    with c1:
+        label("What the graph contains")
+        st.bar_chart(counts_frame(graph["node_types"]), x="type", y="count", horizontal=True, sort="-count", color="#173846")
+    with c2:
+        label("How things are connected")
+        st.bar_chart(counts_frame(graph["relation_types"]), x="type", y="count", horizontal=True, sort="-count", color="#173846")
+
+    if corpus["sources"]:
+        label("Source texts")
+        for s in corpus["sources"]:
+            st.markdown(f"- {s}")
+
+    rule()
+    entities = pd.DataFrame(kg["entities"])
+    relationships = pd.DataFrame(kg["relationships"])
+
+    view_choice = st.segmented_control("Browse", ["Entities", "Relationships"], default="Entities")
+    search = st.text_input("Filter", placeholder="Type a name, e.g. Lakshmibai", label_visibility="collapsed")
+
+    if view_choice == "Relationships":
+        table = relationships[["subject", "relation", "object", "source", "notes"]]
     else:
-        graph, corpus = stats["graph"], stats["corpus"]
-        m1, m2, m3, m4 = st.columns(4)
-        m1.metric("Graph nodes", graph["nodes"])
-        m2.metric("Relationships", graph["relationships"])
-        m3.metric("Passages", f"{corpus['chunks']:,}")
-        m4.metric("Words", f"{corpus['words']:,}")
-        st.caption(
-            ("Live counts from the Neo4j graph database." if stats["neo4j_live"] else "Neo4j isn't reachable — showing counts from the seed files.")
-            + f" Period(s) loaded: {', '.join(stats['periods'])}. More events and periods will be added over time."
-        )
+        table = entities[["name", "entity_type", "aliases", "description", "period_tag"]]
+        types = st.multiselect("Entity type", sorted(entities["entity_type"].unique()))
+        if types:
+            table = table[table["entity_type"].isin(types)]
+    if search.strip():
+        mask = table.apply(lambda col: col.astype(str).str.contains(search.strip(), case=False, regex=False)).any(axis=1)
+        table = table[mask]
+    st.dataframe(
+        table,
+        hide_index=True,
+        width="stretch",
+        column_config={"source": st.column_config.LinkColumn("source", display_text="open")} if view_choice == "Relationships" else None,
+    )
+    secondary(f"{len(table)} rows")
 
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown("**What the graph contains**")
-            st.bar_chart(counts_frame(graph["node_types"]), x="type", y="count", horizontal=True, sort="-count")
-        with c2:
-            st.markdown("**How things are connected**")
-            st.bar_chart(counts_frame(graph["relation_types"]), x="type", y="count", horizontal=True, sort="-count")
 
-        if corpus["sources"]:
-            st.markdown("**Source texts**")
-            for s in corpus["sources"]:
-                st.markdown(f"- {s}")
-
-        st.divider()
-        entities = pd.DataFrame(kg["entities"])
-        relationships = pd.DataFrame(kg["relationships"])
-
-        view_choice = st.segmented_control("Browse", ["Entities", "Relationships"], default="Entities")
-        search = st.text_input("Filter", placeholder="Type a name, e.g. Lakshmibai", label_visibility="collapsed")
-
-        if view_choice == "Relationships":
-            table = relationships[["subject", "relation", "object", "source", "notes"]]
-        else:
-            table = entities[["name", "entity_type", "aliases", "description", "period_tag"]]
-            types = st.multiselect("Entity type", sorted(entities["entity_type"].unique()))
-            if types:
-                table = table[table["entity_type"].isin(types)]
-        if search.strip():
-            mask = table.apply(lambda col: col.astype(str).str.contains(search.strip(), case=False, regex=False)).any(axis=1)
-            table = table[mask]
-        st.dataframe(
-            table,
-            hide_index=True,
-            width="stretch",
-            column_config={"source": st.column_config.LinkColumn("source", display_text="open")} if view_choice == "Relationships" else None,
-        )
-        st.caption(f"{len(table)} rows")
-
-# ---- How it works --------------------------------------------------------
-with tab_how:
+def how_page():
+    header_bar("How it works")
     st.markdown(
         """
 **1. Find the evidence.** Your question is matched against two stores: a small *knowledge graph* of people, places and
@@ -385,9 +608,12 @@ except what was retrieved — and to say so when the sources don't cover the que
 guarantee that the answer is historically true — only that it's supported by *these* sources.
         """
     )
-    st.markdown("**Good to know**")
+    label("Good to know")
     st.markdown(
         "- A low score doesn't always mean a wrong answer; it can mean the sources word things differently.\n"
         "- A high score can't catch an error that is in the sources themselves.\n"
-        "- The knowledge graph is small and hand-built, and currently covers one event (the 1857 Revolt) as the first case study."
+        "- The knowledge graph is small and built from the source book, and currently covers one event (the 1857 Revolt) as the first case study."
     )
+
+
+{"chat": chat_page, "compare": compare_page, "kb": kb_page, "how": how_page}[st.session_state.page]()

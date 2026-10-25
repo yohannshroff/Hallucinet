@@ -26,8 +26,24 @@ def test_format_context_includes_graph_facts_and_citations():
         "vector_chunks": [],
     }
     context = format_context_for_llm(bundle)
-    assert "Rani Lakshmibai --ruled--> Jhansi" in context
-    assert "https://example.org/x" in context
+    assert "[1] Knowledge graph, https://example.org/x: Rani Lakshmibai ruled Jhansi." in context
+
+
+def test_format_context_numbers_facts_then_passages_without_file_paths():
+    bundle = {
+        "query": "q",
+        "graph_facts": [
+            {"subject": "Hodson", "relation": "captured", "object": "Bahadur Shah", "source": "data/raw/book.pdf#page=393", "notes": ""},
+            {"subject": "Jhansi", "relation": "associated_with", "object": "Hugh Rose", "source": "data/raw/book.pdf#page=405", "notes": ""},
+        ],
+        "vector_chunks": [],
+        "passages": [{"title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 401-404)", "source_url": "data/raw/book.pdf#page=401", "text": "The Rani..."}],
+    }
+    assert format_context_for_llm(bundle).splitlines()[2:] == [
+        "[1] Knowledge graph, p. 393: Hodson captured Bahadur Shah.",
+        "[2] Knowledge graph, p. 405: Jhansi and Hugh Rose are mentioned together in the book.",
+        "[3] The Great Mutiny, pp. 401-404: The Rani...",
+    ]
 
 
 def test_format_context_handles_empty_bundle():
@@ -82,6 +98,11 @@ def test_retrieve_modes_isolate_sources():
     assert vector_only["graph_facts"] == []
     assert len(vector_only["vector_chunks"]) > 0
 
+    assert all(p["via"] == "vector" for p in vector_only["passages"])
+
     graph_only = retrieve(query, entities_df, k=3, mode="graph")
     assert graph_only["vector_chunks"] == []
-    assert len(graph_only["graph_facts"]) > 0
+    # Jhansi's own facts are co-mentions and "Siege of Jhansi is located in Jhansi", which the
+    # LLM no longer sees -- the graph's contribution here is the graph-guided passages
+    assert len(graph_only["passages"]) > 0
+    assert all(p["via"] == "graph" for p in graph_only["passages"])

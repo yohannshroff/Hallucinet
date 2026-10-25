@@ -18,13 +18,15 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "generation"))
-from common import ENTITIES_CSV, get_logger  # noqa: E402
+from common import ENTITIES_CSV, bundle_passages, get_logger  # noqa: E402
 
 from claim_splitting import split_into_claims  # noqa: E402
 from entailment import classify_claims  # noqa: E402
 from prompt_template import REFUSAL_PHRASE  # noqa: E402
 
 log = get_logger("trust_score")
+
+META_PREFIXES = ("the provided context", "the context ")  # "The context does not say ..." is about the sources, not history
 
 # Turns a graph fact's (subject, relation, object) into a natural-language
 # sentence so the NLI model -- trained on prose, not "A --rel--> B" arrow
@@ -50,7 +52,9 @@ RELATION_TEMPLATES = {
     "died_during": "{subject} died during {object}.",
     "member_of": "{subject} was a member of {object}.",
     "disbanded_by": "{subject} was disbanded by {object}.",
-    "associated_with": "{subject} is associated with {object}.",
+    "administered": "{subject} administered {object}.",
+    # a co-mention, not a relationship -- worded so neither the LLM nor the NLI model reads more into it
+    "associated_with": "{subject} and {object} are mentioned together in the book.",
 }
 
 
@@ -75,10 +79,17 @@ def evidence_texts_from_bundle(bundle: dict) -> list:
     claims far too low when the premise is a whole ~180-word multi-topic
     chunk instead of the one sentence that actually supports the claim
     (see docs/part6_notes.md for the before/after numbers).
+
+    Each sentence is also given together with the one before it: "She was a
+    beautiful woman of thirty-eight" alone does not support "Lady Canning was
+    a beautiful woman of thirty-eight", but with the previous sentence naming
+    her it does (0.07 -> 0.98 entailment with this model).
     """
     texts = [fact_to_sentence(fact) for fact in bundle.get("graph_facts", [])]
-    for chunk in bundle.get("vector_chunks", []):
-        texts += split_into_claims(chunk["text"])  # just sentence segmentation here, not "claims" per se
+    for chunk in bundle_passages(bundle):
+        sentences = split_into_claims(chunk["text"])  # just sentence segmentation here, not "claims" per se
+        texts += sentences
+        texts += [f"{a} {b}" for a, b in zip(sentences, sentences[1:])]
     return texts
 
 
@@ -98,7 +109,12 @@ def compute_trust_score(answer_text: str, bundle: dict) -> dict:
     # system, not a factual claim about history -- scoring it against
     # evidence would wrongly report 0% trust for exactly the behavior the
     # prompt template is designed to produce (see docs/part6_notes.md).
-    claims = [c for c in claims if c.strip().rstrip(".") != REFUSAL_PHRASE.rstrip(".")]
+    # Remarks about the context itself ("The provided context contains several
+    # passages ...") are the same kind of meta-commentary.
+    claims = [
+        c for c in claims
+        if c.strip().rstrip(".") != REFUSAL_PHRASE.rstrip(".") and not c.lower().startswith(META_PREFIXES)
+    ]
 
     results = classify_claims(claims, evidence_texts)
     n_entailed = sum(1 for r in results if r["verdict"] == "entailed")

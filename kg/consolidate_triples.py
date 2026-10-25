@@ -4,7 +4,10 @@ rule-based facts into data/kg_seed/entities.csv and relationships.csv
 
 What it does:
 0. Reads the grammar-extracted facts (kg/extract_facts.py) that passed the
-   NLI check, plus the rule-based facts (kg/find_candidates.py).
+   NLI check, the rule-based facts (kg/find_candidates.py), and the
+   hand-reviewed facts in data/kg_seed/verified_facts.csv (kg/draft_facts.py):
+   accepted ones are kept as certain, rejected ones are removed even when
+   another stage found them.
 1. Merges name variants into one entity: "Havelock" -> "Henry Havelock"
    when exactly one longer name ends with it, and spelling variants such as
    "Tatya Tope" / "Tantia Tope" by fuzzy matching within the same type.
@@ -38,10 +41,11 @@ from common import (  # noqa: E402
     EXTRACTED_JSONL,
     MENTIONS_JSON,
     RELATIONSHIPS_CSV,
+    VERIFIED_FACTS_CSV,
     get_logger,
 )
 from find_candidates import PERSON_TITLES  # noqa: E402
-from extract_facts import EXCLUDED_NAMES, LLM_TYPE_TO_SCHEMA_TYPE  # noqa: E402
+from extract_facts import EXCLUDED_NAMES, load_lexicon  # noqa: E402
 
 log = get_logger("consolidate_triples")
 
@@ -71,6 +75,7 @@ TYPE_RULES = {
     "died_during": ({P}, {E}),
     "member_of": (ACTORS, {O}),
     "disbanded_by": ({O}, ACTORS),
+    "administered": ({P}, {L, O}),
     "associated_with": ({P, L, O, E}, {P, L, O, E}),
 }
 
@@ -82,6 +87,28 @@ ALIAS_OVERRIDES = {
     "Mutiny": "Indian Mutiny",
     "Indian Rebellion": "Indian Mutiny",
     "Sepoy Revolt": "Indian Mutiny",
+    # bare surnames/titles the automatic merge leaves alone (several longer names end with
+    # them, or the full name is rare) but which mean one person throughout the book
+    "Havelock": "Henry Havelock",
+    "General Havelock": "Henry Havelock",
+    "Harry": "Harry Havelock",
+    "Hodson": "William Hodson",
+    "Nicholson": "John Nicholson",
+    "Outram": "James Outram",
+    "General Hearsey": "Hearsey",
+    "General Barnard": "Barnard",
+    "Madeline": "Madeline Jackson",
+    "King of Delhi": "Bahadur Shah",
+}
+
+# Entities whose name in the book is too short to find from a question; renamed after merging.
+RENAMES = {
+    "Rani": "Rani of Jhansi",
+    "Ranee": "Rani of Jhansi",  # spelling used in the trial transcript
+}
+# Names a question may use that the book does not (or rarely does); added to the aliases column.
+EXTRA_ALIASES = {
+    "Rani of Jhansi": ["Rani", "Ranee", "Lakshmibai", "Lakshmi Bai", "Rani Lakshmibai"],
 }
 
 
@@ -170,6 +197,43 @@ def pages_of(title: str) -> str:
     return f"The Great Mutiny, pp. {m.group(1)}" if m else title
 
 
+def tidy_event_name(cand: dict, lexicon: dict):
+    """An event name whose place swallowed the next word is cut back to the known place
+    ("Relief of Lucknow Havelock" -> "Relief of Lucknow"); one with footnote debris in it
+    ("Massacre of Firinghis'.14 But") is dropped (None). Other candidates pass unchanged."""
+    place = cand["object"]
+    if cand["rule"] != "event_name" or place in lexicon:
+        return cand
+    words = place.split()
+    for n in range(len(words) - 1, 0, -1):
+        known = " ".join(words[:n])
+        if known in lexicon and cand["subject"].endswith(place):
+            return {**cand, "subject": cand["subject"][: -len(place)] + known, "object": known}
+    if re.search(r"[\d'’.]", place):
+        return None
+    return cand
+
+
+def read_verified_facts(path: Path, lexicon: dict) -> tuple:
+    """Return (accepted raw facts, rejected {(subject, relation, object)}) from the
+    hand-review file. Rows naming an entity outside the typed lexicon are skipped."""
+    accepted, rejected, skipped = [], set(), 0
+    if not path.exists():
+        return accepted, rejected
+    for row in csv.DictReader(open(path, encoding="utf-8")):
+        s, rel, o = row["subject"], row["relation"], row["object"]
+        if s not in lexicon or o not in lexicon or rel not in TYPE_RULES:
+            skipped += 1
+            continue
+        if row["decision"] == "accept":
+            accepted.append((s, lexicon[s], rel, o, lexicon[o], ("verified", f"{s}|{rel}|{o}"), row["source"], row["title"]))
+        elif row["decision"] == "reject":
+            rejected.add((s, rel, o))
+    if skipped:
+        log.info(f"verified facts: skipped {skipped} row(s) naming an unknown entity or relation")
+    return accepted, rejected
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--min_support", type=int, default=1, help="Minimum distinct supporting sentences for an extracted fact")
@@ -182,8 +246,7 @@ def main():
 
     mentions = json.loads(MENTIONS_JSON.read_text(encoding="utf-8"))
     mention_count = {k: v["count"] for k, v in mentions.items()}
-    llm_types = json.loads(ENTITY_TYPES_JSON.read_text(encoding="utf-8"))
-    lexicon = {n: LLM_TYPE_TO_SCHEMA_TYPE[t] for n, t in llm_types.items() if t in LLM_TYPE_TO_SCHEMA_TYPE and n not in EXCLUDED_NAMES}
+    lexicon = load_lexicon(ENTITY_TYPES_JSON)
 
     # --- gather raw facts: (subject, stype, relation, object, otype, evidence_id, source_url, title) ---
     raw = []
@@ -202,12 +265,16 @@ def main():
     log.info(f"NLI check: dropped {n_unverified} extracted facts whose sentence does not entail them (< {args.min_entail})")
     if CANDIDATES_JSONL.exists():
         for line in open(CANDIDATES_JSONL, encoding="utf-8"):
-            c = json.loads(line)
+            c = tidy_event_name(json.loads(line), lexicon)
+            if c is None or c["subject"] in EXCLUDED_NAMES or c["object"] in EXCLUDED_NAMES:  # e.g. "Massacre of Europeans" located_in "Europeans"
+                continue
             stype = lexicon.get(c["subject"], c["subject_type"] if c["rule"] == "event_name" else None)
             otype = lexicon.get(c["object"], c["object_type"] if c["rule"] == "event_name" else None)
             if stype and otype:
                 raw.append((c["subject"], stype, c["relation"], c["object"], otype, ("rule", c["doc_id"]), c["source_url"], c["title"]))
-    log.info(f"{n_llm} extracted facts + {len(raw) - n_llm} rule-based facts to consolidate")
+    verified, rejected = read_verified_facts(VERIFIED_FACTS_CSV, lexicon)
+    raw += verified
+    log.info(f"{n_llm} extracted facts + {len(raw) - n_llm - len(verified)} rule-based facts + {len(verified)} hand-verified facts to consolidate")
 
     cooc = []  # (a, b, sentences, source_url, title)
     if COOCCURRENCE_JSONL.exists():
@@ -221,6 +288,9 @@ def main():
     for s, st, _, o, ot, *_ in raw:
         names_by_type[st].add(s)
         names_by_type[ot].add(o)
+    for s, _, o in rejected:
+        names_by_type[lexicon[s]].add(s)
+        names_by_type[lexicon[o]].add(o)
     for a, b, *_ in cooc:
         names_by_type[lexicon[a]].add(a)
         names_by_type[lexicon[b]].add(b)
@@ -229,6 +299,9 @@ def main():
         target = ALIAS_OVERRIDES.get(canon)
         if target and target in canonical:
             canonical[name] = canonical[target]
+    for name, canon in list(canonical.items()):
+        canonical[name] = RENAMES.get(canon, canon)
+    rejected = {(canonical[s], rel, canonical[o]) for s, rel, o in rejected}
     entity_type = {}
     for s, st, _, o, ot, *_ in raw:
         entity_type[canonical[s]] = st
@@ -238,8 +311,8 @@ def main():
             entity_type[canonical[name]] = lexicon[canonical[name]] if canonical[name] in lexicon else entity_type.get(canonical[name], lexicon[name])
 
     # --- type-check, aggregate by (subject, relation, object) ---
-    facts = defaultdict(lambda: {"evidence": set(), "rule": False, "sources": Counter()})
-    dropped_types = dropped_self = 0
+    facts = defaultdict(lambda: {"evidence": set(), "rule": False, "verified": False, "sources": Counter()})
+    dropped_types = dropped_self = dropped_rejected = 0
     for s, st, rel, o, ot, evidence, source_url, title in raw:
         cs, co = canonical[s], canonical[o]
         if cs == co:
@@ -249,14 +322,18 @@ def main():
         if entity_type[cs] not in allowed_s or entity_type[co] not in allowed_o:
             dropped_types += 1
             continue
+        if (cs, rel, co) in rejected:
+            dropped_rejected += 1
+            continue
         fact = facts[(cs, rel, co)]
         fact["evidence"].add(evidence)
         fact["rule"] |= evidence[0] == "rule"
+        fact["verified"] |= evidence[0] == "verified"
         fact["sources"][(source_url, title)] += 1
-    log.info(f"dropped {dropped_types} facts with impossible types and {dropped_self} self-relations")
+    log.info(f"dropped {dropped_types} facts with impossible types, {dropped_self} self-relations and {dropped_rejected} rejected in review")
 
-    kept = {k: v for k, v in facts.items() if v["rule"] or len(v["evidence"]) >= args.min_support}
-    log.info(f"{len(facts)} distinct facts -> {len(kept)} kept (rule-based, or supported by >= {args.min_support} sentences)")
+    kept = {k: v for k, v in facts.items() if v["rule"] or v["verified"] or len(v["evidence"]) >= args.min_support}
+    log.info(f"{len(facts)} distinct facts -> {len(kept)} kept (rule-based, hand-verified, or supported by >= {args.min_support} sentences)")
 
     # --- associated_with edges from co-occurrence ---
     pair_count, pair_sources = Counter(), defaultdict(Counter)
@@ -288,6 +365,9 @@ def main():
     for surface, canon in canonical.items():
         if canon in used:
             members[canon].add(surface)
+    for canon, extra in EXTRA_ALIASES.items():
+        if canon in used:
+            members[canon].update(extra)
 
     def total_mentions(canon):
         return sum(mention_count.get(m, 0) for m in members[canon])
@@ -323,10 +403,16 @@ def main():
     for (s, rel, o), v in sorted(kept.items(), key=lambda kv: (-len(kv[1]["evidence"]), kv[0])):
         (source_url, title), _ = v["sources"].most_common(1)[0]
         support = len(v["evidence"])
+        if v["verified"]:
+            how = "verified by hand"
+        elif v["rule"]:
+            how = f"pattern in the text, seen in {support} place(s)"
+        else:
+            how = f"stated in {support} sentence(s)"
         rel_rows.append(
             {
                 "subject": s, "relation": rel, "object": o, "source": source_url, "period_tag": PERIOD_TAG, "weight": support,
-                "notes": f"{pages_of(title)}; " + (f"pattern in the text, seen in {support} place(s)" if v["rule"] else f"stated in {support} sentence(s)"),
+                "notes": f"{pages_of(title)}; {how}",
             }
         )
 

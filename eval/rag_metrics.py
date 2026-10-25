@@ -25,6 +25,7 @@ REFUSAL_RE = re.compile(
     re.IGNORECASE,
 )
 CITED_PAGES_RE = re.compile(r"pp?\.\s*(\d+)(?:\s*[-–]\s*(\d+))?")
+CITED_NUMBERS_RE = re.compile(r"\[(\d+(?:\s*,\s*\d+)*)\]")
 
 
 def group_start(page: int) -> int:
@@ -48,10 +49,11 @@ def fact_group(fact: dict):
 
 def ranked_groups(bundle: dict, k: int = None) -> list:
     """Page groups in the order the generator sees them: graph facts first,
-    then vector chunks (cut to the top `k`). Duplicates are kept, since
-    precision should count every retrieved item."""
+    then the passages (cut to the top `k`). Duplicates are kept, since
+    precision should count every retrieved item. `passages` falls back to
+    `vector_chunks` for bundles saved before that field existed."""
     bundle = bundle or {}
-    chunks = bundle.get("vector_chunks", [])
+    chunks = bundle.get("passages", bundle.get("vector_chunks", []))
     if k is not None:
         chunks = chunks[:k]
     groups = [fact_group(f) for f in bundle.get("graph_facts", [])] + [chunk_group(c) for c in chunks]
@@ -126,23 +128,45 @@ def judge(answer: str, row: dict) -> dict:
     return {"refused": refused, "correct": correct, "hallucinated_answer": (not refused) and not correct}
 
 
-def citation_stats(answer: str, bundle: dict, gold: list) -> dict:
-    """How the answer's page citations ("pp. 57-60") hold up.
+def source_groups(bundle: dict) -> list:
+    """Page group of each numbered source, in the order the LLM sees them (graph
+    facts, then passages; see context_sources in retrieval/hybrid_retrieve.py).
+    Unlike ranked_groups, sources without a page stay as None, so index n-1 is
+    source [n]."""
+    bundle = bundle or {}
+    chunks = bundle.get("passages", bundle.get("vector_chunks", []))
+    return [fact_group(f) for f in bundle.get("graph_facts", [])] + [chunk_group(c) for c in chunks]
 
-    - cited: number of page citations found
-    - valid: cited groups that were actually in the retrieved context
-    - on_gold: cited groups that are gold pages
-    Returns accuracy = on_gold / cited (nan if nothing cited).
+
+def citation_stats(answer: str, bundle: dict, gold: list) -> dict:
+    """How the answer's citations hold up. The model cites numbered sources
+    ("[2]", "[1, 4]"); answers from older runs cite pages ("pp. 57-60"), which
+    are counted too.
+
+    - cited: number of citations found (each number in a list counts once)
+    - valid: citations pointing at a source that was in the context
+    - on_gold: citations whose source sits on a gold page group
+    Returns accuracy = on_gold / cited (nan if nothing cited or no gold pages).
     """
-    cited = []
+    if bundle is None:
+        return {"n_cited": 0, "citation_valid": math.nan, "citation_accuracy": math.nan}
+    sources = source_groups(bundle)
+    retrieved = {g for g in sources if g is not None}
+    valid, on_gold = [], []
+    for m in CITED_NUMBERS_RE.finditer(answer):
+        for n in (int(x) for x in m.group(1).split(",")):
+            in_range = 1 <= n <= len(sources)
+            valid.append(in_range)
+            on_gold.append(in_range and sources[n - 1] in gold)
     for m in CITED_PAGES_RE.finditer(answer):
-        cited.append(group_start(int(m.group(1))))
-    retrieved = set(ranked_groups(bundle))
-    n = len(cited)
+        g = group_start(int(m.group(1)))
+        valid.append(g in retrieved)
+        on_gold.append(g in gold)
+    n = len(valid)
     return {
         "n_cited": n,
-        "citation_valid": sum(c in retrieved for c in cited) / n if n else math.nan,
-        "citation_accuracy": sum(c in gold for c in cited) / n if n and gold else math.nan,
+        "citation_valid": sum(valid) / n if n else math.nan,
+        "citation_accuracy": sum(on_gold) / n if n and gold else math.nan,
     }
 
 

@@ -15,6 +15,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "kg"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "eval"))
 from common import (  # noqa: E402
     ENTITIES_CSV,
     NEO4J_PASSWORD,
@@ -117,6 +118,60 @@ def search(session, entity_ids: list, limit_per_entity: int = DEFAULT_HOPS_LIMIT
                 seen.add(key)
                 all_facts.append(fact)
     return all_facts
+
+
+MAX_PATH_HOPS = 2
+PATHS_PER_PAIR = 3
+
+
+def path_facts(session, entity_ids: list) -> list:
+    """Facts on the shortest paths (up to MAX_PATH_HOPS edges) between every
+    pair of seed entities -- what a two-entity question ("Who captured the
+    King, and what became of him?") needs but a 1-hop lookup can miss.
+    Each edge on a path becomes an ordinary fact, tagged via="path"."""
+    query = f"""
+        MATCH (a:Entity {{entity_id: $a}}), (b:Entity {{entity_id: $b}})
+        MATCH p = allShortestPaths((a)-[*..{MAX_PATH_HOPS}]-(b))
+        WITH p LIMIT $limit
+        UNWIND relationships(p) AS r
+        RETURN startNode(r).name AS subject, type(r) AS relation, endNode(r).name AS object,
+               r.source AS source, r.notes AS notes
+    """
+    facts, seen = [], set()
+    for i, a in enumerate(entity_ids):
+        for b in entity_ids[i + 1 :]:
+            for record in session.run(query, a=a, b=b, limit=PATHS_PER_PAIR):
+                key = (record["subject"], record["relation"], record["object"])
+                if key not in seen:
+                    seen.add(key)
+                    facts.append({**record.data(), "direction": "path", "via": "path"})
+    return facts
+
+
+# Typed facts state a relation; associated_with only says "mentioned together".
+# The bonus is on the cosine-similarity scale, so a clearly more relevant
+# co-mention can still outrank an off-topic typed fact.
+TYPED_FACT_BONUS = 0.1
+
+
+def rank_facts(question: str, facts: list, cap: int, encode) -> list:
+    """Keep the `cap` facts most relevant to the question: path facts first,
+    then by question similarity of the fact's sentence form (+ a bonus for
+    typed facts). `encode(texts) -> normalized vectors` is injected so tests
+    need no model."""
+    if not facts:
+        return []
+    from trust_score import fact_to_sentence
+
+    vecs = encode([question] + [fact_to_sentence(f) for f in facts])
+    sims = vecs[1:] @ vecs[0]
+
+    def key(i):
+        f = facts[i]
+        typed = f["relation"] != "associated_with"
+        return (f.get("via") != "path", -(float(sims[i]) + TYPED_FACT_BONUS * typed))
+
+    return [facts[i] for i in sorted(range(len(facts)), key=key)[:cap]]
 
 
 def format_fact(fact: dict) -> str:

@@ -53,6 +53,15 @@ def test_citation_stats():
     assert s["citation_accuracy"] == 0.5
 
 
+def test_citation_stats_numbered_sources():
+    # sources: [1] fact on p. 59 (group 57), [2] pp. 169-172, [3] pp. 57-60; [9] does not exist
+    s = M.citation_stats("Yes [1] and [2, 9].", BUNDLE, [169])
+    assert s["n_cited"] == 3
+    assert abs(s["citation_valid"] - 2 / 3) < 1e-9
+    assert abs(s["citation_accuracy"] - 1 / 3) < 1e-9
+    assert math.isnan(M.citation_stats("Yes [1].", None, [169])["citation_accuracy"])
+
+
 def test_mcnemar_and_kappa():
     r = S.mcnemar_exact([1, 1, 1, 1, 1, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1])
     assert (r["a_only"], r["b_only"]) == (6, 1)

@@ -1,15 +1,18 @@
 """Rebuild continuous document text from data/processed/chunks.jsonl.
 
-The chunker stores overlapping 180-word windows (40-word overlap); the
-knowledge graph is built from exactly the same text the vector index
-searches, so we stitch each document's chunks back together here.
+The chunker stores overlapping word windows (CHUNK_OVERLAP_WORDS overlap,
+scripts/common.py); the knowledge graph is built from exactly the same text
+the vector index searches, so we stitch each document's chunks back together
+here.
 """
 
 import json
+import sys
 from collections import defaultdict
 from pathlib import Path
 
-CHUNK_OVERLAP_WORDS = 40  # must match scripts/clean_and_chunk.py (--overlap)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+from common import CHUNK_OVERLAP_WORDS  # noqa: E402  - shared with scripts/clean_and_chunk.py (--overlap)
 
 
 def reconstruct_documents(chunks_path: Path) -> list:

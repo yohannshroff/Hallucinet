@@ -16,10 +16,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "generation"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "retrieval"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "eval"))
 
-from common import is_web_url  # noqa: E402
+from common import bundle_passages, is_web_url  # noqa: E402
 from generate_answer import answer_question  # noqa: E402
 from graph_search import format_fact  # noqa: E402
-from trust_score import compute_trust_score  # noqa: E402
+from trust_score import compute_trust_score, fact_to_sentence  # noqa: E402
 
 SNIPPET_CHARS = 360
 
@@ -38,7 +38,11 @@ def build_ask_response(question: str, entities_df: pd.DataFrame, k: int = 5, mod
 
     bundle = result["bundle"]
 
-    graph_facts = [{"text": format_fact(f), "source": f["source"] or ""} for f in bundle["graph_facts"]]
+    # `sentence` is the wording the LLM saw ("X and Y are mentioned together in the book."), so the
+    # source list reads the same as the context it cited.
+    graph_facts = [
+        {"text": format_fact(f), "sentence": fact_to_sentence(f), "source": f["source"] or ""} for f in bundle["graph_facts"]
+    ]
     passages = [
         {
             "title": c["title"],
@@ -46,7 +50,7 @@ def build_ask_response(question: str, entities_df: pd.DataFrame, k: int = 5, mod
             "score": round(c["score"], 3),
             "source": c["source_url"],
         }
-        for c in bundle["vector_chunks"]
+        for c in bundle_passages(bundle)
     ]
 
     # Flat de-duplicated citation list (kept for older clients / the demo cache).
@@ -56,7 +60,7 @@ def build_ask_response(question: str, entities_df: pd.DataFrame, k: int = 5, mod
         if fact["source"] and fact["source"] not in seen:
             sources.append({"title": f"{fact['subject']} {fact['relation']} {fact['object']}", "url": fact["source"]})
             seen.add(fact["source"])
-    for chunk in bundle["vector_chunks"]:
+    for chunk in bundle_passages(bundle):
         if chunk["source_url"] not in seen:
             sources.append({"title": chunk["title"], "url": chunk["source_url"] if is_web_url(chunk["source_url"]) else ""})
             seen.add(chunk["source_url"])

@@ -29,7 +29,7 @@ def test_local_pdf_path_is_not_shown_in_llm_context():
         ],
     }
     context = format_context_only(bundle)
-    assert "The Great Mutiny (pp. 5-8)" in context
+    assert "The Great Mutiny, pp. 5-8" in context
     assert ".pdf" not in context
 
 

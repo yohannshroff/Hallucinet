@@ -37,6 +37,7 @@ def search(query: str, index, id_map: list, model, k: int = 5) -> list:
         results.append(
             {
                 "score": float(score),
+                "chunk_id": entry.get("chunk_id"),
                 "doc_id": entry["doc_id"],
                 "title": entry["title"],
                 "source_url": entry["source_url"],

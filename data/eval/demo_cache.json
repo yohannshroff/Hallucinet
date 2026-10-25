@@ -1,0 +1,1156 @@
+[
+  {
+    "question": "Who led the resistance at Jhansi?",
+    "answer": "Captain Gordon, the Rani of Jhansi, the Rao Sahib and Tatya Tope led the resistance at Jhansi [1][2].",
+    "mode": "hybrid",
+    "trust_score": 0.0,
+    "n_claims": 1,
+    "n_entailed": 0,
+    "seed_entities": [
+      "Jhansi"
+    ],
+    "sources": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 405-408)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 393-396)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 409-412)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Captain Gordon, the Rani of Jhansi, the Rao Sahib and Tatya Tope led the resistance at Jhansi.",
+        "verdict": "neutral",
+        "score": 0.05,
+        "best_evidence": "The Last of the Rebels • Continued resistance of the talukdars • Walpole's campaign in Rohilkhand • his defeat at Ruiya, 15 April 1858 - Campbell's victory over Khan Bahadur Khan outside Bareilly, 5 May 1858 • death of the Maulvi, 5 June • the mutiny at Indore, 1 July 1857 - the Rani of Jhansi • massacre at Jhansi, 8 June 1857 • Sir Hugh Rose arrives at Jhansi, 21 March 1858 •"
+      }
+    ],
+    "graph_facts": [],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 405-408)",
+        "snippet": "The Last of the Rebels • 379 The Political Agent's vakil gave this account of what happened: Early upon the morning of the 8th [June] the mutineers surrounded the fort and by the aid of their guns succeeded in effecting an entrance into it . . . when Captain Gordon [Deputy Superintendent of Jhansi], after making a most gallant resistance, finding the place...",
+        "score": 0.433,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=405"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 393-396)",
+        "snippet": "The Last of the Rebels • Continued resistance of the talukdars • Walpole's campaign in Rohilkhand • his defeat at Ruiya, 15 April 1858 - Campbell's victory over Khan Bahadur Khan outside Bareilly, 5 May 1858 • death of the Maulvi, 5 June • the mutiny at Indore, 1 July 1857 - the Rani of Jhansi • massacre at Jhansi, 8 June 1857 • Sir Hugh Rose arrives at...",
+        "score": 0.473,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 409-412)",
+        "snippet": "these fellows'.48 Most officers, however, were less grudging and had now quite forgotten Rose's early mistakes. 'He is now the first man in India in most people's opinion here,' Henry Campion thought. 'Indeed he seems to have done more than any of them.'49 It seemed that the war was over at last. The Rani of Jhansi, the Rao Sahib and Tatya Tope were all at...",
+        "score": 0.517,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=409"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 405-408)",
+        "snippet": "volleys of red-hot shot and an assault seemed practicable, a vast bonfire on a nearby hill announced to the cheering rebels the arrival of Tatya Tope with a relieving force of over 20,000 men. Rose kept his nerve. He decided to maintain the siege of Jhansi while withdrawing part of his small army towards the Betwa River to meet Tatya Tope's threat. It was a...",
+        "score": 0.515,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=405"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 405-408)",
+        "snippet": "Calcutta, where the Rani's protestations of innocence were generally discounted; and when Jhansi was invaded by troops of two neighbouring states, her appeal for help from the British was ignored. She turned, therefore, to the rebels who helped her drive out the invaders and who pressed her to fight for independence from the British too. Yet she seems still...",
+        "score": 0.48,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=405"
+      }
+    ],
+    "timing_ms": {
+      "answer": 132916,
+      "trust_check": 10085
+    }
+  },
+  {
+    "question": "What caused the Meerut Mutiny?",
+    "answer": "A native officer informed Hugh Gough that a mutiny of the native troops at Meerut would take place the next day, Sunday 10 May, when their comrades would be delivered from imprisonment [8][9]. [8] The sergeant turned, shot the man dead, leaped over the garden wall and dashed into a nearby bungalow from which he emerged a moment later with two other officers of his regiment [7]. [7]",
+    "mode": "hybrid",
+    "trust_score": 1.0,
+    "n_claims": 2,
+    "n_entailed": 2,
+    "seed_entities": [
+      "Indian Mutiny",
+      "Meerut"
+    ],
+    "sources": [
+      {
+        "title": "Delhi part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "title": "Delhi associated_with Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "title": "Delhi associated_with Meerut",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "Meerut part_of Mutiny at Meerut",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "title": "Lucknow part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      },
+      {
+        "title": "Indian Mutiny located_in Lucknow",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=261"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 89-92)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 81-84)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 85-88)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "A native officer informed Hugh Gough that a mutiny of the native troops at Meerut would take place the next day, Sunday 10 May, when their comrades would be delivered from imprisonment.",
+        "verdict": "entailed",
+        "score": 0.743,
+        "best_evidence": "Soon after his return from the gaol, Hugh Gough was sitting on the veranda of his bungalow when a native officer of the regiment called to see him on the pretence of discussing the troop's accounts. It soon transpired that his real mission was to inform Gough that a mutiny of the native troops at Meerut would take place the next day, Sunday 10 May, when their comrades would be delivered from imprisonment."
+      },
+      {
+        "claim": "The sergeant turned, shot the man dead, leaped over the garden wall and dashed into a nearby bungalow from which he emerged a moment later with two other officers of his regiment.",
+        "verdict": "entailed",
+        "score": 0.984,
+        "best_evidence": "The sergeant turned, shot the man dead, leaped over the garden wall and dashed into a nearby bungalow from which he emerged a moment later with two other officers of his regiment."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Delhi --part_of--> Indian Mutiny",
+        "sentence": "Delhi was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "text": "Delhi --associated_with--> Indian Mutiny",
+        "sentence": "Delhi and Indian Mutiny are mentioned together in the book.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=1"
+      },
+      {
+        "text": "Delhi --associated_with--> Meerut",
+        "sentence": "Delhi and Meerut are mentioned together in the book.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Meerut --part_of--> Mutiny at Meerut",
+        "sentence": "Meerut was part of Mutiny at Meerut.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "text": "Lucknow --part_of--> Indian Mutiny",
+        "sentence": "Lucknow was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      },
+      {
+        "text": "Indian Mutiny --located_in--> Lucknow",
+        "sentence": "Indian Mutiny is located in Lucknow.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=261"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 89-92)",
+        "snippet": "Mutiny at Meerut • 87 pound, pursued by a mob of badmashes and by Mackenzie's chowkidar who thrust at him with a spear, cutting open his lip. The sergeant turned, shot the man dead, leaped over the garden wall and dashed into a nearby bungalow from which he emerged a moment later with two other officers of his regiment. Both the officers and the sergeant...",
+        "score": 0.669,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=89"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 81-84)",
+        "snippet": "Soon after his return from the gaol, Hugh Gough was sitting on the veranda of his bungalow when a native officer of the regiment called to see him on the pretence of discussing the troop's accounts. It soon transpired that his real mission was to inform Gough that a mutiny of the native troops at Meerut would take place the next day, Sunday 10 May, when...",
+        "score": 0.576,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 85-88)",
+        "snippet": "Mutiny at Meerut • 83 majority hurried off as fast as they could to seek hiding-places for themselves or to protect their women and children. Six of them, led by the Commanding Officer of the 20th, sought shelter in a servants' latrine in the compound of Colonel Carmichael-Smyth's bungalow. Three of these attempted to escape from here, going their separate...",
+        "score": 0.689,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=85"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 77-80)",
+        "snippet": "Mutiny at Meerut • Brigadier Wilson at Meerut • Colonel Carmichael-Smyth and the firing-parade of the 3rd Light Cavalry, 24 April 1857 • disgrace of the 3rd Cavalry • the outbreak and murders at Meerut, 10 May 1857 • At the beginning of May 1857, Brigadier Archdale Wilson, the 'tall, soldierly-looking' station commander at Meerut, returned to duty from the...",
+        "score": 0.512,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=77"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 81-84)",
+        "snippet": "he had long since passed the age when he ought to have retired, and by some, that he was rapidly approaching his dotage. Brigadier Wilson condemned him as 'a fearful old dolt ... an exasperating idiot'.22 But Wilson agreed with Hewitt that the reports of a threatened mutiny at Meerut were not to be taken seriously. He had just written to his wife to tell...",
+        "score": 0.625,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=81"
+      }
+    ],
+    "timing_ms": {
+      "answer": 44210,
+      "trust_check": 13503
+    }
+  },
+  {
+    "question": "Who was declared emperor by the rebel sepoys in Delhi?",
+    "answer": "Bahadur Shah was declared emperor by the rebel sepoys in Delhi [2], [7], [9].",
+    "mode": "hybrid",
+    "trust_score": 0.0,
+    "n_claims": 1,
+    "n_entailed": 0,
+    "seed_entities": [
+      "Delhi"
+    ],
+    "sources": [
+      {
+        "title": "Delhi part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "title": "Bahadur Shah ruled Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "title": "Delhi located_in India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "title": "William Hodson captured Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=333"
+      },
+      {
+        "title": "Delhi located_in Jumna",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=345"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 301-304)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 293-296)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 297-300)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 109-112)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Bahadur Shah was declared emperor by the rebel sepoys in Delhi.",
+        "verdict": "neutral",
+        "score": 0.018,
+        "best_evidence": "Rebels and Fugitives • Bahadur Shah II, King of Delhi • mutineers from Meerut arrive at Delhi • massacre of Europeans in Delhi, 11 May 1857 • mutiny of Delhi garrison • the Magazine blown up •flight of British families from Delhi • Bahadur Shah II, King of Delhi, was then eighty-two years old."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Delhi --part_of--> Indian Mutiny",
+        "sentence": "Delhi was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "text": "Bahadur Shah --ruled--> Delhi",
+        "sentence": "Bahadur Shah ruled Delhi.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "text": "Delhi --located_in--> India",
+        "sentence": "Delhi is located in India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "text": "William Hodson --captured--> Delhi",
+        "sentence": "William Hodson captured Delhi.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=333"
+      },
+      {
+        "text": "Delhi --located_in--> Jumna",
+        "sentence": "Delhi is located in Jumna.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=345"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 301-304)",
+        "snippet": "secret negotiations with the British.36 Nor was he the only member of the royal household whose agents were in touch with the enemy. His physician, Hakim Ahsanullah Khan, who had endeavoured to persuade the King not to become involved with the mutineers, was also in touch with the British camp. So was his wife, Zinat Mahal, who feared that her son, Jiwan...",
+        "score": 0.594,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=301"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 293-296)",
+        "snippet": "PART TWO The King of Delhi • Bahadur Shah at Delhi • conditions in the city, May to September, 1857 • the King's sons - sepoys' depredations • arrival of Bakht Khan, 2 July - growing disorder • On the day after the mutinous sepoys from Meerut had been admitted into Delhi, the King had held a durbar in the Diwan-i-Khas for the first time in fifteen years....",
+        "score": 0.637,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 297-300)",
+        "snippet": "roof of a house to observe his artillery open operations with an initial bombardment, he soon 'hastily descended from the roof' when an enemy shell exploded near by, 'mounted his horse, and galloped off with his escort of sowars far into the rear of the position, not heeding the cries of his troops. A general stampede then took place.'15 The King of Delhi •...",
+        "score": 0.571,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=297"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "snippet": "Rebels and Fugitives • Bahadur Shah II, King of Delhi • mutineers from Meerut arrive at Delhi • massacre of Europeans in Delhi, 11 May 1857 • mutiny of Delhi garrison • the Magazine blown up •flight of British families from Delhi • Bahadur Shah II, King of Delhi, was then eighty-two years old. As a young man he had been renowned for his athleticism, his...",
+        "score": 0.517,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 109-112)",
+        "snippet": "of the 38th Native Infantry which the Tytlers had already met. The sepoys called on them to stop. But not trusting them they rattled past until they saw ahead of them a band of Goojurs drawn up across the road; and, doubtful that they could force their way through, they decided to turn back and to throw themselves upon the mercy of the sepoys. The havildar...",
+        "score": 0.54,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=109"
+      }
+    ],
+    "timing_ms": {
+      "answer": 36437,
+      "trust_check": 7544
+    }
+  },
+  {
+    "question": "What happened during the Siege of Cawnpore?",
+    "answer": "Heat was experienced [1][7]. Native servants ate grain meant for horses [2][3]. Nana Sahib joined with matchlock-men and lancers [3]. Mohammed Ali Khan, known as Nane Nawab, was in charge of a battery near the Racquets Court [3]. British brigades worked around the right flank [5]. The Gwalior Contingent was sent flying beyond the Kalpi road [5]. A stone bridge was prepared to be blown up [7]. Messages of desperation were inscribed on the walls [8].",
+    "mode": "hybrid",
+    "trust_score": 0.8571428571428571,
+    "n_claims": 7,
+    "n_entailed": 6,
+    "seed_entities": [
+      "Siege of Cawnpore",
+      "Cawnpore"
+    ],
+    "sources": [
+      {
+        "title": "Tatya Tope fought_against Cawnpore",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=377"
+      },
+      {
+        "title": "House of the Ladies located_in Cawnpore",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=261"
+      },
+      {
+        "title": "Satichaura Ghat located_in Cawnpore",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 189-192)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 169-172)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 205-208)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 213-216)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Native servants ate grain meant for horses.",
+        "verdict": "entailed",
+        "score": 0.98,
+        "best_evidence": "The native servants were reduced to eating the grain which had been laid in for the horses, although the eighty sepoys who had chosen to stay with their officers had been sent out of the entrenchment to make their best way home.66 Scarcely a day had passed since the siege began when Nana Sahib had not been joined by a party of matchlock-men and lancers brought into Cawnpore by some landholder from the outlying districts."
+      },
+      {
+        "claim": "Nana Sahib joined with matchlock-men and lancers.",
+        "verdict": "contradiction",
+        "score": 0.191,
+        "best_evidence": "The native servants were reduced to eating the grain which had been laid in for the horses, although the eighty sepoys who had chosen to stay with their officers had been sent out of the entrenchment to make their best way home.66 Scarcely a day had passed since the siege began when Nana Sahib had not been joined by a party of matchlock-men and lancers brought into Cawnpore by some landholder from the outlying districts. He had also been joined by a wealthy Muslim citizen of Cawnpore, Mohammed Ali Khan, better known as Nane Nawab, who was placed in charge of the battery near the Racquets Court."
+      },
+      {
+        "claim": "Mohammed Ali Khan, known as Nane Nawab, was in charge of a battery near the Racquets Court.",
+        "verdict": "entailed",
+        "score": 0.992,
+        "best_evidence": "He had also been joined by a wealthy Muslim citizen of Cawnpore, Mohammed Ali Khan, better known as Nane Nawab, who was placed in charge of the battery near the Racquets Court."
+      },
+      {
+        "claim": "British brigades worked around the right flank.",
+        "verdict": "entailed",
+        "score": 0.977,
+        "best_evidence": "Distracted by a furious bombardment of Cawnpore and of their positions between the city and the Ganges, the rebel leaders drew reinforcements towards the centre while four British brigades worked round their right."
+      },
+      {
+        "claim": "The Gwalior Contingent was sent flying beyond the Kalpi road.",
+        "verdict": "entailed",
+        "score": 0.988,
+        "best_evidence": "For a time the attack faltered as the enemy held on tenaciously amidst the brick kilns south of the canal; but then Peel's sailors came dashing up, dragging their 24-pounders, and as they opened fire from the canal bridge, the infantry rushed across the canal and sent the Gwalior Contingent flying beyond the Kalpi road. I can't tell you how jolly."
+      },
+      {
+        "claim": "A stone bridge was prepared to be blown up.",
+        "verdict": "entailed",
+        "score": 0.993,
+        "best_evidence": "an unfordable river, where the rebels were prepared to blow up the stone bridge. Exhausted as they were by the long march and the fighting at Aong, the men responded readily when, while lying down waiting for their breakfast, they were ordered to get to their feet and march down in the burning sun towards the river."
+      },
+      {
+        "claim": "Messages of desperation were inscribed on the walls.",
+        "verdict": "entailed",
+        "score": 0.972,
+        "best_evidence": "continued in force for over three months. During this time piteous messages - such as 'Dear Jesus, send us help today, and deliver us not into the hands of our enemies' - were inscribed on the walls in order to increase the fury of the soldiers who were marched through Bibighar, on their arrival in Cawnpore, to witness the scene of their countrywomen's massacre.47"
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Tatya Tope --fought_against--> Cawnpore",
+        "sentence": "Tatya Tope fought against Cawnpore.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=377"
+      },
+      {
+        "text": "House of the Ladies --located_in--> Cawnpore",
+        "sentence": "House of the Ladies is located in Cawnpore.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=261"
+      },
+      {
+        "text": "Satichaura Ghat --located_in--> Cawnpore",
+        "sentence": "Satichaura Ghat is located in Cawnpore.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 189-192)",
+        "snippet": "heat. The native servants were reduced to eating the grain which had been laid in for the horses, although the eighty sepoys who had chosen to stay with their officers had been sent out of the entrenchment to make their best way home.66 Scarcely a day had passed since the siege began when Nana Sahib had not been joined by a party of matchlock-men and...",
+        "score": 0.506,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=189"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 377-380)",
+        "snippet": "the enemy's best troops, whose camp was astride the road on the Kalpi side of the main highway between Delhi and Allahabad. The Fall of Lucknow • 353 His army, now strengthened by five thousand infantry, six hundred cavalry and thirty-five guns, recently arrived from England, launched the attack on 6 December. It was immediately successful. Distracted by a...",
+        "score": 0.627,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=377"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 169-172)",
+        "snippet": "scores of leather workers producing the best and cheapest shoes and horse harnesses in India. It was also a city with a less enviable reputation as a sanctuary for vagrants and rascals of all kinds. And it was these badmashes who were deemed responsible for the increasing unrest in Cawnpore which the military authorities were obliged to notice as May drew...",
+        "score": 0.493,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=169"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 205-208)",
+        "snippet": "an unfordable river, where the rebels were prepared to blow up the stone bridge. Exhausted as they were by the long march and the fighting at Aong, the men responded readily when, while lying down waiting for their breakfast, they were ordered to get to their feet and march down in the burning sun towards the river. Again they were successful. More enemy...",
+        "score": 0.602,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=205"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 213-216)",
+        "snippet": "continued in force for over three months. During this time piteous messages - such as 'Dear Jesus, send us help today, and deliver us not into the hands of our enemies' - were inscribed on the walls in order to increase the fury of the soldiers who were marched through Bibighar, on their arrival in Cawnpore, to witness the scene of their countrywomen's...",
+        "score": 0.55,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=213"
+      }
+    ],
+    "timing_ms": {
+      "answer": 49750,
+      "trust_check": 42525
+    }
+  },
+  {
+    "question": "Who commanded the British forces that recaptured Delhi?",
+    "answer": "William Hodson captured Delhi [6]. Colonel Gerrard defeated the mutineers of the Jodhpur Legion at Narnul [5]. Colonel Edward Greathed commanded a column over 2,500 strong to pursue the mutineers [11].",
+    "mode": "hybrid",
+    "trust_score": 1.0,
+    "n_claims": 3,
+    "n_entailed": 3,
+    "seed_entities": [
+      "British Government",
+      "Delhi"
+    ],
+    "sources": [
+      {
+        "title": "Delhi located_in India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "title": "British Government ruled India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "Delhi part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "title": "William Hodson captured Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=333"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 349-352)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 305-308)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 301-304)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 345-348)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "William Hodson captured Delhi.",
+        "verdict": "entailed",
+        "score": 0.993,
+        "best_evidence": "William Hodson captured Delhi."
+      },
+      {
+        "claim": "Colonel Gerrard defeated the mutineers of the Jodhpur Legion at Narnul.",
+        "verdict": "entailed",
+        "score": 0.992,
+        "best_evidence": "General Van Cortland had carried out successful operations in the districts to the north-west, Brigadier Showers in the west and south-west. Colonel Gerrard, though mortally wounded as he sat resplendent in red coat covered with medals on a snow-white Arab horse, had defeated the mutineers of the Jodhpur Legion at Narnul."
+      },
+      {
+        "claim": "Colonel Edward Greathed commanded a column over 2,500 strong to pursue the mutineers.",
+        "verdict": "entailed",
+        "score": 0.992,
+        "best_evidence": "For many disappointed men their opportunities of sharing in the further plunder of Delhi came to an end on 24 September when a column, over 2,500 strong, was dispatched from Delhi under the command of Colonel Edward Greathed to pursue the mutineers who were now pouring across the Doab into Oudh."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Delhi --located_in--> India",
+        "sentence": "Delhi is located in India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "text": "British Government --ruled--> India",
+        "sentence": "British Government ruled India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "India --associated_with--> Delhi",
+        "sentence": "India and Delhi are mentioned together in the book.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "text": "India --associated_with--> British Government",
+        "sentence": "India and British Government are mentioned together in the book.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "Delhi --part_of--> Indian Mutiny",
+        "sentence": "Delhi was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "text": "William Hodson --captured--> Delhi",
+        "sentence": "William Hodson captured Delhi.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=333"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 349-352)",
+        "snippet": "dismounted to strip and plunder the dead Muslim fanatics whom they detested for they had a far longer and fiercer tradition of hostility to Muslim rule than they had to the British. They rolled the bodies over on to their backs and slashed at their faces as they shouted, 'Take this for the Prophet, and this, and this, and this for the three Imaums!'66...",
+        "score": 0.543,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=349"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 305-308)",
+        "snippet": "of 10,000 Mahommedans congregated near the Kashmir Gate and waited till midnight for the arrival of the King.44 But the King did not come. And soon afterwards it was the British who attacked. The Ridge • The camp before Delhi • dissatisfaction with the commanders • death of General Barnard, 5 July 1957 • Wilson's problems - the 'steaming bog' • arrival of...",
+        "score": 0.537,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=305"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "snippet": "Rebels and Fugitives • Bahadur Shah II, King of Delhi • mutineers from Meerut arrive at Delhi • massacre of Europeans in Delhi, 11 May 1857 • mutiny of Delhi garrison • the Magazine blown up •flight of British families from Delhi • Bahadur Shah II, King of Delhi, was then eighty-two years old. As a young man he had been renowned for his athleticism, his...",
+        "score": 0.555,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 301-304)",
+        "snippet": "6,000 mujahideen in Nasirabad who wanted to come to Delhi, he gloomily dictated the reply: 'Tell them there are 60,000 men in Delhi, and they have not yet driven the English away from the Ridge. What can their 6,000 do?' That evening Bakht Khan came to the durbar and complained that the soldiers were no longer obeying his orders. The King wearily replied,...",
+        "score": 0.598,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=301"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 345-348)",
+        "snippet": "strong boxes, displayed on tables and draped over chairs, were hundreds of Cashmere shawls and silks, kincobs and fans, swords, daggers and fowling-pieces, pearls and emeralds, rings and bracelets, gold bangles and exquisite filigree ornaments. For many disappointed men their opportunities of sharing in the further plunder of Delhi came to an end on 24...",
+        "score": 0.529,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=345"
+      }
+    ],
+    "timing_ms": {
+      "answer": 45087,
+      "trust_check": 34782
+    }
+  },
+  {
+    "question": "What was the Doctrine of Lapse and how did it relate to the revolt?",
+    "answer": "The provided context does not contain enough information to answer this question.",
+    "mode": "hybrid",
+    "trust_score": null,
+    "n_claims": 0,
+    "n_entailed": 0,
+    "seed_entities": [
+      "Baird Smith"
+    ],
+    "sources": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 417-420)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 413-416)",
+        "url": ""
+      }
+    ],
+    "claims": [],
+    "graph_facts": [],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 417-420)",
+        "snippet": "the neighbouring district of Shahabad ' there is no evidence of that general sympathy which would invest the Mutiny with the dignity of a national war'.16 Other Indian scholars have emphasized that it was mainly selfish motives and personal ambitions that impelled the people to revolt, that each group and individual leader fought for self-interest and had...",
+        "score": 0.461,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 417-420)",
+        "snippet": "of it, 'the countrymen of Hampden, Milton and Burke' would restore her people to their birthright.12 But the followers of Gandhi, who rejected violence, had much more in common with earlier forward-looking intellectuals such as the Brahmin, Ram Mohan Roy, than with the reactionary rebels of 1857 whose methods they condemned. In a book which appeared in...",
+        "score": 0.411,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 413-416)",
+        "snippet": "internal peace and order', Canning implemented the spirit of the proclamation with vigour. Loyal princes were summoned to durbars, officially confirmed in their lands and titles, awarded further titles, given presents, assured they could now adopt any heir they wished. The talukdars of Oudh were told that their lands would be restored to them, that they...",
+        "score": 0.449,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=413"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 413-416)",
+        "snippet": "those who believed that the British had been too lenient in India, that their mission was to rule, and rule they must, treating the natives with justice but as a subservient race upon whom civilized values must be imposed, if necessary by force. There were those, too, like Herbert Edwardes, who believed that the rebellion had come as a punishment from God,...",
+        "score": 0.412,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=413"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 417-420)",
+        "snippet": "would have meant a further war between the two.' Their followers had 'no confidence in themselves or their cause', no 'ideas of creating anything new'.18 Indeed, in 1857 it was their enemies, the British, who were considered the radicals and hated for their reforms by traditionalist Indians who supported the mutineers. The Mutiny, in fact, was not so much a...",
+        "score": 0.43,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      }
+    ],
+    "timing_ms": {
+      "answer": 28598,
+      "trust_check": 465
+    }
+  },
+  {
+    "question": "Who led the first relief of Lucknow?",
+    "answer": "Havelock, Neill, Outram and Tytler led the first relief of Lucknow [1][6][8].",
+    "mode": "hybrid",
+    "trust_score": 0.0,
+    "n_claims": 1,
+    "n_entailed": 0,
+    "seed_entities": [
+      "Relief of Lucknow",
+      "Lucknow"
+    ],
+    "sources": [
+      {
+        "title": "Lucknow part_of Oudh",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=221"
+      },
+      {
+        "title": "Lucknow part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      },
+      {
+        "title": "Lucknow located_in Oudh",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=49"
+      },
+      {
+        "title": "Indian Mutiny located_in Lucknow",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=261"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 285-288)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 281-284)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 289-292)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Havelock, Neill, Outram and Tytler led the first relief of Lucknow.",
+        "verdict": "neutral",
+        "score": 0.017,
+        "best_evidence": "The First Relief of Lucknow • 263 staff, the General said he was 'to take them from General Outram'."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Lucknow --part_of--> Oudh",
+        "sentence": "Lucknow was part of Oudh.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=221"
+      },
+      {
+        "text": "Lucknow --part_of--> Indian Mutiny",
+        "sentence": "Lucknow was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      },
+      {
+        "text": "Lucknow --located_in--> Oudh",
+        "sentence": "Lucknow is located in Oudh.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=49"
+      },
+      {
+        "text": "Indian Mutiny --located_in--> Lucknow",
+        "sentence": "Indian Mutiny is located in Lucknow.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=261"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 285-288)",
+        "snippet": "(which I will not undertake to say was not bona fide in intention, at the same time as it was fatally mischievous in practice) with coldness and ingratitude.24 The army, now numbering just over 3,000 men, which Havelock nominally commanded, began to cross the Ganges on 19 September. The First Relief of Lucknow • 261 On that day the spy, Angad, came into...",
+        "score": 0.675,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=285"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 281-284)",
+        "snippet": "The First Relief of Lucknow • 255 came to his decision. But, conscious of a need for earthly counsellors, he sent for Colonel Tytler who agreed with him; and when dispatches arrived announcing the mutiny of the regiments at Dinapore - which meant that the reinforcements which might have been sent to him from there would now be held back - he had no further...",
+        "score": 0.613,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=281"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 289-292)",
+        "snippet": "their muskets, hurling down bricks and stones and even spitting at the figures below. In a long wide street 'with sheets of fire shooting out from the houses' they stumbled over trenches cut through the pavement as they attempted to reply to the incessant fire The First Relief of Lucknow • 265 of the rebels, shouting at each other and occasionally cheering...",
+        "score": 0.663,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=289"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 289-292)",
+        "snippet": "The First Relief of Lucknow • 263 staff, the General said he was 'to take them from General Outram'. Outram did not demur. He gave Major Havelock his orders for the attack which Havelock noted down, then wrote out in full and read out to Outram clause by clause.27 The next morning was bright and sunny; the men were given a good breakfast, and at eight...",
+        "score": 0.643,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=289"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 285-288)",
+        "snippet": "The First Relief of Lucknow • 259 which I thankfully accepted, they are scarce enough in camp . . . The General never ceased smoking and he was most liberal with them. He also gave dinner parties daily to which we were all asked in turn.18 His popularity was much increased when it became known that he had waived his right to command, that he had sent a...",
+        "score": 0.677,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=285"
+      }
+    ],
+    "timing_ms": {
+      "answer": 34027,
+      "trust_check": 13216
+    }
+  },
+  {
+    "question": "What happened to Bahadur Shah II after the fall of Delhi?",
+    "answer": "Bahadur Shah II, King of Delhi, was eighty-two years old [7]. He was a pensioner of the British [8] and lived in his palace in Delhi [9]. The mutineers surprised him when they arrived [9]. After the mutiny, he was reduced [8]. He was also a member of his court who became a Christian [7]. [13]",
+    "mode": "hybrid",
+    "trust_score": 0.6,
+    "n_claims": 5,
+    "n_entailed": 3,
+    "seed_entities": [
+      "Bahadur Shah",
+      "Delhi",
+      "Fall of Delhi"
+    ],
+    "sources": [
+      {
+        "title": "Bahadur Shah ruled Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "title": "Delhi associated_with Bahadur Shah",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "Delhi part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "title": "William Hodson captured Delhi",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=333"
+      },
+      {
+        "title": "Delhi located_in India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "title": "Delhi located_in Jumna",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=345"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 21-24)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 293-296)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "Bahadur Shah II, King of Delhi, was eighty-two years old.",
+        "verdict": "entailed",
+        "score": 0.989,
+        "best_evidence": "Rebels and Fugitives • Bahadur Shah II, King of Delhi • mutineers from Meerut arrive at Delhi • massacre of Europeans in Delhi, 11 May 1857 • mutiny of Delhi garrison • the Magazine blown up •flight of British families from Delhi • Bahadur Shah II, King of Delhi, was then eighty-two years old."
+      },
+      {
+        "claim": "He was a pensioner of the British and lived in his palace in Delhi.",
+        "verdict": "neutral",
+        "score": 0.003,
+        "best_evidence": "But Bahadur Shah himself had no power. A pensioner of the British, he lived in his vast palace in some comfort, surrounded by an enormous number of relations of varying degrees of consanguinity and with real or pretended rights to his protection."
+      },
+      {
+        "claim": "The mutineers surprised him when they arrived.",
+        "verdict": "entailed",
+        "score": 0.991,
+        "best_evidence": "The arrival of the mutineers had taken him by surprise, and he had not welcomed their coming. He was both alarmed by the likely consequences of their revolt and dismayed by their riotous behaviour as they poured."
+      },
+      {
+        "claim": "After the mutiny, he was reduced.",
+        "verdict": "neutral",
+        "score": 0.072,
+        "best_evidence": "During the rest of that century the East India Company extended its power and influence, defeating those princes who challenged its expansion, entering into alliances and treaties of protection with others who were prepared to see their own power decreased, reducing some to the state of Company pensioners, as Bahadur Shah II, the so-called King of Delhi, humiliated descendant of the Moghul Emperors, was to be reduced in the next century."
+      },
+      {
+        "claim": "He was also a member of his court who became a Christian.",
+        "verdict": "entailed",
+        "score": 0.975,
+        "best_evidence": "member of his court became a Christian he welcomed him back, silencing those who criticized the man's action with the words, 'There is no cause for shame in what he has done. '2 Bahadur Shah's family could trace their ancestry to that most powerful Tartar conqueror, Tamerlane, who had invaded India in 1398."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "Bahadur Shah --ruled--> Delhi",
+        "sentence": "Bahadur Shah ruled Delhi.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "text": "Delhi --associated_with--> Bahadur Shah",
+        "sentence": "Delhi and Bahadur Shah are mentioned together in the book.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "text": "Delhi --part_of--> Indian Mutiny",
+        "sentence": "Delhi was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "text": "William Hodson --captured--> Delhi",
+        "sentence": "William Hodson captured Delhi.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=333"
+      },
+      {
+        "text": "Delhi --located_in--> India",
+        "sentence": "Delhi is located in India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "text": "Delhi --located_in--> Jumna",
+        "sentence": "Delhi is located in Jumna.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=345"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "snippet": "Rebels and Fugitives • Bahadur Shah II, King of Delhi • mutineers from Meerut arrive at Delhi • massacre of Europeans in Delhi, 11 May 1857 • mutiny of Delhi garrison • the Magazine blown up •flight of British families from Delhi • Bahadur Shah II, King of Delhi, was then eighty-two years old. As a young man he had been renowned for his athleticism, his...",
+        "score": 0.663,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 21-24)",
+        "snippet": "that rich part of the subcontinent known as Bengal. During the rest of that century the East India Company extended its power and influence, defeating those princes who challenged its expansion, entering into alliances and treaties of protection with others who were prepared to see their own power decreased, reducing some to the state of Company pensioners,...",
+        "score": 0.585,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 293-296)",
+        "snippet": "PART TWO The King of Delhi • Bahadur Shah at Delhi • conditions in the city, May to September, 1857 • the King's sons - sepoys' depredations • arrival of Bakht Khan, 2 July - growing disorder • On the day after the mutinous sepoys from Meerut had been admitted into Delhi, the King had held a durbar in the Diwan-i-Khas for the first time in fifteen years....",
+        "score": 0.56,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=293"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 257-260)",
+        "snippet": "7. Sir Archdale Wilson 8. Officers returning to their regiment in a mail-cart from a drawing by Captain G. F. Atkinson g. The Red Fort, Delhi 10. The tree in Delhi beneath which the European and Eurasian prisoners were massacred ii. A group of mutineers 12. Nana Sahib from J. W. Shepherd's 13. Bahadur Shah, King of Delhi Personal Narrative of the Outbreak...",
+        "score": 0.49,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=257"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 93-96)",
+        "snippet": "member of his court became a Christian he welcomed him back, silencing those who criticized the man's action with the words, 'There is no cause for shame in what he has done.'2 Bahadur Shah's family could trace their ancestry to that most powerful Tartar conqueror, Tamerlane, who had invaded India in 1398. But Bahadur Shah himself had no power. A pensioner...",
+        "score": 0.565,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=93"
+      }
+    ],
+    "timing_ms": {
+      "answer": 36022,
+      "trust_check": 45736
+    }
+  },
+  {
+    "question": "Which act transferred rule of India from the East India Company to the Crown?",
+    "answer": "The 1773 Regulating Act made the Company responsible for governing the territories it controlled [7]. The 1784 India Act brought the Company more firmly under the control of the British Government [7]. In 1858, the East India Company was abolished and the British Government ruled India directly [8]. [8][1]",
+    "mode": "hybrid",
+    "trust_score": 1.0,
+    "n_claims": 3,
+    "n_entailed": 3,
+    "seed_entities": [
+      "East India Company",
+      "India"
+    ],
+    "sources": [
+      {
+        "title": "India associated_with East India Company",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "East India Company part_of British Government",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "title": "Indian Army part_of India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=45"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 413-416)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 17-20)",
+        "url": ""
+      }
+    ],
+    "claims": [
+      {
+        "claim": "The 1773 Regulating Act made the Company responsible for governing the territories it controlled.",
+        "verdict": "entailed",
+        "score": 0.991,
+        "best_evidence": "In 1773 the Houses of Parliament, long disturbed by the virtually uncontrolled empire being established by the East India Company in India, passed a Regulating Act which made the Company responsible for governing the territories it controlled, and appointed one of its senior officials, Warren Hastings, Governor-General of Bengal with supervisory authority over the other two Presidencies, Madras and Bombay."
+      },
+      {
+        "claim": "The 1784 India Act brought the Company more firmly under the control of the British Government.",
+        "verdict": "entailed",
+        "score": 0.988,
+        "best_evidence": "In 1784 Parliament, increasingly alarmed by the Company's omnipotence and the behaviour of its servants, passed a new India Act which brought them more firmly under the control of the British Government."
+      },
+      {
+        "claim": "In 1858, the East India Company was abolished and the British Government ruled India directly.",
+        "verdict": "entailed",
+        "score": 0.744,
+        "best_evidence": "On 1 November 1858, preceded by military salutes and followed by thanksgiving services and firework displays, a proclamation had been read out at every station in India. The document declared that the East India Company was abolished; that the British Government now ruled India directly; that the treaties made by the Company with native princes would be honoured and no extensions of territory would be required; that the Queen offered pardon to all rebels who had not taken part in the murder of Europeans; that religious toleration would be observed and ancient customs respected.6 In pursuit of his declared policy of bringing 'the."
+      }
+    ],
+    "graph_facts": [
+      {
+        "text": "India --associated_with--> East India Company",
+        "sentence": "India and East India Company are mentioned together in the book.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "East India Company --part_of--> British Government",
+        "sentence": "East India Company was part of British Government.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "text": "British Government --ruled--> India",
+        "sentence": "British Government ruled India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "East India Company --captured--> Bengal",
+        "sentence": "East India Company captured Bengal.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "Governor-General --ruled--> India",
+        "sentence": "Governor-General ruled India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "text": "Indian Army --part_of--> India",
+        "sentence": "Indian Army was part of India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=45"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 21-24)",
+        "snippet": "their own power decreased, reducing some to the state of Company pensioners, as Bahadur Shah II, the so-called King of Delhi, humiliated descendant of the Moghul Emperors, was to be reduced in the next century. In 1773 the Houses of Parliament, long disturbed by the virtually uncontrolled empire being established by the East India Company in India, passed a...",
+        "score": 0.617,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 413-416)",
+        "snippet": "at Madras, Bombay and Calcutta. 'It is sometimes forgotten,' Arthur Ewen commented, 'that most of India was not involved in all this. This should encourage the Government not to be too harsh.'5 Already the Government had, in fact, decided that harshness was not to inform their policy. On 1 November 1858, preceded by military salutes and followed by...",
+        "score": 0.596,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=413"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 21-24)",
+        "snippet": "officials in India; but these officials were now under the ultimate authority of a Minister of the Crown, known as the President of the Board of Control. The Governor-General in Calcutta, in whose appointment the Government in London was to have the final say, was also brought more securely under the control of the Cabinet and was forbidden 'to pursue...",
+        "score": 0.623,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 21-24)",
+        "snippet": "armies were manned by native infantrymen, known as sepoys, and by native cavalrymen, sowars. There were also native officers in each regiment, but the most senior amongst them was subordinate to the most junior British officer and could not give orders even to the British sergeantmajor. As well as these regiments of the East India Company's armies, there...",
+        "score": 0.393,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 17-20)",
+        "snippet": "so, he assured them, they would prosper. And so they did. In 1707, however, the last of the great Moghuls, Aurangzeb, died at Ahmednagar, leaving seventeen sons, grandsons and greatgrandsons to squabble over their inheritance. The empire began to disintegrate; foreign invaders marched in to seize what lands they could; former Moghul governors, dispossessed...",
+        "score": 0.439,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=17"
+      }
+    ],
+    "timing_ms": {
+      "answer": 38468,
+      "trust_check": 37789
+    }
+  },
+  {
+    "question": "What was Napoleon's role in the Indian Rebellion of 1857?",
+    "answer": "The provided context does not contain enough information to answer this question.",
+    "mode": "hybrid",
+    "trust_score": null,
+    "n_claims": 0,
+    "n_entailed": 0,
+    "seed_entities": [
+      "Indian Mutiny",
+      "India"
+    ],
+    "sources": [
+      {
+        "title": "India associated_with Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      },
+      {
+        "title": "Indian Army part_of India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=45"
+      },
+      {
+        "title": "Lucknow part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      },
+      {
+        "title": "British Government ruled India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "title": "Delhi part_of Indian Mutiny",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "title": "Governor-General ruled India",
+        "url": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 13-16)",
+        "url": ""
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 393-396)",
+        "url": ""
+      }
+    ],
+    "claims": [],
+    "graph_facts": [
+      {
+        "text": "India --associated_with--> Indian Mutiny",
+        "sentence": "India and Indian Mutiny are mentioned together in the book.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      },
+      {
+        "text": "Indian Army --part_of--> India",
+        "sentence": "Indian Army was part of India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=45"
+      },
+      {
+        "text": "Lucknow --part_of--> Indian Mutiny",
+        "sentence": "Lucknow was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=425"
+      },
+      {
+        "text": "British Government --ruled--> India",
+        "sentence": "British Government ruled India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=21"
+      },
+      {
+        "text": "Delhi --part_of--> Indian Mutiny",
+        "sentence": "Delhi was part of Indian Mutiny.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=465"
+      },
+      {
+        "text": "Governor-General --ruled--> India",
+        "sentence": "Governor-General ruled India.",
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=25"
+      }
+    ],
+    "passages": [
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 417-420)",
+        "snippet": "of it, 'the countrymen of Hampden, Milton and Burke' would restore her people to their birthright.12 But the followers of Gandhi, who rejected violence, had much more in common with earlier forward-looking intellectuals such as the Brahmin, Ram Mohan Roy, than with the reactionary rebels of 1857 whose methods they condemned. In a book which appeared in...",
+        "score": 0.521,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 417-420)",
+        "snippet": "sprung from the great races, as \"niggers\"'.10 'If I were an Indian,' observed one of the prince's suite, Albert Grey, 'I would long to be free of such contemptuous masters.'11 In time, though, attitudes did change; the wounds did heal. And when, two generations later, India won her long struggle for national independence, the Indian people parted from their...",
+        "score": 0.585,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 417-420)",
+        "snippet": "by subversive than constructive activities. '17 The leaders of the revolt, as Dr Percival Spear, the distinguished British historian of India, has concluded, were 'backward-looking men whose aims were incompatible. Nana Sahib hoped to revive the Peshwaship and the Delhi leaders the Moghul Empire. Success would have meant a further war between the two.'...",
+        "score": 0.563,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=417"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 13-16)",
+        "snippet": "Author's Note and Acknowledgements This is a narrative history of the Indian uprising of 1857 incorporating as much hitherto unpublished material as I have been able to find. In order to recount in a single book events which Kaye and Malleson in their six volumes took 3,750 pages to describe, certain of these events have been treated rather cursorily so...",
+        "score": 0.593,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=13"
+      },
+      {
+        "title": "The Great Mutiny - India 1857 by Christopher Hibbert (pp. 393-396)",
+        "snippet": "The Last of the Rebels • Continued resistance of the talukdars • Walpole's campaign in Rohilkhand • his defeat at Ruiya, 15 April 1858 - Campbell's victory over Khan Bahadur Khan outside Bareilly, 5 May 1858 • death of the Maulvi, 5 June • the mutiny at Indore, 1 July 1857 - the Rani of Jhansi • massacre at Jhansi, 8 June 1857 • Sir Hugh Rose arrives at...",
+        "score": 0.556,
+        "source": "data/raw/The Great Mutiny - India 1857 by Christopher Hibbert.pdf#page=393"
+      }
+    ],
+    "timing_ms": {
+      "answer": 30572,
+      "trust_check": 318
+    }
+  }
+]

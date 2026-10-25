@@ -22,6 +22,10 @@ the whole project — architecture, results (with an honest read of their
 caveats), and what to fix before presenting the numbers as final. Each
 `docs/part*_notes.md` has the detailed per-part log.
 
+## Source
+
+All answers come from one book: Christopher Hibbert, *The Great Mutiny: India 1857* (New York: The Viking Press, 1978). The book is copyrighted and is not included in this repository; page citations in the app and in the evaluation refer to the PDF's own page numbering. To rebuild everything, supply your own copy as a PDF in `data/raw/` (see the pipeline below).
+
 ## Setup
 
 ```bash

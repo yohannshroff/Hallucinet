@@ -1,11 +1,7 @@
 id,question,category,notes
-Q01,Who led the resistance at Jhansi?,person,Should surface Rani Lakshmibai via graph facts
-Q02,What caused the Meerut Mutiny?,cause,Tests the caused_by chain (cartridge issue -> Meerut Mutiny)
-Q03,Who was declared emperor by the rebel sepoys in Delhi?,person,Should surface Bahadur Shah II
-Q04,What happened during the Siege of Cawnpore?,event,Tests vector retrieval depth on a single event
-Q05,Who commanded the British forces that recaptured Delhi?,person,Should surface John Nicholson
-Q06,What was the Doctrine of Lapse and how did it relate to the revolt?,cause,Tests the split-noun-chunk entity extraction case from Part 4
-Q07,Who led the first relief of Lucknow?,person,Should surface Henry Havelock and James Outram
-Q08,What happened to Bahadur Shah II after the fall of Delhi?,event,Tests multi-entity/event chaining
-Q09,Which act transferred rule of India from the East India Company to the Crown?,aftermath,Should surface Government of India Act 1858
-Q10,What was Napoleon's role in the Indian Rebellion of 1857?,out_of_scope,"Deliberately unanswerable from our KG/sources -- checks the model refuses rather than hallucinates"
+D1,"How old was Bahadur Shah II, King of Delhi, when the mutineers from Meerut reached Delhi?",single_hop,Clean grounded answer; trust score 100%
+D2,"Which general, commanding the Meerut Division, rejected the plea that the 3rd Light Cavalry troopers had been misled by rumours?",single_hop,Compare page: vector refuses; graph guesses wrongly; hybrid answers correctly
+D3,On what date was Jhansi captured?,temporal,Date question; trust score 100%
+D4,What was the population of Delhi in 1857?,unanswerable,The book does not say; the system should refuse rather than invent
+D5,"What was the grease on the new Enfield rifle cartridges made from, and why was that a problem for native troops?",single_hop,Correct answer; the claim checker is cautious so the score can be low
+D6,"Who captured the King of Delhi, and what became of the King afterwards?",multi_hop,Needs two passages (capture; trial and exile)

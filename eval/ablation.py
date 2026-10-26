@@ -1,4 +1,7 @@
-"""Part 7 ablation: run every question in data/eval/qa_test_set.csv through
+"""Superseded by eval/rag_eval.py (the current evaluation); kept for the record
+of the first version's 30-question ablation (docs/part7_notes.md).
+
+Part 7 ablation: run every question in data/eval/qa_test_set.csv through
 vector-only, graph-only, and hybrid retrieval, generate an answer for each,
 and classify each answer as correct / partial / wrong / hallucinated.
 

@@ -15,7 +15,7 @@ LLM integration on top of Part 4's hybrid retrieval.
   HTTP endpoint.
 - `generate_answer.py` — ties retrieval (`retrieval/hybrid_retrieve.py`) +
   the prompt template + Ollama into one grounded-answer call.
-- `run_sample_questions.py` — runs the 10 questions in
+- `run_sample_questions.py` — runs the questions in
   `data/eval/sample_questions.csv` through the full pipeline and saves a
   transcript to `docs/part5_sample_answers.md` for manual review (not
   scored — Part 7 turns this into a real scored ablation).

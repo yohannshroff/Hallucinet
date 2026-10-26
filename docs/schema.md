@@ -24,7 +24,7 @@ ever mean adding new `period_tag` *values*, never new columns.
 | `object` | entity `name`, or a short phrase when no single entity fits (e.g. "rebel sepoys") |
 | `source` | where the fact was drawn from: the book PDF and page (`data/raw/<book>.pdf#page=N`), or a URL for a web source (matching a `resolved_url` in `data/raw/sources_manifest.csv`) |
 | `period_tag` | same convention as entities.csv |
-| `weight` | how many distinct source sentences support the fact (co-mentions for `associated_with`); graph search returns typed facts first, then the highest-weight associations |
+| `weight` | how many distinct source sentences support the fact (co-mentions for `associated_with`); at question time facts are ranked by similarity to the question and capped at 6, and `associated_with` facts are only shown when they lie on a path between two question entities (see `retrieval/README.md`) |
 | `notes` | free-text context: book pages and how the fact was found |
 
 ### Relation controlled vocabulary

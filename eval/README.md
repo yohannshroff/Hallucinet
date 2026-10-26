@@ -10,7 +10,7 @@ Hallucination evaluation harness.
 - `trust_score.py` — ties the two together: % of an answer's claims
   entailed by the retrieved evidence. CLI: `python eval/trust_score.py
   "<question>"`.
-- `run_trust_scores.py` — runs trust scoring over the 10 sample questions,
+- `run_trust_scores.py` — runs trust scoring over the sample questions,
   saves a transcript to `docs/part6_trust_scores.md`.
 
 Claims are cleaned of citations, page references, file paths and markdown

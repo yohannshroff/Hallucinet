@@ -1,4 +1,4 @@
-"""Pre-run the 10 sample questions through the full pipeline and cache the
+"""Pre-run the sample questions through the full pipeline and cache the
 results as JSON -- a fallback for ui/app.py if live Ollama inference is too
 slow or fails during a demo (per the master plan's risk register: "Local
 LLM too slow for live demo -> cached/pre-run fallback").

@@ -1,10 +1,9 @@
-"""Run generate_answer.py over the 10 sample questions in
+"""Run generate_answer.py over the sample questions in
 data/eval/sample_questions.csv and save results for manual review.
 
-This is Part 5's "test answer generation on 10 sample questions" step --
+This is Part 5's "test answer generation on sample questions" step --
 no scoring/grading here, just generation + a saved transcript. Part 7 turns
-this into a real scored ablation (vector-only vs graph-only vs hybrid) over
-a larger 30-40 question set.
+this into a scored evaluation (eval/rag_eval.py) over the 54-question set.
 
 Usage:
     python generation/run_sample_questions.py

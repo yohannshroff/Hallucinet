@@ -23,7 +23,8 @@ written from the old knowledge graph and so favoured graph retrieval.
 | `hop_type`, `category`, `answerable` | |
 | `notes` | for unanswerable questions: why the book cannot answer (e.g. the term never occurs) |
 
-`gold_pages` use the same page groups the system cites (`pp. 353-356` etc.),
+`gold_pages` use the same 4-page groups the system's sources are stored and
+listed by (`pp. 353-356` etc.),
 so retrieval can be scored against them directly (Recall@k, MRR). They are
 PDF page numbers, which differ from the printed page numbers.
 

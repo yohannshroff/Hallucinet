@@ -76,8 +76,8 @@ def evidence_texts_from_bundle(bundle: dict) -> list:
     Sentence-level evidence matters here, not just chunk-level: this
     cross-encoder NLI model (like most) is trained on single-sentence
     premise/hypothesis pairs, and empirically scores true, well-supported
-    claims far too low when the premise is a whole ~180-word multi-topic
-    chunk instead of the one sentence that actually supports the claim
+    claims far too low when the premise is a whole multi-topic passage
+    instead of the one sentence that actually supports the claim
     (see docs/part6_notes.md for the before/after numbers).
 
     Each sentence is also given together with the one before it: "She was a

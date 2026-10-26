@@ -1,4 +1,4 @@
-"""Run generate_answer + trust scoring over the 10 sample questions in
+"""Run generate_answer + trust scoring over the sample questions in
 data/eval/sample_questions.csv and save a report for manual review.
 
 Same "generate, don't grade" spirit as Part 5's run_sample_questions.py --

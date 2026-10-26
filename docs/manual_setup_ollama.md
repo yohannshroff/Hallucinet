@@ -15,7 +15,8 @@ brew services start ollama
   `brew services info ollama`.
 
 (Other platforms: download from https://ollama.com/download and run
-`ollama serve`.)
+`ollama serve`. On Windows, also set the memory-saving environment
+variables listed under "Running it on Windows" in the main README.)
 
 ## Pull a model
 

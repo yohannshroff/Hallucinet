@@ -2,6 +2,8 @@
 
 Not installed by any Part 1-2 script — set this up when you reach Part 3
 (KG ingestion). This project's dev instance was set up with Option A below.
+On Windows, use Docker with a memory cap: see "Running it on Windows" in
+the main README.
 
 ## Option A: Homebrew (macOS, what this repo's dev instance uses)
 
@@ -46,6 +48,6 @@ script reads the connection config from there.
 Then:
 
 ```bash
-python kg/load_graph.py
+python kg/load_graph.py --reset
 python kg/validate_graph.py --all
 ```

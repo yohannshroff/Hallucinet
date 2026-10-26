@@ -84,15 +84,15 @@ python retrieval/hybrid_retrieve.py "Who led the resistance at Jhansi?"
 
 # Part 5: grounded answer generation via Ollama
 python generation/generate_answer.py "Who led the resistance at Jhansi?"
-python generation/run_sample_questions.py   # runs the 10-question sample set
+python generation/run_sample_questions.py   # runs the sample questions (data/eval/sample_questions.csv)
 
 # Part 6: claim splitting + NLI entailment -> trust score
 python eval/trust_score.py "Who led the resistance at Jhansi?"
-python eval/run_trust_scores.py   # trust scores for the 10-question sample set
+python eval/run_trust_scores.py   # trust scores for the sample questions
 
 # Part 7: vector vs graph vs hybrid ablation over the question set (docs/test_set.md)
 python eval/validate_test_set.py   # checks every gold page against the book text
-python eval/ablation.py
+python eval/ablation.py             # old 30-question ablation (superseded by rag_eval.py below)
 python eval/rag_eval.py retrieval        # Recall@k / MRR against the gold pages (no LLM)
 python eval/chunk_sensitivity.py          # chunk-size sensitivity of vector retrieval (no LLM)
 python eval/rag_eval.py generate --runs 3 # closed-book / vector / graph / hybrid answers (needs Ollama, ~3 h)
@@ -100,7 +100,7 @@ python eval/rag_eval.py citations         # re-score citation accuracy in saved 
 python eval/rag_eval.py report            # tables with mean +- SD, CIs, McNemar -> docs/eval_report.md
 
 # Part 8: run the app
-python api/build_demo_cache.py     # pre-cache the 10 sample questions as a demo fallback
+python api/build_demo_cache.py     # pre-cache the sample questions as a demo fallback
 uvicorn api.main:app --port 8000   # in one terminal (endpoints: /ask /health /stats /kg)
 streamlit run ui/app.py            # in another: Ask, Compare search modes, Knowledge base
 ```

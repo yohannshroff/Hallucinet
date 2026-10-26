@@ -13,26 +13,35 @@ Hallucination evaluation harness.
 - `run_trust_scores.py` — runs trust scoring over the 10 sample questions,
   saves a transcript to `docs/part6_trust_scores.md`.
 
-**Part 7 — ablation:**
-- `ablation.py` — runs every question in `data/eval/qa_test_set.csv`
-  (30 hand-written Q&A pairs) through vector-only / graph-only / hybrid
-  retrieval, generates an answer for each, and classifies it
-  correct/partial/wrong/hallucinated/refused using an automated,
-  non-LLM proxy (entity match + trust score — see the module docstring for
-  the full rubric and its rationale). CLI: `python eval/ablation.py`.
-- `chart.py` — renders the accuracy-by-mode bar chart from `ablation.py`'s
-  results CSV.
+Claims are cleaned of citations, page references, file paths and markdown
+before checking, and evidence is checked one sentence and one pair of
+consecutive sentences at a time (so a claim whose subject is a pronoun in the
+book can still be matched).
 
-See [docs/part6_notes.md](../docs/part6_notes.md) and
-[docs/part7_notes.md](../docs/part7_notes.md) for what was run, verified,
-and found.
-
-**Track B evaluation (final review):**
-- `rag_eval.py` — `retrieval` (Recall@k / hit@k / MRR / context precision
-  against `gold_pages`, no language model needed), `generate` (closed-book,
-  vector, graph, hybrid; several seeded runs; resumable), `report` (mean ± SD
-  across runs, bootstrap 95% CIs, exact McNemar, breakdown by question type).
-- `rag_metrics.py` — the scoring rules (unanswerable questions are correct only
+**Evaluation (current; results in [docs/eval_report.md](../docs/eval_report.md)
+and [docs/final_report.md](../docs/final_report.md)):**
+- `rag_eval.py`
+  - `retrieval`: hit@k / Recall@k / MRR / context precision against
+    `gold_pages`, no language model needed.
+  - `generate`: closed-book, vector, graph and hybrid answers to the 54
+    questions in `data/eval/qa_test_set.csv`; seeded runs; resumable.
+  - `citations`: re-scores citation accuracy in saved runs (no language model).
+  - `report`: mean ± SD across runs, bootstrap 95% CIs, exact McNemar,
+    breakdown by question type -> `docs/eval_report.md`.
+- `rag_metrics.py` — the scoring rules: unanswerable questions are correct only
   if the model refuses; claim-level hallucination is measured against the gold
-  pages). `rag_stats.py` — bootstrap, McNemar, Cohen's kappa.
+  pages; citation accuracy maps each `[n]` the answer cites to its source and
+  checks that source's page against the gold pages. `rag_stats.py` — bootstrap,
+  McNemar, Cohen's kappa.
+- `annotation.py` — the two-annotator check of the automatic scorer
+  ([docs/eval_annotation.md](../docs/eval_annotation.md)).
+- `chunk_sensitivity.py` — vector retrieval at different chunk sizes
+  ([docs/eval_chunk_sensitivity.md](../docs/eval_chunk_sensitivity.md)).
 - `validate_test_set.py` — checks the question set against the book text.
+
+**Earlier ablation (superseded):** `ablation.py` and `chart.py` ran the old
+30-question set over the Wikipedia corpus; see
+[docs/part7_notes.md](../docs/part7_notes.md). They are kept for the record.
+
+See [docs/part6_notes.md](../docs/part6_notes.md) for how the trust score was
+built and tested.

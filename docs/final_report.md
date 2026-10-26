@@ -1,7 +1,3 @@
-> **Outdated.** The numbers in this report were produced on the earlier Wikipedia corpus and the
-> hand-curated graph. The corpus is now the PDF source book and the graph has been rebuilt from it
-> ([kg_build.md](kg_build.md)); the evaluation is being redone, and the old result files were removed.
-
 # HalluciNet — Final Report
 
 ## Hypothesis
@@ -12,114 +8,189 @@
 
 ## Scope
 
-v1: the Revolt of 1857 (~May 1857 – 1859). 47 hand-curated entities, 50
-sourced relationships, 36 fetched Wikipedia articles, 995 indexed text
-chunks. Schema built generically (`period_tag`, not 1857-specific field
-names) so it can extend to the wider freedom struggle later without a
-redesign.
+v1: the Revolt of 1857, answered from one source book: Christopher Hibbert,
+*The Great Mutiny: India 1857* (1978). The book is cut into 4,147 chunks of
+60 words (15-word overlap), and a knowledge graph of 245 entities and 441
+relationships is built from the same text ([kg_build.md](kg_build.md)).
+The schema is generic (`period_tag`, not 1857-specific fields), so more
+books and periods can be added without a redesign.
+
+![Architecture](figures/architecture.png)
 
 ## System
 
-1. **Vector retrieval** (Part 2): Wikipedia articles → cleaned, chunked
-   (180 words, 40 overlap) → `all-MiniLM-L6-v2` embeddings → FAISS flat
-   index.
-2. **Knowledge graph** (Parts 1, 3): entities/relationships hand-curated
-   into a spreadsheet with per-fact source citations, loaded into Neo4j
-   (`:Entity` nodes typed by `:Person`/`:Location`/`:Event`/
-   `:Organization`/`:Cause`; unresolved relationship objects become
-   `:Concept` nodes rather than being dropped).
-3. **Hybrid retrieval** (Part 4): query-time entity extraction (direct
-   alias substring scan + spaCy noun-chunk/NER spans resolved via exact
-   + fuzzy matching — chosen after verifying generic spaCy NER alone
-   misses domain-specific entities) → 1-hop Cypher graph search + FAISS
-   vector search, run independently and concatenated (graph facts first,
-   then vector passages).
+1. **Vector retrieval** (Part 2): book PDF → 4-page groups → 60-word chunks
+   → `all-MiniLM-L6-v2` embeddings → FAISS index.
+2. **Knowledge graph** (Parts 1, 3): names found with spaCy and typed by
+   the local LLM; typed facts from grammar rules plus LLM drafts that were
+   **checked by hand** (112 reviewed: 63 accepted, 49 rejected); co-mention
+   edges for entities named together in 2+ sentences. Loaded into Neo4j.
+   Every fact names its book page.
+3. **Hybrid retrieval** (Part 4): entities in the question → up to 6 graph
+   facts (1-hop facts and facts on paths between question entities, ranked
+   by the question) + passages. Passages come from a pool of 20 candidates
+   per source (vector search and graph-guided passages), limited to the
+   book's narrative pages, reranked by a cross-encoder
+   (`ms-marco-MiniLM-L-6-v2`), de-duplicated and widened by one chunk each
+   side. The context is one numbered source list.
 4. **Grounded generation** (Part 5): local Ollama (`gemma3:4b`) with a
-   system prompt that forbids outside knowledge and requires an explicit
-   "I don't have enough information" response when the context doesn't
-   support an answer.
-5. **Trust scoring** (Part 6): claim splitting (spaCy sentences) → NLI
-   entailment (`cross-encoder/nli-MiniLM2-L6-H768`, an independent model —
-   not the generating LLM grading itself) against the retrieved evidence,
-   sentence-decomposed for accurate scoring. Trust score = % of claims
-   entailed.
-6. **Evaluation** (Part 7): 30-question hand-authored test set, ablated
-   across vector-only / graph-only / hybrid retrieval, classified
-   correct/partial/wrong/hallucinated/refused via an automated proxy
-   (entity match + trust score).
-7. **App** (Part 8): FastAPI backend (`POST /ask`), Streamlit frontend
-   with a pre-cached demo-question fallback.
+   prompt that forbids outside knowledge, requires a fixed refusal when the
+   sources don't answer, and asks for citations by source number (`[2]`).
+5. **Trust scoring** (Part 6): the answer is split into claims; an
+   independent NLI model (`cross-encoder/nli-MiniLM2-L6-H768`, not the
+   generating LLM grading itself) checks each claim against the retrieved
+   evidence, one sentence or sentence pair at a time. Trust score = share
+   of claims supported.
+6. **Evaluation** (Part 7): 54 questions written from the book
+   independently of the system ([test_set.md](test_set.md)): 21 single-hop,
+   13 temporal, 10 multi-hop, 10 unanswerable. Four systems: closed book
+   (no retrieval), vector, graph, hybrid.
+7. **App** (Part 8): FastAPI backend and a Streamlit front end (ask,
+   compare modes side by side, browse the knowledge base), with a demo-answer
+   cache as a fallback.
 
 ## Results
 
+From [eval_report.md](eval_report.md): 1 run per system (the model runs at
+temperature 0.3), 95% bootstrap confidence intervals over questions in
+brackets.
 
-| mode | correct | partial | wrong | hallucinated | refused |
-|---|---|---|---|---|---|
-| graph-only | 20/30 | 5 | 1 | 1 | 3 |
-| hybrid | 15/30 | 9 | 6 | 0 | 0 |
-| vector-only | 6/30 | 7 | 9 | 7 | 1 |
+**All 54 questions**
 
-**This table needs its caveats to be read honestly** (full detail in
-[docs/part7_notes.md](part7_notes.md)):
+| system | correct | hallucinated answer | refused |
+|---|---|---|---|
+| closed book | 16.7% [7, 28] | 75.9% [65, 87] | 14.8% |
+| vector | 83.3% [72, 93] | 13.0% [6, 22] | 18.5% |
+| graph | 68.5% [56, 80] | 16.7% [7, 28] | 33.3% |
+| hybrid | **85.2%** [76, 94] | 13.0% [6, 22] | 16.7% |
 
-- The test set was authored directly from the same KG that graph-only
-  retrieves from, which structurally advantages graph-only — this is
-  closer to "does graph search find graph facts" than a neutral benchmark.
-- The automated entity-match scorer favors answers that echo canonical KG
-  entity names, which graph-derived answers naturally do and vector-only
-  prose often doesn't even when factually correct (two concrete examples
-  in `part7_notes.md`: T25's "maladministration" vs the test set's
-  "misgovernance"; T21's accurate but non-canonical phrasing).
-- Net effect: vector-only's apparent error rate is inflated by scoring
-  brittleness, not just by real invented facts. The true gap between
-  hybrid and graph-only is likely narrower than the raw numbers suggest.
+**44 answerable questions**
 
-**What the numbers do support, with case-study evidence, independent of
-those caveats:**
+| system | correct | claim-level hallucination rate | trust score | citation accuracy |
+|---|---|---|---|---|
+| closed book | 11.4% | 77.5% | n/a | n/a |
+| vector | 84.1% | 30.6% | 0.60 | 62.8% |
+| graph | 61.4% | 27.0% | 0.72 | 51.1% |
+| hybrid | **86.4%** | **23.6%** | 0.69 | **66.2%** |
 
-- **Hybrid had zero hallucinations** in this run (vs 7 for vector-only, 1
-  for graph-only) — its failures were mostly "wrong but grounded," a
-  safer failure mode than inventing facts outright.
-- **Graph-only's 1-hop limit is real and reproducible** (T13: correctly
-  refused a 2-hop question graph search couldn't reach; hybrid, given the
-  same graph gap plus vector context, confidently answered with an
-  unrelated-but-real fact instead of refusing).
-- **Vector retrieval adds real coverage the graph doesn't have** (T30: a
-  fact that exists only in the fetched prose, not as a KG relationship —
-  graph-only correctly said it didn't know; vector-only and hybrid both
-  found it).
-- **A specific KG design gap caused one genuine graph hallucination**
-  (T10: a `:Concept` node not linked back to the `:Location` entity named
-  in its own text — root-caused and documented, not hand-waved).
+**By question type (correct)**
+
+| system | single-hop | multi-hop | temporal | unanswerable (refused) |
+|---|---|---|---|---|
+| closed book | 4.8% | 20% | 15.4% | 40% |
+| vector | 81.0% | 90% | 84.6% | 80% |
+| graph | 42.9% | 90% | 69.2% | **100%** |
+| hybrid | 81.0% | **100%** | 84.6% | 80% |
+
+**Paired comparison (exact McNemar)**
+
+| A vs B | only A right | only B right | p |
+|---|---|---|---|
+| hybrid vs vector | 1 | 0 | 1.000 |
+| hybrid vs graph | 11 | 2 | 0.022 |
+| graph vs vector | 3 | 11 | 0.057 |
+| hybrid vs closed book | 39 | 2 | <0.001 |
+
+**Retrieval (answerable questions, top 5)**: the right page was retrieved
+for 86% of questions with vector search, 91% with hybrid and 73% with
+graph-only. Vector search puts it first for 80% of questions (hit@1 0.795,
+MRR 0.83). Hybrid and graph-only MRR (0.52, 0.33) are lower because graph
+facts are listed before passages and many facts have no gold page, so their
+MRR is not comparable to vector's.
+
+### How the results changed
+
+Correct answers on the 44 answerable questions, per version:
+
+| version | vector | graph | hybrid |
+|---|---|---|---|
+| first graph built from the book (3 runs) | 61.4% | 6.8% | 65.9% |
+| + typed facts reviewed by hand, junk names cleaned | 54.5% | 54.5% | 59.1% |
+| + numbered citations, reranker, narrative-page filter (current) | **84.1%** | **61.4%** | **86.4%** |
+
+The hand review made graph-only usable (6.8% → 54.5%). The reranker made
+the biggest single difference: vector hit@1 rose from 0.50 to 0.80 and
+hybrid from 0.66 to 0.86, and answer accuracy followed. One cost: the
+hybrid system's refusals on unanswerable questions fell from 10/10 to 8/10.
+
+## Reading the results honestly
+
+**What the numbers support:**
+
+- **Retrieval sharply reduces hallucination.** Hallucinated answers fall
+  from 76% (closed book) to 13% (vector, hybrid); 39 questions are answered
+  correctly by hybrid and not by the closed-book model, against 2 the other
+  way.
+- **Hybrid is better than graph-only** (p = 0.022), mainly on single-hop
+  questions, where the answer is usually in a passage, not a typed fact.
+- **The graph helps on multi-hop questions and on refusing.** Hybrid got
+  all 10 multi-hop questions right (vector 9), and graph-only refused all
+  10 unanswerable questions. Graph-only answers also have the highest trust
+  score (0.72).
+- **Hybrid has the lowest claim-level hallucination rate** (23.6% vs 30.6%
+  for vector) and the best citation accuracy, but the confidence intervals
+  overlap, so this is a direction, not a proven difference.
+
+**What they don't support:**
+
+- **The hypothesis is not confirmed on this set.** Hybrid and vector are
+  level on correctness (86.4% vs 84.1%; one question apart, p = 1.0). Once
+  the reranker made the book passages good, the graph added little that the
+  passages did not already contain. With 54 questions, only a large
+  difference could be detected.
+
+**Caveats:**
+
+- **One run.** The ± values in eval_report.md are 0 because only one run was
+  made; `rag_eval.py generate --runs 3` gives run-to-run spread.
+- **The automatic scorer is conservative.** It counts an answer as correct
+  if it contains at least half the expected names or words. Two annotators
+  checked it on 60 answers from an earlier run ([eval_annotation.md](eval_annotation.md)):
+  they agreed with each other at kappa 0.86 and with the scorer at kappa
+  0.77, and judged more retrieval answers correct than the scorer did. Read
+  the RAG numbers as a lower bound.
+- **Citation accuracy is a lower bound too.** A citation to a relevant
+  source on a page other than the gold pages, or to a graph fact without a
+  page, counts as wrong.
+- **The graph is small and partly automatic.** 103 typed relationships;
+  the remaining 338 edges only say two entities are mentioned together
+  (see kg_build.md for why automatic extraction with a 4B model failed).
+- **Known failure:** for "Who led the resistance at Jhansi?" the reranker
+  ranks a passage about Captain Gordon's "gallant resistance" first, and
+  the answer names him. The trust check flags that claim (0% support).
 
 ## What went right in the process
 
-Building and testing against real output caught real bugs, not just
-theoretical ones:
+Building and testing against real output caught real bugs:
 
-- Part 6: the refusal phrase itself was being scored as an unsupported
-  claim (0% trust for the *correct* behavior); evidence chunks fed to the
-  NLI model whole instead of sentence-split cut real claims' scores by an
-  order of magnitude. Fixing both took the 10-question average trust
-  score from 21% to 61% — the 21% number was mostly a bug in our own
-  evaluation code, not a true hallucination rate.
-- Part 7: found and fixed a synonym mismatch in the test set itself
-  (T25), and a missing entity alias ("Tatya Tope") that would have caused
-  real query-time entity extraction failures, not just an eval scoring
-  quirk.
+- The refusal phrase itself was being scored as an unsupported claim, and
+  evidence passages were fed to the NLI model whole instead of sentence by
+  sentence. Fixing both took the sample trust score from 21% to 61%: the
+  21% was mostly a bug in the evaluation code, not a true hallucination rate.
+- The first test set (30 questions) had been written from the knowledge
+  graph and so favoured graph retrieval; it was replaced with 54 questions
+  written from the book, with every gold page machine-checked.
+- Reviewing the answers showed the model turning "mentioned together" edges
+  into invented roles ("X was Y's ally"); those edges are now hidden from the
+  model unless they connect two question entities, and the prompt forbids
+  reading roles into them.
 
-## Recommendations before presenting these numbers as final
+## Next steps
 
-1. Run the master plan's suggested 2-rater manual agreement check on a
-   sample of the 90 ablation answers — the automated scorer's known
-   brittleness to paraphrasing means it should not be the last word.
-2. Fix the T10 Concept-node linkage gap if time permits.
-3. Consider authoring a second, independently-sourced batch of test
-   questions (not derived from the same KG) for a fairer vector-vs-graph
-   comparison in any future iteration.
+1. Run `rag_eval.py generate --runs 3` for run-to-run spread.
+2. Look at the 2 unanswerable questions hybrid and vector answered anyway.
+3. Grow the typed part of the graph (a larger model for drafting facts, or
+   a longer hand review) and add harder multi-hop questions, where the graph
+   is most likely to help.
+4. Add the second source book, so the graph has to join facts across books.
+
+## History
+
+The first version (Parts 1–8, August 2026) used 36 Wikipedia articles, a
+hand-curated 47-entity graph and the 30-question set; its results are in
+[part7_notes.md](part7_notes.md) and are superseded by the above.
 
 ## Repository
 
 [github.com/yohannshroff/Hallucinet](https://github.com/yohannshroff/Hallucinet)
-— see `README.md` for setup and the full pipeline, and `docs/part*_notes.md`
-for what was built, run, and found in each part.
+— see `README.md` for setup and the full pipeline.

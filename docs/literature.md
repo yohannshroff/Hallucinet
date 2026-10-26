@@ -64,7 +64,7 @@ appear at the venue named).
 - **Data / metrics:** PopQA (accuracy), biography generation (FactScore), PubHealth, Arc-Challenge.
 - **Key findings:** With a Self-RAG LLaMA2-7B base, CRAG beat plain RAG by 7.0% accuracy on PopQA, 14.9% FactScore on biographies, 36.6% on PubHealth and 15.4% on Arc-Challenge.
 - **Limitations (stated):** Needs a fine-tuned external retrieval evaluator.
-- **For us:** Retrieval failure is the main loss in our results (vector search misses the gold pages for about 30% of questions at k=5). Corrective retrieval is the natural next step.
+- **For us:** Retrieval failure was the main loss in our first results (plain vector search missed the gold pages for 25% of questions at k=5). Adding a cross-encoder reranker and skipping the book's back matter cut that to 14% (hybrid: 9%), and correct answers rose accordingly; a CRAG-style evaluator is the next step for what is still missed.
 
 ### 7. Chen et al., 2024 — arXiv:2309.01431 (AAAI 2024; DOI 10.1609/AAAI.V38I16.29728)
 **Benchmarking Large Language Models in Retrieval-Augmented Generation**
@@ -73,7 +73,7 @@ appear at the venue named).
 - **Data / metrics:** Six LLMs; accuracy, rejection rate, error detection.
 - **Key findings:** Negative rejection is weak: the best rejection rates were 45% (English) and 43.33% (Chinese) when only noise documents were given (Table 3). Models also struggle to integrate information and to resist false documents.
 - **Limitations:** Models often do not follow the rejection instruction exactly, which makes rejection hard to detect automatically.
-- **For us:** "Negative rejection" is our unanswerable category. Our 4B model's refusal behaviour (graph-only and vector-only 100% on our unanswerable questions) can be compared with their weak numbers; ours is easier because the book either has the answer or does not, and our context is small.
+- **For us:** "Negative rejection" is our unanswerable category. Our 4B model refuses correctly on 100% (graph-only) and 80% (vector, hybrid) of our 10 unanswerable questions, which can be compared with their weak numbers; ours is easier because the book either has the answer or does not, and our context is small.
 
 ### 8. Es et al., 2024 — arXiv:2309.15217 (EACL 2024 demonstrations)
 **RAGAs: Automated Evaluation of Retrieval Augmented Generation**
@@ -91,7 +91,7 @@ appear at the venue named).
 - **Data / metrics:** Eight tasks (KILT, SuperGLUE, AIS); context relevance, answer faithfulness, answer relevance.
 - **Key findings:** Accurate with only a few hundred human annotations; they report needing 78% fewer annotations than the baseline approach.
 - **Limitations (stated):** Still needs roughly 150–300 human-labelled points, and a domain-aware annotator.
-- **For us:** Supports using a small human-labelled validation sample (our 50–60 items with two annotators) to check an automatic scorer.
+- **For us:** Supports using a small human-labelled validation sample to check an automatic scorer: our 60 items with two annotators gave kappa 0.86 between annotators and 0.77 between the scorer and the agreed labels (`docs/eval_annotation.md`).
 
 ### 10. Min et al., 2023 — arXiv:2305.14251 (EMNLP 2023)
 **FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation**
@@ -109,7 +109,7 @@ appear at the venue named).
 - **Data / metrics:** 238 GPT-3 biography passages from WikiBio; sentence-level AUC-PR and passage-level correlation.
 - **Key findings (Table 2):** Non-factual sentence AUC-PR 92.50 with NLI and 93.42 with prompting, against a random baseline of 72.96; passage-level Pearson 74.14 (NLI) and 78.32 (prompting).
 - **Limitations (stated):** Mostly biographical text; sentence-level labels; the best variant is expensive.
-- **For us:** A cheap extra signal we could add: our three runs per question already give several samples per question.
+- **For us:** A cheap extra signal we could add: seeded runs (`rag_eval.py generate --runs 3`) give several samples per question.
 
 ### 12. Li et al., 2023 — arXiv:2305.11747 (EMNLP 2023; ACL 2023.emnlp-main.397)
 **HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models**
@@ -136,7 +136,7 @@ appear at the venue named).
 - **Data / metrics:** Multi-document QA accuracy across positions and context lengths; closed-book and oracle baselines (Table 1: GPT-3.5-Turbo closed-book 56.1%, oracle 88.3%).
 - **Key findings:** Accuracy is best when the answer is at the start or end and falls in the middle; GPT-3.5-Turbo can drop by more than 20%, and in the 20- and 30-document settings it falls below its closed-book 56.1%.
 - **Limitations:** Not stated as a separate section in the text we read; tested on specific tasks and models.
-- **For us:** Why top-k matters for a small 4B model: more passages are not always better. Our hybrid context (about 19 graph facts plus passages) is long for this reason.
+- **For us:** Why top-k matters for a small 4B model: more passages are not always better. This is why our context is capped (at most 6 graph facts plus 5 reranked passages) and plain co-mention facts are left out unless they connect two question entities.
 
 ## Gap statement (Section 2.3)
 

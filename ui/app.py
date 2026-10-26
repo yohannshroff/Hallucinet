@@ -32,6 +32,9 @@ API_URL = os.environ.get("HALLUCINET_API_URL", "http://localhost:8000")
 DEMO_CACHE_PATH = REPO_ROOT / "data" / "eval" / "demo_cache.json"
 SAMPLE_QUESTIONS_CSV = REPO_ROOT / "data" / "eval" / "sample_questions.csv"
 STYLES_CSS = Path(__file__).with_name("styles.css")
+ASK_TIMEOUT = 240  # seconds per question on the Ask page
+COMPARE_TIMEOUT = 600  # per mode on Compare: three answers in a row, and a slow laptop can take minutes each
+TIMEOUT_LEAD = "The backend took longer than"
 
 MODES = {
     "hybrid": "Hybrid: knowledge graph + book passages (recommended)",
@@ -69,8 +72,8 @@ def api_get(path: str):
         return None
 
 
-def query_api(question: str, mode: str, k: int) -> dict:
-    resp = requests.post(f"{API_URL}/ask", json={"question": question, "mode": mode, "k": k}, timeout=240)
+def query_api(question: str, mode: str, k: int, timeout: int = ASK_TIMEOUT) -> dict:
+    resp = requests.post(f"{API_URL}/ask", json={"question": question, "mode": mode, "k": k}, timeout=timeout)
     resp.raise_for_status()
     return resp.json()
 
@@ -98,18 +101,31 @@ def example_questions(limit: int = 3) -> list:
     return df["question"].head(limit).tolist()
 
 
-def answer_question(question: str, mode: str, k: int):
+def error_text(exc: requests.RequestException, timeout: int) -> str:
+    """Why a request failed, in plain words. A timed-out question keeps running on
+    the backend, so the next one has to wait for it."""
+    if isinstance(exc, requests.Timeout):
+        return (f"{TIMEOUT_LEAD} {timeout // 60} minutes. It may still be finishing an earlier "
+                "question; try again in a minute.")
+    if isinstance(exc, requests.ConnectionError):
+        return "The backend isn't running. Start it with: uvicorn api.main:app --port 8000"
+    if isinstance(exc, requests.HTTPError) and exc.response is not None:
+        return f"The backend hit an error (HTTP {exc.response.status_code}). Check the uvicorn terminal."
+    return str(exc)
+
+
+def answer_question(question: str, mode: str, k: int, timeout: int = ASK_TIMEOUT):
     """Returns (result_dict | None, from_cache, error_text)."""
     try:
         started = time.perf_counter()
-        result = query_api(question, mode, k)
+        result = query_api(question, mode, k, timeout)
         result["elapsed_s"] = time.perf_counter() - started
         return result, False, None
     except requests.RequestException as exc:
         cached = query_demo_cache(question)
         if cached is not None:
             return cached, True, None
-        return None, False, str(exc)
+        return None, False, error_text(exc, timeout)
 
 
 # --------------------------------------------------------------------------
@@ -497,15 +513,20 @@ def compare_page():
         "The same question, answered three ways. This is the heart of the project: does combining the "
         "knowledge graph with book search give more trustworthy answers than either alone?"
     )
-    secondary("This asks the language model three times, so it takes roughly three times as long.")
+    secondary("This asks the language model three times in a row, so it can take several minutes.")
     cmp_question = st.text_input("Question to compare", value="Who led the resistance at Jhansi?", key="cmp_question")
     if st.button("Compare all three", type="primary", disabled=not cmp_question.strip()):
         results = {}
         progress = st.progress(0.0, text="Starting…")
+        busy = False
         for i, m in enumerate(MODES):
-            progress.progress(i / len(MODES), text=f"Searching: {MODE_SHORT[m]}…")
-            res, _, err = answer_question(cmp_question.strip(), m, k)
+            if busy:  # don't queue more work behind a question the backend is still answering
+                results[m] = {"error": "Skipped: the backend is still busy with the previous mode."}
+                continue
+            progress.progress(i / len(MODES), text=f"Asking: {MODE_SHORT[m]} ({i} of {len(MODES)} done)…")
+            res, _, err = answer_question(cmp_question.strip(), m, k, COMPARE_TIMEOUT)
             results[m] = res if res else {"error": err}
+            busy = bool(err and err.startswith(TIMEOUT_LEAD))
         progress.empty()
         st.session_state["compare_results"] = {"question": cmp_question.strip(), "results": results}
 
@@ -520,7 +541,7 @@ def compare_page():
         with col:
             label(MODE_SHORT[m])
             if "error" in res:
-                secondary("No answer (backend unreachable).")
+                secondary("No answer. " + esc(res["error"] or ""))
                 continue
             trust_block(res)
             rule()

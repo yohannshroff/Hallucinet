@@ -11,16 +11,31 @@ events and periods (every entity already carries a `period_tag`).
 
 ## Status
 
-All 8 parts of the build plan are complete: KG seed data + source
-documents (1), vector retrieval (2), Neo4j graph (3), hybrid retrieval
-(4), grounded generation via a local LLM (5), NLI-based trust scoring (6),
-a vector/graph/hybrid ablation over 30 questions (7), and a FastAPI +
-Streamlit app with a demo-question cache (8).
+All 8 parts of the build plan are complete: source book and knowledge
+graph (1, 3), vector retrieval with reranking (2), hybrid retrieval (4),
+grounded generation via a local LLM (5), NLI-based trust scoring (6), an
+evaluation of closed-book / vector / graph / hybrid on 54 questions (7),
+and a FastAPI + Streamlit app with a demo-question cache (8).
+
+**Current results** (54 questions, 1 run; full tables in
+[docs/eval_report.md](docs/eval_report.md)):
+
+| system | correct (all 54) | correct (44 answerable) | hallucinated answer |
+|---|---|---|---|
+| closed book (no retrieval) | 16.7% | 11.4% | 75.9% |
+| vector | 83.3% | 84.1% | 13.0% |
+| graph | 68.5% | 61.4% | 16.7% |
+| hybrid | 85.2% | 86.4% | 13.0% |
+
+Retrieval cuts hallucinated answers from 76% to 13%. Hybrid and vector are
+level on this set (they differ on one question, p = 1.0); hybrid beats
+graph-only (p = 0.022).
 
 **Start here:** [docs/final_report.md](docs/final_report.md) summarizes
 the whole project — architecture, results (with an honest read of their
-caveats), and what to fix before presenting the numbers as final. Each
-`docs/part*_notes.md` has the detailed per-part log.
+caveats), and what to do next. Each `docs/part*_notes.md` is the log
+written while that part was built (the early ones describe the first,
+Wikipedia-based version).
 
 ## Source
 
@@ -81,6 +96,7 @@ python eval/ablation.py
 python eval/rag_eval.py retrieval        # Recall@k / MRR against the gold pages (no LLM)
 python eval/chunk_sensitivity.py          # chunk-size sensitivity of vector retrieval (no LLM)
 python eval/rag_eval.py generate --runs 3 # closed-book / vector / graph / hybrid answers (needs Ollama, ~3 h)
+python eval/rag_eval.py citations         # re-score citation accuracy in saved runs (no LLM)
 python eval/rag_eval.py report            # tables with mean +- SD, CIs, McNemar -> docs/eval_report.md
 
 # Part 8: run the app
@@ -117,7 +133,7 @@ the project does about it:
   (`OLLAMA_KEEP_ALIVE`) and replies are capped at 400 tokens
   (`OLLAMA_NUM_PREDICT`).
 - **Cap Neo4j's memory.** Its defaults claim a big share of RAM; for this
-  47-node graph add these to `$(brew --prefix neo4j)/libexec/conf/neo4j.conf`
+  ~250-node graph add these to `$(brew --prefix neo4j)/libexec/conf/neo4j.conf`
   and restart it:
 
   ```
@@ -127,7 +143,9 @@ the project does about it:
   ```
 
 Typical timings (warm): ~15 s per answer (language model) plus ~2 s for the
-trust check. The first question after the model has unloaded takes longer.
+trust check on the Mac; about 30 s per answer on the 16 GB Windows laptop
+(median over the evaluation run). The first question after the model has
+unloaded takes longer, up to a few minutes.
 
 ## Running it on Windows
 
@@ -166,10 +184,10 @@ setx PYTHONUTF8 1                                      # then open a new termina
 ```
 data/           source docs, KG seed CSVs, eval question sets, processed chunks/embeddings/index
 scripts/        Part 1-2 pipeline scripts (see docs/part1_notes.md, part2_notes.md)
-kg/             Part 3: Neo4j ingestion + entity resolution (see docs/part3_notes.md)
-retrieval/      Part 4: hybrid vector+graph retrieval (see docs/part4_notes.md)
+kg/             Part 3: building the graph from the book, Neo4j loading (see docs/kg_build.md)
+retrieval/      Part 4: hybrid vector+graph retrieval and reranking (see retrieval/README.md)
 generation/     Part 5: grounding prompt template + Ollama generation (see docs/part5_notes.md)
-eval/           Parts 6-7: trust score + vector/graph/hybrid ablation (see docs/part6_notes.md, part7_notes.md)
+eval/           Parts 6-7: trust score + evaluation (see eval/README.md, docs/eval_report.md)
 api/            Part 8: FastAPI backend (see docs/part8_notes.md)
 ui/             Part 8: Streamlit frontend
 docs/           final report, schema reference, manual setup guides, per-part notes

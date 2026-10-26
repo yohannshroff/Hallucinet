@@ -8,9 +8,10 @@ replaces the earlier hand-curated, Wikipedia-sourced graph.
 
 | | |
 |---|---|
-| Entities | 278 (123 people, 91 places, 48 events, 16 groups) |
-| Typed relationships | 57: `located_in` 47, `ruled` 7, `member_of` 2, `fought_against` 1 |
-| `associated_with` edges | 357 (entities mentioned together in 2+ sentences) |
+| Entities | 245 (108 people, 78 places, 43 events, 16 groups) |
+| Typed relationships | 103 across 12 relations: `located_in` 59, `ruled` 10, `part_of` 10, `administered` 9, `allied_with` 3, `member_of` 3, `captured` 3, `fought_against` 2, `appointed_by`, `besieged`, `died_during`, `commanded` 1 each |
+| `associated_with` edges | 338 (entities mentioned together in 2+ sentences) |
+| Hand-reviewed facts | 112 (63 accepted, 49 rejected), in `data/kg_seed/verified_facts.csv` |
 | Citations | every relationship names the book pages it came from |
 
 ## Pipeline
@@ -72,7 +73,18 @@ What each stage does:
    sentences, at most the 6 strongest per entity. Accepted facts from
    `verified_facts.csv` are kept as certain; rejected ones are removed from
    every other source. "Rani" is renamed "Rani of Jhansi" with the aliases
-   questions use (Lakshmibai, ...).
+   questions use (Lakshmibai, Ranee, ...).
+
+   Name cleanup after the review: run-on event names are cut back to a known
+   place ("Relief of Lucknow Havelock" -> "Relief of Lucknow") and debris
+   names (digits, apostrophes, dots) are dropped (`tidy_event_name`); a few
+   names the LLM typed wrongly are fixed (`TYPE_OVERRIDES` in
+   `kg/extract_facts.py`: Sagar is a place, Colvin and Craigie are people,
+   the Gwalior Contingent is a group); common words that slipped through as
+   names (Adjutant, Fort, Court, Council, ...) are excluded
+   (`EXCLUDED_NAMES`); and short names are mapped to the full person
+   (`ALIAS_OVERRIDES`: Havelock -> Henry Havelock, Hodson -> William Hodson,
+   King of Delhi -> Bahadur Shah, ...).
 
 ### Keeping the evaluation fair
 
@@ -102,9 +114,16 @@ weaker evidence than a typed fact. Consequences for the evaluation:
 
 - Graph-only retrieval on this graph is expected to be weak for "who did X to
   Y" questions; the vector side supplies the content.
-- A larger model, or a human-verified set of typed facts layered on top
-  (checked against the book's pages), would improve it. That is the main
-  future-work item for the graph.
+- To get past this, typed facts were drafted by the LLM and then checked by
+  hand against their sentences (stages 3b and 3c): 63 accepted, 49 rejected.
+  The accepted facts are layered on top of the automatic ones.
+
+Effect on the evaluation (`docs/eval_report.md`, answerable questions
+answered correctly in graph-only mode): 6.8% with the old graph, 54.5% after
+the rebuild and hand review, 61.4% once passage reranking was added. The
+weak spot is still single-hop questions (43% correct graph-only), where the
+answer is usually in a passage rather than a typed fact; a larger model for
+drafting facts, or a longer review, is the main future-work item.
 
 ## Re-running
 

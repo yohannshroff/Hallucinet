@@ -1,6 +1,6 @@
 # Chunk-size sensitivity (vector retrieval, 44 answerable questions)
 
-Embedding model reads at most 256 word pieces per chunk.
+Embedding model reads at most 256 word pieces per chunk. Plain embedding search over the whole book: no page filter and no reranking, so these numbers compare chunk sizes, not the system (see `rag_eval.py retrieval` for that).
 
 | chunk words (overlap) | chunks | k | hit@k | recall@k | MRR | context precision |
 |---|---|---|---|---|---|---|

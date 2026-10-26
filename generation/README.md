@@ -6,6 +6,11 @@ LLM integration on top of Part 4's hybrid retrieval.
   from the retrieved context, explicitly say so when the context doesn't
   support an answer, never fall back on the model's own training-time
   knowledge. This is the core anti-hallucination lever for this project.
+  The context is a numbered source list (graph facts, then book passages)
+  and the model cites by number (`[2]`, `[1][4]`), never by file name or
+  page. It is also told that "mentioned together" is not a relationship,
+  to say who did what only when a source states it, and to answer in plain
+  sentences.
 - `ollama_client.py` — thin wrapper around the local Ollama `/api/chat`
   HTTP endpoint.
 - `generate_answer.py` — ties retrieval (`retrieval/hybrid_retrieve.py`) +

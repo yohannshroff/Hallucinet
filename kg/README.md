@@ -2,7 +2,9 @@
 
 Building the knowledge graph from the book, and loading it into Neo4j. The
 build pipeline (`find_candidates.py` -> `type_entities.py` -> `extract_facts.py`
--> `consolidate_triples.py`, with `book_text.py` as a helper) is described in
+-> `draft_facts.py` (LLM-drafted typed facts, reviewed by hand and exported to
+`data/kg_seed/verified_facts.csv`) -> `consolidate_triples.py`, with
+`book_text.py` as a helper) is described in
 [docs/kg_build.md](../docs/kg_build.md); the loader and resolution code:
 
 - `entity_resolution.py` — resolves a free-text mention to an `entity_id`:

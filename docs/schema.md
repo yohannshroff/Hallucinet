@@ -22,7 +22,7 @@ ever mean adding new `period_tag` *values*, never new columns.
 | `subject` | entity `name` (must resolve to a row in entities.csv, or an alias of one) |
 | `relation` | controlled vocabulary, see below |
 | `object` | entity `name`, or a short phrase when no single entity fits (e.g. "rebel sepoys") |
-| `source` | URL the fact was drawn from — should match a `resolved_url` in `data/raw/sources_manifest.csv` |
+| `source` | where the fact was drawn from: the book PDF and page (`data/raw/<book>.pdf#page=N`), or a URL for a web source (matching a `resolved_url` in `data/raw/sources_manifest.csv`) |
 | `period_tag` | same convention as entities.csv |
 | `weight` | how many distinct source sentences support the fact (co-mentions for `associated_with`); graph search returns typed facts first, then the highest-weight associations |
 | `notes` | free-text context: book pages and how the fact was found |

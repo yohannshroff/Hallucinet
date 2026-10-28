@@ -10,8 +10,9 @@ Three steps, so the cheap ones never need the language model:
 
 `generate` appends one line per (question, mode, run) to
 data/eval/runs/generation.jsonl and skips lines already there, so it can be
-stopped and restarted. Retrieval is deterministic; the runs differ by the
-sampling seed (temperature 0.3).
+stopped and restarted. Retrieval is deterministic. Closed-book answers are
+sampled at temperature 0.3 with the run number as seed; the retrieval modes
+use the generator's default (temperature 0.1, no seed), so runs can differ.
 
 How an answer is scored is defined in eval/rag_metrics.py. In short:
 unanswerable questions are correct only if the model refuses; answerable ones

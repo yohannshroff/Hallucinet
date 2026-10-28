@@ -143,8 +143,8 @@ the project does about it:
   ```
 
 Typical timings (warm): ~15 s per answer (language model) plus ~2 s for the
-trust check on the Mac; about 30 s per answer on the 16 GB Windows laptop
-(median over the evaluation run). The first question after the model has
+trust check on the Mac; about 33 s per retrieval answer on the 16 GB
+Windows laptop (median over the evaluation run). The first question after the model has
 unloaded takes longer, up to a few minutes.
 
 ## Running it on Windows
@@ -175,8 +175,8 @@ setx PYTHONUTF8 1                                      # then open a new termina
   `docker stop neo4j` / `docker start neo4j` when not in use.
 - `copy .env.example .env` and set `NEO4J_PASSWORD`; keep `OLLAMA_NUM_CTX`
   at 4096 (a smaller window cuts long prompts).
-- Run the pipeline above. For long evaluation runs use `--runs 1` (the model
-  is deterministic) and batches via `--ids`; it resumes after Ctrl+C. Don't
+- Run the pipeline above. For long evaluation runs use `--runs 1` (three runs
+  take ~3 h) and batches via `--ids`; it resumes after Ctrl+C. Don't
   run the app and the evaluation at the same time.
 
 ## Repo layout

@@ -11,7 +11,7 @@ Hallucination evaluation harness.
   entailed by the retrieved evidence. CLI: `python eval/trust_score.py
   "<question>"`.
 - `run_trust_scores.py` — runs trust scoring over the sample questions,
-  saves a transcript to `docs/part6_trust_scores.md`.
+  writes a transcript to `docs/part6_trust_scores.md` (not committed).
 
 Claims are cleaned of citations, page references, file paths and markdown
 before checking, and evidence is checked one sentence and one pair of
@@ -24,7 +24,8 @@ and [docs/final_report.md](../docs/final_report.md)):**
   - `retrieval`: hit@k / Recall@k / MRR / context precision against
     `gold_pages`, no language model needed.
   - `generate`: closed-book, vector, graph and hybrid answers to the 54
-    questions in `data/eval/qa_test_set.csv`; seeded runs; resumable.
+    questions in `data/eval/qa_test_set.csv`; resumable (closed-book runs are
+    seeded at temperature 0.3, the retrieval modes use temperature 0.1).
   - `citations`: re-scores citation accuracy in saved runs (no language model).
   - `report`: mean ± SD across runs, bootstrap 95% CIs, exact McNemar,
     breakdown by question type -> `docs/eval_report.md`.

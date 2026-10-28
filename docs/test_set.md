@@ -17,7 +17,7 @@ written from the old knowledge graph and so favoured graph retrieval.
 |---|---|
 | `id`, `question` | |
 | `gold_answer` | short answer, paraphrased from the book (no quotations) |
-| `expected_entities` | `;`-separated words or names; an answer containing any of them counts as matching (used by the automatic scorer) |
+| `expected_entities` | `;`-separated words or names; an answer counts as correct if it contains at least half of them and is not a refusal (the automatic scorer, `eval/rag_metrics.py`) |
 | `gold_pages` | the 4-page groups of the PDF that state the answer, `;`-separated, e.g. `353-356;373-376`. A multi-hop question lists a group per fact. Blank for unanswerable questions |
 | `evidence_terms` | short phrases that must appear in the gold pages, used to machine-check `gold_pages` |
 | `hop_type`, `category`, `answerable` | |

@@ -17,7 +17,7 @@ LLM integration on top of Part 4's hybrid retrieval.
   the prompt template + Ollama into one grounded-answer call.
 - `run_sample_questions.py` — runs the questions in
   `data/eval/sample_questions.csv` through the full pipeline and saves a
-  transcript to `docs/part5_sample_answers.md` for manual review (not
+  transcript to `docs/part5_sample_answers.md` (not committed) for manual review (not
   scored — Part 7 turns this into a real scored ablation).
 
 See [docs/part5_notes.md](../docs/part5_notes.md) for what was run and

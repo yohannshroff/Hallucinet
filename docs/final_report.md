@@ -23,7 +23,8 @@ books and periods can be added without a redesign.
    → `all-MiniLM-L6-v2` embeddings → FAISS index.
 2. **Knowledge graph** (Parts 1, 3): names found with spaCy and typed by
    the local LLM; typed facts from grammar rules plus LLM drafts that were
-   **checked by hand** (112 reviewed: 63 accepted, 49 rejected); co-mention
+   **checked by hand** (101 reviewed: 52 accepted, 12 corrected, 37
+   rejected); co-mention
    edges for entities named together in 2+ sentences. Loaded into Neo4j.
    Every fact names its book page.
 3. **Hybrid retrieval** (Part 4): entities in the question → up to 6 graph
@@ -51,9 +52,9 @@ books and periods can be added without a redesign.
 
 ## Results
 
-From [eval_report.md](eval_report.md): 1 run per system (the model runs at
-temperature 0.3), 95% bootstrap confidence intervals over questions in
-brackets.
+From [eval_report.md](eval_report.md): 1 run per system (closed book at
+temperature 0.3, the retrieval systems at 0.1), 95% bootstrap confidence
+intervals over questions in brackets.
 
 **All 54 questions**
 
@@ -109,8 +110,8 @@ Correct answers on the 44 answerable questions, per version:
 | + numbered citations, reranker, narrative-page filter (current) | **84.1%** | **61.4%** | **86.4%** |
 
 The hand review made graph-only usable (6.8% → 54.5%). The reranker made
-the biggest single difference: vector hit@1 rose from 0.50 to 0.80 and
-hybrid from 0.66 to 0.86, and answer accuracy followed. One cost: the
+the biggest single difference: vector hit@1 rose from 0.50 without it to
+0.80 with it (same narrative-page filter), and answer accuracy followed. One cost: the
 hybrid system's refusals on unanswerable questions fell from 10/10 to 8/10.
 
 ## Reading the results honestly
@@ -145,7 +146,7 @@ hybrid system's refusals on unanswerable questions fell from 10/10 to 8/10.
   made; `rag_eval.py generate --runs 3` gives run-to-run spread.
 - **The automatic scorer is conservative.** It counts an answer as correct
   if it contains at least half the expected names or words. Two annotators
-  checked it on 60 answers from an earlier run ([eval_annotation.md](eval_annotation.md)):
+  checked it on 60 answers from the first book-graph run ([eval_annotation.md](eval_annotation.md)):
   they agreed with each other at kappa 0.86 and with the scorer at kappa
   0.77, and judged more retrieval answers correct than the scorer did. Read
   the RAG numbers as a lower bound.

@@ -11,7 +11,7 @@ replaces the earlier hand-curated, Wikipedia-sourced graph.
 | Entities | 245 (108 people, 78 places, 43 events, 16 groups) |
 | Typed relationships | 103 across 12 relations: `located_in` 59, `ruled` 10, `part_of` 10, `administered` 9, `allied_with` 3, `member_of` 3, `captured` 3, `fought_against` 2, `appointed_by`, `besieged`, `died_during`, `commanded` 1 each |
 | `associated_with` edges | 338 (entities mentioned together in 2+ sentences) |
-| Hand-reviewed facts | 112 (63 accepted, 49 rejected), in `data/kg_seed/verified_facts.csv` |
+| Hand-reviewed facts | 101 drafted facts reviewed (52 accepted, 12 corrected, 37 rejected) -> 63 accepted and 49 rejected rows in `data/kg_seed/verified_facts.csv` (a correction exports as the fixed fact accepted plus the draft rejected) |
 | Citations | every relationship names the book pages it came from |
 
 ## Pipeline
@@ -115,7 +115,8 @@ weaker evidence than a typed fact. Consequences for the evaluation:
 - Graph-only retrieval on this graph is expected to be weak for "who did X to
   Y" questions; the vector side supplies the content.
 - To get past this, typed facts were drafted by the LLM and then checked by
-  hand against their sentences (stages 3b and 3c): 63 accepted, 49 rejected.
+  hand against their sentences (stages 3b and 3c): of 101 reviewed, 52
+  accepted, 12 corrected, 37 rejected.
   The accepted facts are layered on top of the automatic ones.
 
 Effect on the evaluation (`docs/eval_report.md`, answerable questions

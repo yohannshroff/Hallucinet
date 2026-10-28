@@ -1,6 +1,6 @@
 # Human validation of the automatic scorer
 
-Sample: 60 answers from run 1, 15 per system (closed-book, vector, graph, hybrid), drawn at
+Sample: 60 answers from run 1 of the first book-graph evaluation (`data/eval/runs/generation_before_rebuild.jsonl`, before the hand-reviewed facts and the reranker), 15 per system (closed-book, vector, graph, hybrid), drawn at
 random with a fixed seed and shuffled. Two annotators labelled each answer independently
 (1 = states what the gold answer says, or correctly says the book does not say; 0 = wrong,
 invented, or an unwarranted refusal), without seeing each other's labels, the system name or

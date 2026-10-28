@@ -1,5 +1,9 @@
 # Part 4 notes
 
+> **Superseded.** Historical build log (August 2026, first Wikipedia-based
+> version). Settings and numbers here are out of date; see
+> [final_report.md](final_report.md) for the current system and results.
+
 Goals: extract entities from a user query, run graph + vector search, merge
 into a single context.
 

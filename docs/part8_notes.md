@@ -1,5 +1,9 @@
 # Part 8 notes
 
+> **Superseded.** Historical build log (August 2026, first Wikipedia-based
+> version). Settings and numbers here are out of date; see
+> [final_report.md](final_report.md) for the current system and results.
+
 Goals: wire FastAPI + Streamlit end-to-end, cache demo questions as a
 fallback, finalize the report.
 

@@ -1,5 +1,9 @@
 # Part 5 notes
 
+> **Superseded.** Historical build log (August 2026, first Wikipedia-based
+> version). Settings and numbers here are out of date; see
+> [final_report.md](final_report.md) for the current system and results.
+
 Goals: get a local LLM running, write a grounding-only prompt template, and
 test answer generation on 10 sample questions.
 

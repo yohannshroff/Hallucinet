@@ -1,5 +1,9 @@
 # Part 7 notes
 
+> **Superseded.** Historical build log (August 2026, first Wikipedia-based
+> version). Settings and numbers here are out of date; see
+> [final_report.md](final_report.md) for the current system and results.
+
 Goals: finalize a 30-40 question Q&A test set, run the vector-only vs
 graph-only vs hybrid ablation, score it, and produce the comparison chart.
 

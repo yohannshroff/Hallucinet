@@ -1,5 +1,9 @@
 # Part 2 notes
 
+> **Superseded.** Historical build log (August 2026, first Wikipedia-based
+> version). Settings and numbers here are out of date; see
+> [final_report.md](final_report.md) for the current system and results.
+
 Goals: clean + chunk the fetched documents, embed the chunks, build a FAISS
 index, and confirm vector search works end-to-end.
 

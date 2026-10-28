@@ -142,6 +142,12 @@ hybrid system's refusals on unanswerable questions fell from 10/10 to 8/10.
 
 **Caveats:**
 
+- **Not a held-out test set.** The same 54 questions were used to compare
+  all three versions and to choose the later changes (reranker, page filter,
+  prompt rules, name cleanup; some aliases were added because questions use
+  them). The numbers are development-set results and likely optimistic; a
+  fresh set of questions, written and scored once, is needed for an unbiased
+  estimate.
 - **One run.** The ± values in eval_report.md are 0 because only one run was
   made; `rag_eval.py generate --runs 3` gives run-to-run spread.
 - **The automatic scorer is conservative.** It counts an answer as correct
@@ -184,6 +190,7 @@ Building and testing against real output caught real bugs:
    a longer hand review) and add harder multi-hop questions, where the graph
    is most likely to help.
 4. Add the second source book, so the graph has to join facts across books.
+5. Write a new held-out question set and score the final system on it once.
 
 ## History
 

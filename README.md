@@ -29,7 +29,8 @@ and a FastAPI + Streamlit app with a demo-question cache (8).
 
 Retrieval cuts hallucinated answers from 76% to 13%. Hybrid and vector are
 level on this set (they differ on one question, p = 1.0); hybrid beats
-graph-only (p = 0.022).
+graph-only on 11 questions against 2 (p = 0.022, not significant after
+Bonferroni correction for 5 tests).
 
 **Start here:** [docs/final_report.md](docs/final_report.md) summarizes
 the whole project — architecture, results (with an honest read of their

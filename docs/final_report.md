@@ -54,7 +54,9 @@ books and periods can be added without a redesign.
 
 From [eval_report.md](eval_report.md): 1 run per system (closed book at
 temperature 0.3, the retrieval systems at 0.1), 95% bootstrap confidence
-intervals over questions in brackets.
+intervals over questions in brackets. The intervals show how much a result
+depends on which questions were asked, not run-to-run variation (there was
+only one run).
 
 **All 54 questions**
 
@@ -92,6 +94,11 @@ intervals over questions in brackets.
 | graph vs vector | 3 | 11 | 0.057 |
 | hybrid vs closed book | 39 | 2 | <0.001 |
 
+Five paired tests were run ([eval_report.md](eval_report.md) also has vector
+vs closed book, 38 vs 2, p < 0.001). With a Bonferroni correction (α = 0.01)
+only the two comparisons with the closed-book model are significant; hybrid
+vs graph (p = 0.022, adjusted ≈ 0.11) is not.
+
 **Retrieval (answerable questions, top 5)**: the right page was retrieved
 for 86% of questions with vector search, 91% with hybrid and 73% with
 graph-only. Vector search puts it first for 80% of questions (hit@1 0.795,
@@ -122,8 +129,6 @@ hybrid system's refusals on unanswerable questions fell from 10/10 to 8/10.
   from 76% (closed book) to 13% (vector, hybrid); 39 questions are answered
   correctly by hybrid and not by the closed-book model, against 2 the other
   way.
-- **Hybrid is better than graph-only** (p = 0.022), mainly on single-hop
-  questions, where the answer is usually in a passage, not a typed fact.
 - **The graph helps on multi-hop questions and on refusing.** Hybrid got
   all 10 multi-hop questions right (vector 9), and graph-only refused all
   10 unanswerable questions. Graph-only answers also have the highest trust
@@ -134,6 +139,11 @@ hybrid system's refusals on unanswerable questions fell from 10/10 to 8/10.
 
 **What they don't support:**
 
+- **Hybrid beating graph-only is not established.** Hybrid was right on 11
+  questions graph-only missed, against 2 the other way (p = 0.022), mainly
+  single-hop questions, where the answer is usually in a passage, not a typed
+  fact. After Bonferroni correction for the 5 paired tests (α = 0.01) this is
+  not significant (adjusted p ≈ 0.11), so it is a direction only.
 - **The hypothesis is not confirmed on this set.** Hybrid and vector are
   level on correctness (86.4% vs 84.1%; one question apart, p = 1.0). Once
   the reranker made the book passages good, the graph added little that the

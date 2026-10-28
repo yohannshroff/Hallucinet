@@ -245,7 +245,8 @@ def cmd_report(args):
     n_runs = runs["run"].nunique()
     modes = [m for m in GEN_MODES if m in set(runs["mode"])]
     out = [f"# Evaluation report\n\n{runs['id'].nunique()} questions, {n_runs} run(s) per system. "
-           "Cells are mean ± SD across runs, then a 95% bootstrap CI over questions in brackets.\n"]
+           "Cells are mean ± SD across runs, then a 95% bootstrap CI over questions in brackets "
+           "(the CI reflects question sampling, not run-to-run variation).\n"]
 
     out.append("## Overall (all questions)\n")
     out.append("| system | correct | hallucinated answer | refused |\n|---|---|---|---|")
@@ -267,7 +268,8 @@ def cmd_report(args):
         cells = [metric_cell(runs[(runs["mode"] == m) & (runs["hop_type"] == h)], "correct") for h in hops]
         out.append(f"| {m} | " + " | ".join(cells) + " |")
 
-    out.append("\n## Paired comparison (exact McNemar on per-question majority correctness)\n")
+    out.append("\n## Paired comparison (exact McNemar on per-question majority correctness; "
+               "Bonferroni α = 0.01 for these 5 tests)\n")
     out.append("| A vs B | A only right | B only right | p |\n|---|---|---|---|")
     maj = {m: (runs[runs["mode"] == m].groupby("id")["correct"].mean() >= 0.5) for m in modes}
     for a, b in [("hybrid", "vector"), ("vector", "closed_book"), ("hybrid", "closed_book"), ("graph", "vector"), ("hybrid", "graph")]:

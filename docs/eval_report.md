@@ -1,6 +1,6 @@
 # Evaluation report
 
-54 questions, 1 run(s) per system. Cells are mean ± SD across runs, then a 95% bootstrap CI over questions in brackets.
+54 questions, 1 run(s) per system. Cells are mean ± SD across runs, then a 95% bootstrap CI over questions in brackets (the CI reflects question sampling, not run-to-run variation).
 
 ## Overall (all questions)
 
@@ -29,7 +29,7 @@
 | graph | 0.429 ± 0.000 [0.24, 0.62] | 0.900 ± 0.000 [0.70, 1.00] | 0.692 ± 0.000 [0.46, 0.92] | 1.000 ± 0.000 [1.00, 1.00] |
 | hybrid | 0.810 ± 0.000 [0.62, 0.95] | 1.000 ± 0.000 [1.00, 1.00] | 0.846 ± 0.000 [0.62, 1.00] | 0.800 ± 0.000 [0.50, 1.00] |
 
-## Paired comparison (exact McNemar on per-question majority correctness)
+## Paired comparison (exact McNemar on per-question majority correctness; Bonferroni α = 0.01 for these 5 tests)
 
 | A vs B | A only right | B only right | p |
 |---|---|---|---|
